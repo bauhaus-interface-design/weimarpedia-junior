@@ -1,7 +1,0 @@
-<p id="taglist" class="tags clearfix"> 
-<f:for each="{article.tags}" as="tag">
-	<f:link.action action="removeTag" arguments="{controller: 'article', tag: tag, article: article}">
-		{tag.concept.caption} {tag.caption}
-	</f:link.action> 
-</f:for>
-</p>
