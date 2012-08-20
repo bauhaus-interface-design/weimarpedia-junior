@@ -1,0 +1,27 @@
+<f:layout name="default" />
+
+This Template is responsible for displaying a single view for a domain object
+
+If you modify this template, do not forget to change the overwrite settings 
+in /Configuration/Kickstarter/settings.yaml:
+	Resources:
+		Private: 
+			Templates:
+				Show.html		keep
+
+Otherwise your changes will be overwritten the next time you save the extension in the kickstarter
+
+<f:section name="main">
+
+<h3>POST</h3>
+<f:debug>{post}</f:debug>
+<br /><br />
+
+<h3>FILES</h3>
+<f:debug>{resultSet}</f:debug>
+<br /><br />
+
+<h3>VAR</h3>
+<f:debug>{var1}</f:debug>
+<br /><br />
+</f:section>

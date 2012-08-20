@@ -1,0 +1,45 @@
+{namespace wpj=Tx_Wpj_ViewHelpers}
+<wpj:ifAdminLevel minLevel="10">
+	<f:then>
+		<div id="admin">
+			<div class="grid">
+				<h2 class="hideme">Administration</h2>
+				<div id="adminmenu" class="row">
+					<div class="slot-6">
+						<h4><span>Artikel</span></h4>
+						<ul>
+						    <li><f:link.action controller="articleAdmin" action="indexNotReviewed">freigeben</f:link.action></li>
+						    <li><f:link.action controller="articleAdmin" action="indexLastModified">letzte &Auml;nderungen</f:link.action></li>
+						</ul>
+					</div>
+					<div class="slot-7">
+						<h4><span>Verwalten der</span></h4>
+	 					<ul>
+						    <li><f:link.action controller="articleAdmin" action="index">Artikel</f:link.action></li>
+							<li><f:link.action controller="author" action="index">Nutzerlogins</f:link.action></li>
+							<li><f:link.action controller="school" action="index">Schulen</f:link.action></li>
+						    <!--<li><f:link.action controller="article" action="index_tasks">Aufgaben</f:link.action></li>-->
+						</ul>
+					</div>
+					<div class="slot-8">
+						<h4><span>Medien und Orte</span></h4>
+						<ul>
+						    <li><f:link.action controller="mediafile" action="index">Medienbibliothek</f:link.action></li>
+						    <li><f:link.action controller="place" action="index">Ortsregister</f:link.action></li>
+						    <li><f:link.action controller="mapAdmin" action="index">Karteneditor</f:link.action></li>
+						</ul>
+					</div>
+					<div class="slot-9">
+						<h4><span>Assistenten</span></h4>
+						<ul>
+						    <li><f:link.action controller="authorWizard" action="step1">Neue Gruppen anlegen</f:link.action></li>
+						    <li><f:link.action controller="Rallye" extensionName="wpjr" pageUid="10">Rallye-Editor</f:link.action></li>
+						    <li><f:link.action controller="articleAdmin" action="backupWizard">Alte Artikel-Versionen aufr&auml;umen</f:link.action></li>
+						</ul>
+					</div>
+				</div>
+				<hr class="hideme" />
+			</div>
+		</div>
+	</f:then>
+</wpj:ifAdminLevel>

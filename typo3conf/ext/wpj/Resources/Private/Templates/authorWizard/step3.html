@@ -1,0 +1,57 @@
+<f:layout name="default" />
+
+This template displays a NEW form for the current domain object.
+
+<f:section name="main">
+<h1>Zugangsinformationen</h1>
+
+<p class="no-print">
+	<strong>Achtung!</strong> <br />Diese Zugangsdaten k&ouml;nnen nur <strong>jetzt</strong> ausgegeben werden. 
+	Es ist nicht m&ouml;glich, die verschl&uuml;sselten Passw&ouml;rter sp&auml;ter zu rekonstruieren.<br />
+	Bitte ausdrucken.
+</p>
+
+<p>
+	Schule: {school.name}, {school.city}
+</p>
+
+
+<f:for each="{authors}" as="author">
+	<table>
+		<tr class="firstrow">
+			<th colspan="2">Login f&uuml;r http://weimarpedia.de</th>
+		</tr>
+		<tr>
+			<th>Gruppe</th>
+			<td>{author.name}<br /><i>{author.address}</i></td>
+		</tr>
+		<tr>
+			<th>Login:</th>
+			<td>{author.username}</td>
+		</tr>
+		<tr>
+			<th>Passwort:</th>
+			<td>{author.password}</td>
+		</tr>
+		<tr>
+			<th>G&uuml;ltigkeit:</th>
+			<td>{author.dates}</td>
+		</tr>
+		<tr class="lastrow">
+			<th>E-Mail:</th>
+			<td>{author.email}</td>
+		</tr>
+	</table>
+</f:for>
+
+<p class="no-print">
+	angelegt von {admin.shortName} 
+</p>
+
+<script type="text/javascript">
+	<!--
+	window.print();
+	// -->
+</script>
+
+</f:section>

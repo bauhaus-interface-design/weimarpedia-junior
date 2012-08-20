@@ -1,0 +1,89 @@
+<div id="container" class="start">
+	
+
+
+	<header class="grid">
+		<h2 class="hideme">Navigation</h2>
+		
+<ul class="nav" id="nav-main">
+
+	<li class="first">###homeLink###</li>	
+	###menu###
+</ul>
+<hr class="hideme" />
+		
+<ul class="nav clearfix" id="nav-wiki">
+
+<!--
+	<li class=""><a href="index.php?id=1&amp;tx_wpj_pi1%5Baction%5D=index&amp;tx_wpj_pi1%5Bcontroller%5D=map&amp;cHash=c2bb3211758ca5a7521ab770dc7d7a38">Karte</a></li>
+-->
+	<li class="wpj-item"><a href="index.php?id=1&amp;tx_wpj_pi1%5Baction%5D=index&amp;tx_wpj_pi1%5Bcontroller%5D=article&amp;cHash=aef2391118f203f8772ce8298295504b">Lexikon</a></li>
+	<li class="wpj-item"><a href="index.php?id=1&amp;tx_wpj_pi1%5Baction%5D=exhibition&amp;tx_wpj_pi1%5Bcontroller%5D=article&amp;cHash=6f69c81024f2f33b36c2da57a7560a1a">Galerie</a></li>
+
+	<li id="searchbox">
+		<form method="post" name="demand" action="index.php?id=1&amp;tx_wpj_pi1%5Bcontroller%5D=search&amp;cHash=7bf3bebf80bf09c3b3119c419307917e">
+<div style="display: none">
+<input type="hidden" name="tx_wpj_pi1[__referrer][extensionName]" value="Wpj" />
+<input type="hidden" name="tx_wpj_pi1[__referrer][controllerName]" value="article" />
+<input type="hidden" name="tx_wpj_pi1[__referrer][actionName]" value="show" />
+<input type="hidden" name="tx_wpj_pi1[__hmac]" value="a:2:{s:6:&quot;demand&quot;;a:2:{s:5:&quot;scope&quot;;i:1;s:10:&quot;searchterm&quot;;i:1;}s:10:&quot;controller&quot;;i:1;}d684212125124f37aba5a219c6c80f540bcc8e25" />
+
+</div>
+
+			<input id="scopeField" type="hidden" name="tx_wpj_pi1[demand][scope]" value="" />
+			<label for="searchField">Suche</label> <input id="searchField" type="text" name="tx_wpj_pi1[demand][searchterm]" /> <input type="submit" name="" value="suchen" />
+		</form>
+	</li>
+</ul>
+		<hr class="hideme" />
+		<div id="branding"></div>
+
+	</header>
+	
+	<div id="nav-wiki-tools">
+		<hr class="hideme" />
+	</div>
+	
+	<div id="main" role="main" class="grid">
+
+		<div class="row">
+			<div class="slot-0-1-2-3">
+				<article class="article" id="article">
+				
+				###content###
+
+				</article>
+			</div>
+			<div class="slot-4-5">
+				<aside>
+				</aside>
+			</div>
+		</div>
+	</div>
+	
+	
+	<footer class="grid">
+	<div class="slot-6-7">
+		<h5>Gefördert durch:</h5>
+		<div class="slot-6">
+
+			<a href="http://www.bmbf.de"><img src="typo3conf/ext/wpj/Resources/Public/img/bmbf.png" width="156" height="80" alt="Bundesministerium für Bildung und Forschung" /></a>
+		</div>
+		<div class="slot-7">
+			<a href="http://www.thueringen.de/de/tmbwk/"><img src="typo3conf/ext/wpj/Resources/Public/img/thmbwk.png" width="146" height="83" alt="Thüringer Ministerium für Bildung, Wissenschaft und Kultur" /></a>
+		</div>
+	</div>
+	<div class="slot-8-9">
+		<h5>Projektträger:</h5>
+
+		<div class="slot-8">
+			<a href="http://www.klassikstiftung.de"><img src="typo3conf/ext/wpj/Resources/Public/img/klassik-stiftung-weimar.png" width="147" height="49" alt="Klassik Stiftung Weimar" /></a>
+		</div>
+		<div class="slot-9">
+			<a href="http://www.uni-weimar.de"><img src="typo3conf/ext/wpj/Resources/Public/img/bauhaus-universitaet-weimar.png" width="155" height="39" alt="Bauhaus-Universität Weimar" /></a>
+		</div>
+	</div>
+</footer>
+
+
+</div>

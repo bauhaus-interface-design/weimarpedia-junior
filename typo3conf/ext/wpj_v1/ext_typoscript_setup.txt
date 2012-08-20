@@ -1,0 +1,1 @@
+<INCLUDE_TYPOSCRIPT: source="FILE:EXT:wpj_v1/Configuration/TypoScript/ajax.txt">

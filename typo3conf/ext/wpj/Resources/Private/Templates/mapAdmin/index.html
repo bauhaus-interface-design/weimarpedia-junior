@@ -1,0 +1,78 @@
+{namespace wpj=Tx_Wpj_ViewHelpers}
+<f:layout name="map" />
+
+<f:section name="main">
+	<div id="nav-wiki-tools">
+		<hr class="hideme" />
+	</div>
+	
+	<div id="map_canvas"></div>
+	
+	<div id="overlay-tools" class="box" style="width: 300px; height: 80px; background: #ffffff;border: 1px solid #bdcad9;margin:5px 20px;padding:10px;">
+		<h3>Overlay</h3>
+		<br />
+		<select id="overlayImageSelectBox">
+			<option value=""> 1 </option>
+			<option value="Schillerhaus_EG.png"> SH EG </option>
+			<option value="Schillerhaus_1_OG.png"> SH 1.OG </option>
+			<option value="Schillerhaus_2_OG.png"> SH 2.OG </option>
+			<option value="test.png"> test </option>
+			<option value="overlay_gnm.png"> GNM </option>
+		</select>
+		<br />
+		<input type="button" value="Overlay an/aus" onclick="WpjMap.overlay.toggle();"/>
+		
+	</div>
+	
+	<div id="place-select-tools" class="box" style="width: 300px; height: 190px; background: #ffffff;border: 1px solid #bdcad9;margin:5px 20px;padding:10px;">
+		<h3>Geb&auml;ude und Etage w&auml;hlen</h3>
+		<p><br />
+		<select id="buildingSelectBox" style="width: 220px;"></select>
+		<input type="button" value="aktualisieren" id="updateBuildings"/>
+		<br /><br />
+		<select id="floorSelectBox" style="width: 220px;"></select>
+		<input type="button" value="aktualisieren" id="updateFloors"/>
+		<br />
+		<br />
+		Overlay <input type="button" value="laden" id="loadOverlay"/>
+		<input type="button" value="speichern" id="saveOverlay"/>
+		<input type="button" value="entfernen" id="removeOverlay"/>
+		<br /></p>
+		<p id="floor-messages"></p>
+		
+	</div>
+	
+	<div id="room-select-tools" class="box" style="width: 300px; height: 250px; background: #ffffff;border: 1px solid #bdcad9;margin:5px 20px;padding:10px;">
+		<h3>Raum w&auml;hlen</h3>
+		<br />
+		<select id="roomSelectBox" size="7" style="width: 220px;"></select>
+		<input type="button" value="aktualisieren" id="updateRooms"/>
+		<br />
+		
+		<a href="#" id="btnAssign">zuweisen</a><br /> 
+		<a href="#" id="btnRestore">aus der DB laden</a><br />
+		<p id="room-messages"></p>
+	</div>
+	
+	<div id="place-draw-tools" class="box" style="width: 300px; height: 50px; background: #ffffff;border: 1px solid #bdcad9;margin:5px 20px;padding:10px;">
+	
+		<a href="#" id="btnEnableSelection">
+			<img src="typo3conf/ext/wpj/Resources/Public/map/icon_select.png" alt="select" />
+		</a>
+		<a href="#" id="btnEnableDrawing">
+			<img src="typo3conf/ext/wpj/Resources/Public/map/icon_draw.png" alt="draw" />
+		</a>
+
+		<a href="#" id="btnDelete">loeschen</a><br />
+		<a href="#" id="btnDeleteAll">alle loeschen</a><br />
+		<p id="editorMode"></p>
+		
+		<br />
+		
+		<a href="#" id="btnDebug">debug</a><br />
+		<p id="debug"></p>
+		
+		<br />
+	</div>
+	
+</f:section>

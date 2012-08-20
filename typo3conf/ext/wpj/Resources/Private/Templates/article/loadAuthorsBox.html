@@ -1,0 +1,56 @@
+{namespace wpj=Tx_Wpj_ViewHelpers}
+<ul>
+<f:for each="{publicAuthors}" as="author">
+	<li>
+		<f:link.action controller="article" action="indexByAuthor" arguments="{author : author}" title="Alle Artikel von {author.shortName} anzeigen">
+			<f:image src="{author.avatarImage}" width="40c" height="40c" alt="{author.shortName}" style="float: left;"/>
+		</f:link.action>
+		<f:link.action controller="article" action="indexByAuthor" arguments="{author : author}" title="Alle Artikel von {author.shortName} anzeigen">
+			{author.shortName}
+		</f:link.action>
+		
+		<f:if condition="{author.school}">
+			, 
+			<f:link.action controller="article" action="indexBySchool" arguments="{school : author.school}" title="Alle Artikel von {author.school.name} anzeigen">
+				{author.school.name}
+			</f:link.action>
+		</f:if>
+	
+		<wpj:ifAdminLevel minLevel="9">
+			 &nbsp;
+			<f:link.action class="wpj-button" action="removeAuthor" arguments="{article : article, author : author}" onclick="return confirm('Wirklich loeschen und alle Aenderungen verwerfen?');">
+				entfernen
+			</f:link.action>	
+		</wpj:ifAdminLevel>
+	</li>	
+</f:for>
+
+<wpj:ifAdminLevel minLevel="9">
+
+	<f:for each="{hiddenAuthors}" as="author">
+		<li>
+			
+			<f:link.action controller="article" action="indexByAuthor" arguments="{author : author}" title="Alle Artikel von {author.shortName} anzeigen">
+				<f:image src="{author.avatarImage}" width="40c" height="40c" alt="{author.shortName}" style="float: left;"/>
+			</f:link.action>
+			<f:link.action controller="article" action="indexByAuthor" arguments="{author : author}" title="Alle Artikel von {author.shortName} anzeigen">
+				{author.shortName}
+			</f:link.action>
+			
+			<f:if condition="{author.school}">
+				, 
+				<f:link.action controller="article" action="indexBySchool" arguments="{school : author.school}" title="Alle Artikel von {author.school.name} anzeigen">
+					{author.school.name}
+				</f:link.action>
+			</f:if>
+		
+			 &nbsp;
+			<f:link.action class="wpj-button" action="removeAuthor" arguments="{article : article, author : author}" onclick="return confirm('Wirklich loeschen und alle Aenderungen verwerfen?');">
+				entfernen
+			</f:link.action>	
+		</li>	
+	</f:for>
+
+</wpj:ifAdminLevel>
+
+</ul>

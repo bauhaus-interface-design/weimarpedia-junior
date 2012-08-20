@@ -1,0 +1,51 @@
+<f:layout name="default" />
+
+
+
+<f:section name="main">
+
+<hr/>
+<f:render partial="Result/start" arguments="{resultSet:resultSet}" />
+<hr/>
+	
+<f:for each="{resultSet.meta.tasks}" as="ctask">
+	<h2>{ctask.task.instruction}</h2>
+	<br />
+	RESULTS<br />
+	<ul>
+	<f:for each="{ctask.results}" as="result">
+		<li>{result.uid} {result.login}<br />
+		
+		<br />
+		
+		
+			<f:if condition="{ctask.task.isText}">
+				{result.text}
+			</f:if>	
+			<f:if condition="{ctask.task.isPhoto}">
+				<img src="data:image/jpg;base64,{result.photo}" alt="" height="100px" style="border:1px solid #ddd;"/>
+			</f:if>
+			
+				
+		</li>
+	</f:for>
+	</ul>
+	<hr/>
+</f:for>
+
+
+<!--
+TASKS<br />
+<f:debug>{resultSet.meta.tasks}</f:debug>
+
+<br /><br /><br />
+
+RESULTS<br />
+<f:debug>{resultSet.meta}</f:debug>
+
+<br /><br /><br />
+SET:<br />
+
+-->
+
+</f:section>

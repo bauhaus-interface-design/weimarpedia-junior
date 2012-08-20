@@ -1,0 +1,14 @@
+{namespace wpjr=Tx_Wpjr_ViewHelpers}
+
+<wpjr:includeFile path="EXT:wpjr/Resources/Public/stylesheets/presentation.css" />
+
+
+<script type="text/javascript">(function(H){H.className=H.className.replace(/\bno-js\b/,'js')})(document.documentElement)</script>
+<div id="wrapper"<f:format.html parseFuncTSPath="">{wrapperCssClass}</f:format.html>>   
+	
+	<f:render section="main" />
+	
+    <script type="text/javascript" src="typo3conf/ext/wpjr/Resources/Public/js/jquery.presentation-full.js"></script>
+    <script type="text/javascript" src="typo3conf/ext/wpjr/Resources/Public/js/global.js"></script>
+
+</div>

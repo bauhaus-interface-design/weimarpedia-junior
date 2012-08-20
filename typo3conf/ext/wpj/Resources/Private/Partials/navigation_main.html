@@ -1,0 +1,6 @@
+{namespace wpj=Tx_Wpj_ViewHelpers}
+<ul class="nav" id="nav-main">
+	<li class="first"><f:cObject typoscriptObjectPath="lib.homeLink" /></li>
+	<f:cObject typoscriptObjectPath="lib.navigation_main" />
+	<li id="login"><wpj:userStatus /><wpj:ifAdminLevel minLevel="10"> <a id="toggle-admin-menu" href="#">Administration</a></wpj:ifAdminLevel></li>
+</ul>

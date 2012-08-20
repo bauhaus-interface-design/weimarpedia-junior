@@ -1,0 +1,28 @@
+<f:layout name="default" />
+
+This Template is responsible for creating a single view for a domain object
+
+<f:section name="main">
+<h1>Single View for article</h1>
+
+<f:flashMessages />
+
+<table>
+	<tr>
+		<td><f:translate key="tx_wpjv1_domain_model_article.article_type" /></td>
+		<td>{article.article_type}</td>
+	</tr>
+	<tr>
+		<td><f:translate key="tx_wpjv1_domain_model_article.title" /></td>
+		<td>{article.title}</td>
+	</tr>
+	<tr>
+		<td><f:translate key="tx_wpjv1_domain_model_article.body" /></td>
+		<td>{article.body}</td>
+	</tr>
+</table>
+<f:link.action action="edit" arguments="{article : article}">Edit</f:link.action>
+<f:link.action action="delete" arguments="{article : article}">Delete</f:link.action>
+
+<f:link.action action="index">Back to listing</f:link.action>
+</f:section>

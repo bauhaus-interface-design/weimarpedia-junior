@@ -1,0 +1,931 @@
+//@import "_twitter/bootstrap.less";
+@import "_twitter/preboot.less";
+
+// Colors
+@wpj_blue: #778EB4;
+@wpj_blue_light: #B5C2D6;
+@wpj_blue_dark: #637086;
+
+@wpj_brown: #96825A;
+@wpj_grey: #787878;
+
+@wpj_admin_grey: #DCE2E5;
+@wpj_admin_line_grey: #ADADAD;
+
+@white: #fff;
+@black: #333;
+@grey: #999;
+
+@smaller_headline: 1.2em;
+
+
+// Mixins 
+
+.solid_line_top (@size: 1px, @color : @wpj_brown) {
+	border-top: @size solid @color;
+}
+
+.solid_line_bottom (@size: 1px, @color : @wpj_brown) {
+	border-bottom: @size solid @color;
+}
+
+.dashed_line_bottom (@size: 1px, @color : @black) {
+	border-bottom: @size dashed @color;
+}
+
+.dashed_line_top (@size: 1px, @color : @black) {
+	border-top: @size dashed @color;
+}
+
+.bl { .dashed_line_bottom() }
+.bt { .dashed_line_top() }
+
+.box-shadow(@arguments : 0 0 20px #ccc) {
+  -webkit-box-shadow: @arguments;
+  -moz-box-shadow: @arguments;
+  box-shadow: @arguments;
+}
+
+.cleanList () {
+	list-style-type: none;
+	padding: 0;
+	margin: 0;
+}
+
+// Fonts
+@fonts_serif: DroidSerifRegular, Georgia, serif;
+@fonts_sans: 'Helvetica Neue', Arial, sans;
+.upper() {
+	text-transform: uppercase;
+}
+.spacing {
+	letter-spacing: 1px;
+}
+
+
+
+@import "droid.css";
+@import "html5boilerplate.less";
+
+
+body {
+	background: #fff url(../img/weimarpedia_bg.gif);
+	//background: #996600;
+	color: @black;
+}
+
+.grid { padding:0 20px; }
+
+.nav { margin-top: 0; margin-left: 0; padding-left: 0; list-style-type: none; }
+.nav li { display: inline; }
+
+hr { display: block; height: 1px; border: 0; border-top: 1px dashed @wpj_brown; margin: 1em 0; padding: 0; }
+
+#nav-main { 
+	position: relative;
+	border-bottom: 1px dashed #000; 
+	font-size: .72em; 
+	.spacing;
+	padding: 40px 0 5px 0;
+	li {
+		padding-left: 20px;
+	}
+	li.first {
+		padding-left: .5em;
+	}
+	a {
+		text-decoration: none;
+	}
+	#login {
+		float: right;
+	}
+	#toggle-admin-menu {
+		position: absolute;
+		right: 0;
+		top: -1px;
+		z-index: 100;
+		background: @wpj_admin_grey;
+		color: @wpj_blue_dark;
+		display: block;
+		padding: .2em .5em;
+		border: 1px solid @wpj_admin_line_grey;
+		border-top: none;
+	}
+}
+
+#nav-wiki-tools {
+	font-family: @fonts_serif;
+	margin: 1em auto 0 auto;
+	ul {
+		.cleanList ();
+		li {
+			font-family: @fonts_sans;
+			.upper;
+			.spacing;
+			font-size: .72em;
+			float: left;
+			display: block;
+			padding: .2em .5em;
+			background: url(../img/transparent.png);
+		}
+		li.current {
+			background: @wpj_brown;
+			a {
+				color: @white;
+				text-decoration: none;
+			}
+		}
+	}
+}
+
+.exhibition #nav-wiki-tools {
+	position: fixed;
+	z-index: 1000;
+	right: 20px;
+	bottom: 50px;
+	li {
+		float: none;
+	}
+}
+
+#nav-wiki {
+	font-family: @fonts_serif;
+	.cleanList ();
+	padding-top: 1em;
+	margin: 0 0 .5em 0;
+	li {
+		float: left;
+		display: block;
+		padding: .2em .5em .1em .5em;
+	}
+	a {
+		text-decoration: none;
+	}
+	li.current {
+		background-color: @wpj_brown;
+		a { color: @white; }
+	}
+	label {
+		color: @wpj_blue;
+	}
+	input {
+		font-size: .78em;
+		vertical-align: middle;
+	}
+}
+
+#searchLinks {
+	z-index: 999;
+	font-size: .78em;
+	line-height: 160%;
+	font-family: @fonts_sans;
+	color: @grey;
+	.searchterm-wrapper {
+		color: @wpj_blue_dark;
+		font-weight: bold;
+	}
+}
+
+#container {
+	background: url(../img/weimarpedia_ornaments.gif) right top no-repeat;
+	max-width: 1236px;
+	margin: 0 auto;
+	position: relative;
+	z-index: 2;
+}
+
+#container.custom-bg {
+	background: none;
+}
+
+#bg {
+	position: fixed; top: 0; left: 0; right: 0;
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover;
+	background-size: cover;
+}
+
+.bgwidth { width: 100%; }
+.bgheight { height: 100%; }
+
+#logo {
+	margin-top: 1.5em;
+}
+
+#logo h1 {
+	font-size: 1em;
+	color: @black;
+}
+
+#logo, #logo h1 { text-align: center; }
+
+#main {
+	padding-top: 2em;
+}
+
+#admin { 
+	margin: 0 15px;
+	background: @wpj_admin_grey ;
+	border: 1px solid @wpj_admin_line_grey;
+	border-top: none; 
+	h4 {
+		color: @wpj_blue_dark;
+		margin: 1em 0 0 0;
+	}
+	ul {
+		.cleanList ();
+		margin: .5em 0 1.2em 0;
+		font-size: .78em;
+	}
+	li {
+		margin-bottom: .4em;
+	}
+	a {
+		padding: .3em .7em;
+		display: block;
+		color: @wpj_blue_dark;
+		width: 80%;
+	}
+	a:hover {
+		background: @wpj_blue;
+		color: @white;
+	}
+}
+
+.feature { position: relative; margin-top: 1.2em; }
+.feature img { width: 100%; height: auto; }
+.feature p { margin: .7em; } 
+.feature .info {
+	background: url(../img/transparent.png);
+	position: absolute;
+	left: 0;
+	width: 100%;
+	bottom: 15px;
+}
+
+.feature .authors { display: block; }
+.feature .authors img { display: none; }
+
+a, a:visited {
+	color: @wpj_blue;
+}
+
+a:hover, a:active {
+	color: @wpj_blue_dark;
+}
+
+h1, h2, h3 { 
+	font-family: @fonts_serif ;
+	color: @wpj_blue;
+	font-weight: normal;
+}
+
+h5 {
+	font-family: @fonts_serif ;
+	color: @wpj_blue;
+	font-weight: normal;
+	color: @grayDark;
+}
+
+h2 {
+	color: @grayDark;
+}
+
+.welcome {
+	h1 { margin: .7em 0 .2em 0; color: @wpj_brown; }
+	p { font-size: .78em; margin-top: .2em;}
+}
+
+.scope { background: @white; min-height: 13em; margin: 1.5em 0; .solid_line_top; .dashed_line_bottom; .box-shadow(0 0 20px #ccc) }
+.scope {
+	p {
+		word-wrap: break-word;
+		font-size: .78em;
+		padding-left: .5em;
+		padding-right: .5em;
+		line-height: 140%;
+	}
+}
+.scope h2 { 
+	text-align: center; 
+	font-size: .9em;
+	padding-left: .5em;
+	padding-right: .5em;
+}
+.scope h2 a { text-decoration: none; }
+.scope h2 span { border-bottom: 3px solid @wpj_blue_dark; text-transform: uppercase;}
+
+.article-teaser {
+	position: relative;
+	background: @white;
+	margin: 0 0 1.5em;
+	.solid_line_top;
+	.solid_line_bottom;
+	.box-shadow(0 0 16px #ccc);
+}
+
+.article-teaser {
+	h3 { .upper; font-size: .88em; margin-top: .2em; line-height: 150%; width: 230px;}
+	h3 a { text-decoration: none; }
+	h3 span { border-bottom: 4px solid @wpj_blue; }
+	.inner-teaser { padding: .5em; }
+	img, h3 { float: left; }
+	img { margin-right: 10px; }
+	.teaser-content {
+		img { width: 70px; height: 60px; border: 1px solid @grey; }
+		padding: 0 0 .5em 0;
+	}
+	.meta { padding-top: .3em;}
+}
+
+.exhibition {
+	.article-teaser {
+		.inner-teaser { padding: 0; }
+		.teaser-content {
+			h3 {
+				margin-top: .5em;
+			}
+			p {
+				font-size: .78em;
+			}
+		}
+		.teaser-content, .author {
+			padding: .5em;
+		}
+		h3 { float: none; }
+		.inner {
+			padding: .5em;
+			img { float: none; width: 100%; height: auto; }
+		}
+		.meta {
+			margin: 0;
+			h4 {
+				margin-top: .5em;
+			}
+		}
+	}
+}
+
+.mediaIcons {
+	position: absolute;
+	left: 20px;
+	top: 20px;
+	div {
+		float: left;
+		width: 31px;
+		height: 31px;
+		margin: 0 10px 0 0;
+		background-image: url(../img/mediaicons_small.png);
+		background-repeat: no-repeat;
+	}
+	.image {
+		 background-position: -31px -31px;
+	}
+	.hasImage {
+		background-position: 0 -31px;
+	}
+
+	.audio {
+		background-position: -31px -93px;
+	}
+	.hasAudio {
+		background-position: 0 -93px;
+	}
+
+	.video {
+		background-position: -31px -62px;
+	}
+	.hasVideo {
+		background-position: 0 -62px;
+	}
+
+	.pdf {
+		background-position: -31px 0;
+	}
+	.hasPdf {
+		background-position: 0 0;
+	}
+}
+
+// Article-Teaser Meta
+
+.meta.clearfix h4 { padding: 0 4px; font-size: .58em; font-weight: normal; color: @white; background: @wpj_blue; text-transform: uppercase; letter-spacing: 1px;}
+.meta.clearfix ul, .meta h4, .meta.clearfix h4 { display: inline; }
+.authorlist { font-size: .72em; list-style: none;}
+
+.article-teaser .state { display: none; }
+.article-teaser .state.my-article, .article-teaser .state.not-reviewed  { display: block; position: absolute; right: -15px; top: -15px; width: 60px; height: 60px; }
+.authorlist { font-size: .72em; }
+.state.my-article { background: url(../img/article_state.png) no-repeat right -233px; }
+.state.my-article.not-reviewed { background: url(../img/article_state.png) no-repeat right 0; }
+.state.not-reviewed { background: url(../img/article_state.png) no-repeat right -466px; }
+
+.start .articletype { 
+	display: block; position: absolute; right: -15px; top: 40%; width: 49px; height: 40px;
+	&.knowledge {
+		background: url(../img/articletype_knowledge.png) no-repeat right 0;
+	}
+	&.exhibition {
+		background: url(../img/articletype_exhibition.png) no-repeat right 0;
+	}
+}
+
+#article {
+	background: @white;
+	padding: .5em 1em 2em 1em;
+	#article_body, p {
+		font-family: @fonts_serif;
+		line-height: 180%;
+		font-size: .88em;
+		color: @black;
+	}
+	h3 {
+		color: @wpj_grey;
+		.spacing;
+		margin-top: .7em;
+		font-size: 150%;
+	}
+}
+
+.GENTICS_editable { background: #e4e8f0; }
+.GENTICS_editable:focus { border: 2px solid #e4e8f0; background: #fff; padding: 12px;}
+
+.media-element {
+	background: #f7f6f2 url(../img/weimarpedia_bg.gif);
+	border: 1px solid #efece5;
+	padding: .7em;
+	margin-bottom: 1em;
+	p, .mediadescription {
+		font-size: .82em;
+		padding: 0;
+		margin: .5em 0;
+		font-family: DroidSerifItalic;
+	}
+}
+
+#medialist ul {
+	.cleanList;
+	li {
+		.media-element
+	}
+}
+
+aside {
+	background: @white;
+	padding: 1em;
+	.metabox {
+		margin-bottom: 2em;
+	}
+	p {
+		font-size: .82em;
+		color: @wpj_grey;
+		margin: 0 0 .5em;
+	}
+	ul {
+		margin-left: 0; padding-left: 0;
+		font-size: .82em;
+		list-style-type: none;
+		color: @wpj_grey;
+	}
+	h4 {
+		margin-top: 0;
+		margin-bottom: 1em;
+		//background: lighten(@wpj_blue, 5%);
+		color: @wpj_blue;
+		text-transform: uppercase;
+		font-weight: normal;
+		font-size: .82em;
+		letter-spacing: 1px;
+		font-family: @fonts_serif;
+		.dashed_line_bottom;
+	}
+
+	h5 {
+		margin: 0;
+	}
+	.taglist {
+		margin: 0 0 1em 0;
+		li { 
+			font-size: .78em;
+			display: inline-block; margin: .2em; padding: .2em .5em;
+			background: lighten(@wpj_blue, 10%);
+			.border-radius(2px);
+			a, a:hover {
+				color: white;
+				.spacing;
+				text-decoration: none;
+			}
+		}
+	}
+}
+
+#modalwindow {
+	margin: 1em auto;
+	width: 96%;
+	font-size: 92%;
+	p { margin-top: .4em;}
+	h4 {
+		margin-top: .4em;
+		margin-bottom: 0;
+		padding-top: .7em;
+		color: @wpj_blue;
+		text-transform: uppercase;
+		font-weight: normal;
+		font-size: .82em;
+		letter-spacing: 1px;
+		font-family: @fonts_serif;
+		.dashed_line_top(1px, @wpj_brown);
+	}
+}
+
+ul.selection {
+	list-style: none; margin: 1em 0 0 0; padding: 0; border: 1px dotted @wpj_blue_light;
+	background: lighten(@wpj_blue_light, 20%);
+	height: 90px; overflow: auto;
+	li {
+		padding: .2em;
+	}
+}
+
+
+header {
+	border-bottom: 3px solid @wpj_brown;
+	position: relative;
+}
+
+header.grid {
+	//padding-top: 20px;
+}
+
+.exhibition header {
+	background: url(../img/transparent.png);	
+}
+
+#branding {
+	background: url(../img/weimarpedia_button.png) left top no-repeat;
+	width: 107px;
+	height: 97px;
+	position: absolute;
+	top: 70px;
+	right: 150px;
+}
+
+#branding.rallye {
+	top: 10px;
+}
+
+.start #branding {
+	display: none;
+}
+
+footer {
+	background: url(../img/weimarpedia_footer.png) top center no-repeat;
+}
+
+footer.grid {
+	padding-top: 145px;
+}
+
+footer img {
+	border: none;
+	margin-bottom: 20px;
+}
+
+// --------------- Pagination ----------------------------
+
+.pagination {
+	margin: 1em 0;
+	font-family: @fonts_serif;
+	li.current {
+		color: @wpj_brown;
+	}
+}
+
+.pagination.top {
+	margin: 0;
+}
+
+
+.f3-widget-paginator { list-style: none; margin: 0; padding: 0; margin: 10px; text-align: center; }
+.f3-widget-paginator li { display: inline; margin: 0 .3em; }
+.f3-widget-paginator .current { color: #333; font-weight: bold; }
+
+// --------------- Notification --------------------------
+
+#notifications ul { .cleanList; margin: 1em 0;}
+#notifications ul li { border: 2px solid #e3007a; padding: .5em; background: #fff; color: #666; text-transform: uppercase; letter-spacing: 1px; font-size: 72%;}
+
+
+/* TAG IT */
+
+ul.tagit {
+	padding: 1px 5px;
+	overflow: auto;
+    margin-left: inherit; 
+    margin-right: inherit;
+	background-color: #f8f8f8;
+	border: 1px solid #aaa;
+}
+ul.tagit li {
+	display: block;
+	float: left;
+	margin: 2px 5px 2px 0;
+}
+ul.tagit li.tagit-choice {
+	padding: .2em 18px .2em .5em;
+    position: relative;
+    line-height: inherit;
+}
+ul.tagit li.tagit-new {
+	padding: .25em 4px .25em 0;
+}
+
+ul.tagit li.tagit-choice a.tagit-label {
+	cursor: pointer;
+	text-decoration: none;
+}
+ul.tagit li.tagit-choice .close {
+	cursor: pointer;
+    position: absolute;
+    right: .1em;
+    top: 50%;
+    margin-top: -8px;
+}
+
+ul.tagit li.tagit-choice input {
+	display: block;
+	float: left;
+	margin: 2px 5px 2px 0;
+}
+ul.tagit input[type="text"] {
+    -moz-box-sizing:    border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing:         border-box;
+
+    border: none;
+	margin: 0;
+	padding: 0;
+	width: inherit;
+    outline: none;
+}
+
+@import "utils.less";
+
+@media only screen and (max-width: 720px) {
+	
+	#main {
+		padding-top: 0;
+		margin-top: .5em;
+	}
+
+	header {
+		border-bottom: none;
+	}
+
+	#branding {
+		background: url(../img/wpj-labels.png) left top no-repeat;
+		width: 60px;
+		height: 45px;
+		position: absolute;
+		top: 37px;
+		right: 20px;
+	}
+
+	.start #branding {
+		display: block;
+	}
+
+	.welcome {
+		h1 { text-transform: uppercase; margin: 1em 0; color: @wpj_brown; font-size: 1.6em; line-height: 1; font-size: 1em;}
+	}
+	
+	#container {background: none;}
+	#logo { margin-top: .7em;}
+	#logo, #logo h1 { text-align: left; }
+	#logo h1 {
+		margin: 0;
+		font-size: .72em;
+		font-weight: normal;
+		display: none;
+	}
+	#logo img { display: none; } 
+	.scope h2 { text-align: left; }
+	.scope { min-height: 0; }
+	.forceright { float: none !important;}
+
+	#nav-main { 
+		padding-top: 1em;
+	}
+
+	#nav-wiki li {
+		float: none;
+		display: block;
+		padding: .5em 0;
+	}
+	#nav-wiki .wpj-item {
+		display: inline;
+		padding: .5em;
+	}
+	#nav-wiki form {
+		margin-top: .7em;
+		padding: .7em;
+		background: #ededed;
+		.border-radius
+	}
+	#nav-wiki form  {
+		label { width: 20%; } 
+		input { width: 25%; }
+		#searchField {
+			width: 45%;
+		}
+	}
+	#medialist {
+		img { width: 100%; height: auto; }
+	}
+}
+
+/*
+.wpj-button, .wpj-button:visited {
+background: #222 url(/images/alert-overlay.png) repeat-x; 
+display: inline-block; 
+padding: 5px 10px 6px; 
+color: #fff; 
+text-decoration: none;
+-moz-border-radius: 5px; 
+-webkit-border-radius: 5px;
+-moz-box-shadow: 0 1px 3px rgba(0,0,0,0.5);
+-webkit-box-shadow: 0 1px 3px rgba(0,0,0,0.5);
+text-shadow: 0 -1px 1px rgba(0,0,0,0.25);
+border-bottom: 1px solid rgba(0,0,0,0.25);
+position: relative;
+cursor: pointer;
+}
+
+.wpj-button:hover							{ background-color: #111; color: #fff; }
+.wpj-button:active							{ top: 1px; }
+.small.wpj-button, .small.wpj-button:visited 			{ font-size: 11px; padding: ; }
+.wpj-button, .wpj-button:visited,
+.medium.wpj-button, .medium.wpj-button:visited 		{ font-size: 13px; font-weight: bold; line-height: 1; text-shadow: 0 -1px 1px rgba(0,0,0,0.25); }
+.large.wpj-button, .large.wpj-button:visited 			{ font-size: 14px; padding: 8px 14px 9px; }
+
+.green.wpj-button, .green.wpj-button:visited		{ background-color: #91bd09; }
+.green.wpj-button:hover						{ background-color: #749a02; }
+.blue.wpj-button, .blue.wpj-button:visited		{ background-color: #2daebf; }
+.blue.wpj-button:hover							{ background-color: #007d9a; }
+.red.wpj-button, .red.wpj-button:visited			{ background-color: #e33100; }
+.red.wpj-button:hover							{ background-color: #872300; }
+.magenta.wpj-button, .magenta.wpj-button:visited		{ background-color: #a9014b; }
+.magenta.wpj-button:hover							{ background-color: #630030; }
+.orange.wpj-button, .orange.wpj-button:visited		{ background-color: #ff5c00; }
+.orange.wpj-button:hover							{ background-color: #d45500; }
+.yellow.wpj-button, .yellow.wpj-button:visited		{ background-color: #ffb515; }
+.yellow.wpj-button:hover							{ background-color: #fc9200; }
+*/
+table { margin: 0 0 1.2em 0; width: 960px;}
+table th, table td { padding: 5px; line-height: 140%; text-align: left; vertical-align: top; font-size: .74em; }
+table th { border-top: 1px #ADADAD solid; border-bottom: 1px solid @wpj_admin_line_grey; background: @wpj_admin_grey;}
+table th, table td { }
+table tr.even th, table tr.even td { background: #fff; }
+table td { background: #fff; }
+table th p, table td p {font-size: 1em; margin: 0; }
+table {
+	width: 100%;
+	tr {
+		td { border-bottom: 1px solid #ADADAD; }
+	}
+}
+
+
+// Base .btn styles
+.wpj-button {
+  // Button Base
+  cursor: pointer;
+  display: inline-block;
+  #gradient > .vertical-three-colors(#ffffff, #ffffff, 25%, darken(#ffffff, 10%)); // Don't use .gradientbar() here since it does a three-color gradient
+  padding: 5px 14px 6px;
+  text-shadow: 0 1px 1px rgba(255,255,255,.75);
+  color: #333;
+  font-size: 13px;
+  line-height: normal;
+  border: 1px solid #ccc;
+  border-bottom-color: #bbb;
+  .border-radius(4px);
+  @shadow: inset 0 1px 0 rgba(255,255,255,.2), 0 1px 2px rgba(0,0,0,.05);
+  .box-shadow(@shadow);
+
+  &:hover {
+    background-position: 0 -15px;
+    color: #333;
+    text-decoration: none;
+  }
+
+  // Primary Button Type
+  &.primary {
+    color:#fff;
+    .gradientBar(@blue, @blueDark)
+  }
+
+   // Transitions
+  .transition(.1s linear all);
+
+  // Active and Disabled states
+  &:active {
+    @shadow: inset 0 2px 4px rgba(0,0,0,.25), 0 1px 2px rgba(0,0,0,.05);
+    .box-shadow(@shadow);
+  }
+  &.disabled {
+    cursor: default;
+    background-image: none;
+    .reset-filter();
+    .opacity(65);
+    .box-shadow(none);
+  }
+  &[disabled] {
+    // disabled pseudo can't be included with .disabled
+    // def because IE8 and below will drop it ;_;
+    cursor: default;
+    background-image: none;
+    .reset-filter();
+    .opacity(65);
+    .box-shadow(none);
+  }
+
+  // Button Sizes
+  &.large {
+    font-size: 16px;
+    line-height: normal;
+    padding: 9px 14px 9px;
+    .border-radius(6px);
+  }
+  &.small {
+    padding: 7px 9px 7px;
+    font-size: 11px;
+  }
+}
+
+//---------------------------------------------------------------- TWITTER BOOTSTRAP ELEMENTS -------------------------------
+
+// Twitter Bootstrap Vars
+@baseline: 18px;
+
+// Links
+@linkColor:         #0069d6;
+@linkColorHover:    darken(@linkColor, 10);
+
+// Grays
+//@black:             #000;
+@grayDark:          lighten(@black, 25%);
+@gray:              lighten(@black, 50%);
+@grayLight:         lighten(@black, 75%);
+@grayLighter:       lighten(@black, 90%);
+@white:             #fff;
+
+// Accent Colors
+@blue:              #049CDB;
+@blueDark:          #0064CD;
+@green:             #46a546;
+@red:               #9d261d;
+@yellow:            #ffc40d;
+@orange:            #f89406;
+@pink:              #c3325f;
+@purple:            #7a43b6;
+
+
+// Border Radius
+.border-radius(@radius: 5px) {
+  -webkit-border-radius: @radius;
+     -moz-border-radius: @radius;
+          border-radius: @radius;
+}
+
+// Drop shadows
+.box-shadow(@shadow: 0 1px 3px rgba(0,0,0,.25)) {
+  -webkit-box-shadow: @shadow;
+     -moz-box-shadow: @shadow;
+          box-shadow: @shadow;
+}
+
+// Transitions
+.transition(@transition) {
+	-webkit-transition: @transition;
+	   -moz-transition: @transition;
+	        transition: @transition;
+}
+
+// Background clipping
+.background-clip(@clip) {
+	-webkit-background-clip: @clip;
+	   -moz-background-clip: @clip;
+	        background-clip: @clip;
+}
+
+// CSS3 Content Columns
+.content-columns(@columnCount, @columnGap: 20px) {
+	-webkit-column-count: @columnCount;
+	   -moz-column-count: @columnCount;
+          column-count: @columnCount;
+  -webkit-column-gap: @columnGap;
+	   -moz-column-gap: @columnGap;
+          column-gap: @columnGap;
+}

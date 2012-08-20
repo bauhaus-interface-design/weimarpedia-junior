@@ -1,0 +1,22 @@
+{namespace wpj=Tx_Wpj_ViewHelpers}
+[
+	<f:for each="{children}" as="child">
+	<f:format.html parseFuncTSPath="">{</f:format.html>
+		"text": " {child.name}",
+		"editUrl": "<wpj:actionUrl action="edit" arguments="{place : child}"/>",
+		"removeUrl": "<wpj:actionUrl action="delete" arguments="{place : child}"/>",
+		"expanded": false,
+		"id": {child.uid},
+		"hasChildren": true,
+		"hasPosition": {child.hasPosition},
+		"hasCoordinates": {child.hasCoordinates}
+	<f:format.html parseFuncTSPath="">}</f:format.html>,
+	</f:for>
+	
+	<f:format.html parseFuncTSPath="">{</f:format.html>
+		"text": "({children.first.accuracyLabel})",
+		"newUrl": "<wpj:actionUrl action="new" arguments="{parentPlace : parentPlace}"/>",
+		"expanded": false
+	<f:format.html parseFuncTSPath="">}</f:format.html>
+	
+]

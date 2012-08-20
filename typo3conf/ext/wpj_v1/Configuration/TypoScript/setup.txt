@@ -1,0 +1,36 @@
+plugin.tx_wpjv1.settings {
+}
+
+# key weimarpedia.de ABQIAAAAF9dCXBZbsEx0fZKZ5SwadhQ938W8UB6Ck-0u-R3bfpQvEQPqkhTq92r175xaArGjvwZP2ssC5jF-Dw
+# key http://192.168.2.108 ABQIAAAA04cuHc4R8oOgjpKujB8iEhQLbyhXvKuBXQfeICQ85EhpAwBT4RScJQ1_fkin-rffCcQmW7VwYTyYUw
+
+page.headerData.10 = TEXT
+page.headerData.10.value (
+	<script src="http://maps.google.com/maps?file=api&amp;sensor=false&amp;v=2&amp;key=ABQIAAAA04cuHc4R8oOgjpKujB8iEhQLbyhXvKuBXQfeICQ85EhpAwBT4RScJQ1_fkin-rffCcQmW7VwYTyYUw" type="text/javascript"></script>
+)
+page.headerData.20 = TEXT
+page.headerData.20.value (
+	<meta name="viewport" content="width=device-width, minimum-scale=1.0, minimum-scale=1.0, maximum-scale=1.0" />
+)
+page.headerData.30 = TEXT
+page.headerData.30.value (
+	<link rel="apple-touch-icon" href="fileadmin/wpj_v1/wpj_touch_icon.png" />
+)
+	
+page.includeJS {
+
+	file1 = fileadmin/wpj_v1/javascripts/aloha/aloha.js
+	file2 = fileadmin/wpj_v1/javascripts/aloha/plugins/com.gentics.aloha.plugins.Format/plugin.js
+	file3 = fileadmin/wpj_v1/javascripts/aloha/plugins/com.gentics.aloha.plugins.Table/plugin.js
+	file4 = fileadmin/wpj_v1/javascripts/aloha/plugins/com.gentics.aloha.plugins.List/plugin.js
+	file5 = fileadmin/wpj_v1/javascripts/aloha/setup.js
+	
+	file6 = fileadmin/wpj_v1/javascripts/application.js
+	
+	file8 = fileadmin/wpj_v1/javascripts/maps.js
+}
+
+page.includeCSS {
+	file1 = fileadmin/wpj_v1/stylesheets/reset.css
+	file2 = fileadmin/wpj_v1/stylesheets/main.css
+}

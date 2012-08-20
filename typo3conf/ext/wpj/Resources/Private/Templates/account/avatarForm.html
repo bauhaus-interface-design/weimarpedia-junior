@@ -1,0 +1,43 @@
+<f:layout name="default" />
+
+This template displays a EDIT form for the current domain object.
+
+<f:section name="main">
+<h1>Bild hochladen</h1>
+
+<f:flashMessages />
+
+<f:render partial="formErrors" />
+
+<f:image src="{author.avatarImage}" width="60c" height="60c" alt="{author.shortName}"/>
+<br />
+<br />
+
+<h2>Bilddatei hochladen</h2>
+	<f:form enctype="multipart/form-data" method="post" action="uploadAvatarFile" name="account" object="{author}">
+		<f:form.upload property="avatarFile" />
+		<f:form.submit value="hochladen" id="submitUpload"/>
+	</f:form>
+<br />
+<br />
+
+<h2>Foto mit der eingebauten Videokamera aufnehmen</h2>
+	<object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000" codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=10,0,0,0" width="320" height="340" id="Flash-Camera-Uploader" align="middle">
+	<param name="allowScriptAccess" value="sameDomain" />
+	<param name="allowFullScreen" value="false" />
+	<param name="movie" value="typo3conf/ext/wpj/Resources/Public/swf/Flash-Camera-Uploader.swf?uploadAvatarRawUrl={uploadAvatarRawUrl}&redirectUrl={redirectUrl}" />
+	<param name="loop" value="false" />
+	<param name="menu" value="false" />
+	<param name="quality" value="high" />
+	<param name="bgcolor" value="#ffffff" />	
+	<embed src="typo3conf/ext/wpj/Resources/Public/swf/Flash-Camera-Uploader.swf?uploadAvatarRawUrl={uploadAvatarRawUrl}&redirectUrl={redirectUrl}" loop="false" menu="false" quality="high" bgcolor="#ffffff" width="320" height="340" 
+		name="Flash-Camera-Uploader" align="middle" allowScriptAccess="sameDomain" allowFullScreen="false" 
+		type="application/x-shockwave-flash" pluginspage="http://www.adobe.com/go/getflashplayer_de" />
+	</object>
+
+<br />
+<br />
+<f:link.action action="index">zur&uuml;ck</f:link.action>
+			
+			
+</f:section>

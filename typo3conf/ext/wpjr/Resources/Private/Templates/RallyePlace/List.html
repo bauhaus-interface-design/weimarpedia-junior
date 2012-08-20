@@ -1,0 +1,47 @@
+<f:layout name="default" />
+
+This Template is responsible for creating a table of domain objects.
+
+
+If you modify this template, do not forget to change the overwrite settings 
+in /Configuration/Kickstarter/settings.yaml:
+	Resources:
+		Private: 
+			Templates:
+				List.html		keep
+
+Otherwise your changes will be overwritten the next time you save the extension in the kickstarter
+
+<f:section name="main">
+<h1>Orte f&uuml;r Rallyes</h1>
+
+<f:flashMessages />
+
+<table>
+	<tr>
+		<th></th>
+		<th>Name</th>
+		<th>Beschreibung</th>
+		<th>Adresse</th>
+		<th>Koordinaten</th>
+		
+		<th> </th>
+		<th> </th>
+	</tr>
+
+	<f:for each="{rallyePlaces}" as="rallyePlace">
+		<tr>
+			<td><img src="data:image/jpeg;base64,{rallyePlace.image}" alt="" height="100px" style="border:1px solid #ddd;"/></td>
+			<td>{rallyePlace.name}</td>
+			<td>{rallyePlace.description}</td>
+			<td>{rallyePlace.address}</td>
+			<td>{rallyePlace.lat},<br />{rallyePlace.lng}<br />{rallyePlace.accuracy}</td>
+			
+			<td><f:link.action class="wpj-button" action="update" arguments="{rallyePlace : rallyePlace}">Bearbeiten</f:link.action></td>
+			<td><f:link.action class="wpj-button" action="delete" arguments="{rallyePlace : rallyePlace}">Entfernen</f:link.action></td>
+		</tr>
+	</f:for>
+</table>
+
+<f:link.action class="wpj-button" action="create">Neuer Ort</f:link.action>
+</f:section>

@@ -1,0 +1,92 @@
+<f:layout name="default" />
+
+This Template is responsible for creating a table of domain objects.
+
+
+If you modify this template, do not forget to change the overwrite settings 
+in /Configuration/Kickstarter/settings.yaml:
+	Resources:
+		Private: 
+			Templates:
+				List.html		keep
+
+Otherwise your changes will be overwritten the next time you save the extension in the kickstarter
+
+<f:section name="main">
+<h1>Auswertung</h1>
+
+<f:flashMessages />
+
+<table>
+	<tr>
+		<th>Datum</th>
+		<th>Rallye</th>
+		<th>Teilnehmer</th>
+		<th>Ergebnisse</th>
+		
+		<th> </th>
+		<th> </th>
+		<th> </th>
+	</tr>
+
+	<f:for each="{resultSets}" as="resultSet">
+		<tr>
+			<td><f:format.date format="d.m.y">{resultSet.dateBegin}</f:format.date></td>
+			<td>{resultSet.rallye.name} </td>
+			<td>
+				<small>
+				<f:for each="{resultSet.meta.logins}" as="login">
+					{login.login}: {login.total} Antworten<br />
+				</f:for>
+				</small>
+			</td>
+			<td>
+				<table style="width:150px;">
+				<f:for each="{resultSet.meta.tasks}" as="task" iteration="i">
+					<tr><td>Aufgabe {i.cycle}:</td><td> {task.total} Ergebnisse</td></tr>
+				</f:for>
+				</table>
+			</td>
+			
+			<td>
+			<!--
+				<f:form method="post" action="show" name="resultSet" object="{resultSet}">
+					<f:form.hidden property="tsBegin" />
+					<f:form.hidden property="tsEnd" />
+					<f:form.hidden property="rallye" />
+					<f:form.submit class="wpj-button" value="Anzeigen" />
+				</f:form>
+			-->
+
+			</td>
+			<!--<td>
+				<f:form method="post" action="report" name="resultSet" object="{resultSet}">
+					<f:form.hidden property="tsBegin" />
+					<f:form.hidden property="tsEnd" />
+					<f:form.hidden property="rallye" />
+					<f:form.submit class="wpj-button" value="Auswerten" />
+				</f:form>
+
+			</td>-->
+			<td>
+				<f:form method="post" pageType="100" action="present" additionalAttributes="{target: '_blank'}" name="resultSet" object="{resultSet}">
+					<f:form.hidden property="tsBegin" />
+					<f:form.hidden property="tsEnd" />
+					<f:form.hidden property="rallye" />
+					<f:form.submit class="wpj-button" value="Präsentieren" />
+				</f:form>
+			</td>
+			<td>
+				<f:form method="post" pageType="100" action="delete" onsubmit="return confirm('Wirklich entfernen?');" name="resultSet" object="{resultSet}">
+					<f:form.hidden property="tsBegin" />
+					<f:form.hidden property="tsEnd" />
+					<f:form.hidden property="rallye" />
+					<f:form.submit class="wpj-button" value="Löschen" />
+				</f:form>
+			</td>
+		</tr>
+	</f:for>
+</table>
+
+
+</f:section>

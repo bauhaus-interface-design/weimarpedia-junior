@@ -1,0 +1,14 @@
+{namespace wpj=Tx_Wpj_ViewHelpers}
+<p>aktuell {article.versionDescription}</p>
+<ul>
+<f:for each="{versions}" as="version">
+	<li>
+		{version.versionLabel} <br/>
+		{version.versionDescription}
+		<f:link.action controller="article" action="compareVersions" arguments="{article : article, version: version}" target="_blank">
+			vergleichen
+		</f:link.action>
+		
+	</li>	
+</f:for>
+</ul>

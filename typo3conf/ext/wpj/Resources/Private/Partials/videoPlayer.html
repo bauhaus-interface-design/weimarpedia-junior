@@ -1,0 +1,22 @@
+<!-- Begin VideoJS -->
+	<div class="video-js-box">
+	<!-- Using the Video for Everybody Embed Code http://camendesign.com/code/video_for_everybody -->
+	<video id="video_{mediafile.uid}" class="video-js" width="{width}" height="{height}" controls="controls" preload="auto" poster="{poster}">
+	  <source src="{mediafile.url}" type='video/mp4; codecs="avc1.42E01E, mp4a.40.2"' />
+	   
+	  
+	  <!-- Flash Fallback. Use any flash video player here. Make sure to keep the vjs-flash-fallback class. -->
+	  <object id="flash_fallback_{mediafile.uid}" class="vjs-flash-fallback" width="{width}" height="{height}" type="application/x-shockwave-flash"
+	    data="typo3conf/ext/wpj/Resources/Public/video-js/flowplayer-3.2.7.swf">
+	    <param name="movie" value="typo3conf/ext/wpj/Resources/Public/video-js/flowplayer-3.2.7.swf" />
+	    <param name="allowfullscreen" value="true" />
+	    <param name="flashvars" value='{mediafile.videoFlashvars}' />
+	    <!-- Image Fallback. Typically the same as the poster image. -->
+	    <img src="{poster}" width="{width}" height="{height}" alt="Poster Image"
+	      title="No video playback capabilities." />
+	  </object>
+	</video>
+	
+	
+	</div>
+<!-- End VideoJS -->

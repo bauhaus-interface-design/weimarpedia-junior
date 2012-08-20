@@ -1,0 +1,63 @@
+{namespace wpj=Tx_Wpj_ViewHelpers}
+
+<label for="title">Titel</label><br />
+	<f:form.textfield property="title" size="60"/><br /><br />
+
+<label for="title">Form des Ergebnisses</label><br />
+	<f:form.select id="resultrequiredSelect" property="resultrequired" options="{1: 'Pflichtantwort', 0: 'keine Antwort', 2: 'freiwillige Zusatzaufgabe'}"/><br />
+	<f:form.select id="resulttypeSelect" property="resulttype" options="{resultTypes}"/><br />
+	<br />	
+		
+<label for="title">Einf&uuml;hrung</label><br />
+	<f:form.textarea property="intro" cols="60" rows="8" /><br /><br />
+	
+<label for="title">Aufgabe</label><br />
+	<f:form.textarea property="instruction" cols="60" rows="4" /><br /><br />
+
+<label for="title">Bilder</label><br />
+	1. <wpj:form.upload property="image1" /><br />
+	2. <wpj:form.upload property="image2" /><br />
+	3. <wpj:form.upload property="image3" /><br /><br />
+	<br />	
+	
+<label for="title">Ort zuweisen</label><br />
+	<f:form.select id="placeSelect" property="place" options="{rallyePlaces}" optionLabelField="name" optionValueField="uid"/>
+	<p><f:link.action target="_blank" action="create" controller="RallyePlace">Neuen Ort anlegen</f:link.action> (neues Fenster)</p>
+	<br />
+
+
+<label for="title">max. Dauer</label><br />
+	<f:form.textfield property="duration" size="3"/> min<br /><br />
+
+
+
+
+
+
+<script type="text/javascript">
+/* <![CDATA[ */
+
+	$(document).ready(function(){
+		// set empty resulttype if no result is required
+		$('#resultrequiredSelect').change(function(){
+				if ($(this).val() == 0){
+					$('#resulttypeSelect').val("");
+					$('#resulttypeSelect').hide();
+				} else {
+					$('#resulttypeSelect').show();
+					if ($('#resulttypeSelect').val() == "") $('#resulttypeSelect').val("text")
+				}
+			}
+		
+		);
+		
+		// set empty resulttype if no result is required
+		$('#placeSelect').change(function(){
+				$('#placeImage').hide();
+			}
+		
+		);
+	});
+	
+/* ]]> */
+</script>

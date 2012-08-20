@@ -1,0 +1,116 @@
+{namespace wpj=Tx_Wpj_ViewHelpers}
+<wpj:includeFile path="EXT:wpj/Resources/Public/stylesheets/jquery.fancybox-1.3.4.css" />
+<div id="container"<f:format.html parseFuncTSPath="">{wrapperCssClass}</f:format.html>>
+	<f:render partial="navigation_admin" />
+	<header class="grid">
+		<h2 class="hideme">Navigation</h2>
+		<f:render partial="navigation_main" />
+		<hr class="hideme" />
+		<f:render partial="navigation_wiki" arguments="{demand: demand}"/>
+		<hr class="hideme" />
+		<div id="branding"></div>
+	</header>
+	<f:render section="main" />
+
+	<f:render partial="footer" />
+
+</div>
+
+<script type="text/javascript" src="typo3conf/ext/wpj/Resources/Public/js/jquery.cookie.js"></script>
+<script type="text/javascript" src="typo3conf/ext/wpj/Resources/Public/js/general.js"></script>
+<script type="text/javascript" src="typo3conf/ext/wpj/Resources/Public/js/jquery.fancybox-1.3.4.pack.js"></script>
+<script type="text/javascript" src="typo3conf/ext/wpj/Resources/Public/video-js/video.js"></script>
+<script type="text/javascript" src="typo3conf/ext/wpj/Resources/Public/audiojs/audio.min.js"></script>
+<script type="text/javascript">
+
+	var exhibitionBG = true;
+
+	var isiPad   = navigator.userAgent.match(/iPad/i) != null;
+	var isiPhone = navigator.userAgent.match(/iPhone/i) != null;
+
+	if(isiPad || isiPhone) {
+		
+		var iOSVersion5 = navigator.userAgent.match(/OS 5/i) != null;
+
+		if(!iOSVersion5) {
+			exhibitionBG = false;
+		}
+	}
+
+
+	$(document).ready(function(){
+		/*
+		// fixing different article-teaser heights
+		var maxTeaserHeight = 0;
+
+		$('.article-teaser').each(function(){
+			var teaserHeight = parseInt($(this).height());
+			if(!maxTeaserHeight || maxTeaserHeight < $(this).height())
+				maxTeaserHeight = teaserHeight;
+		});
+		$('.article-teaser').css({ height : (((1/16) * maxTeaserHeight) + 1.5) + 'em'});
+
+		var teasers = $('.article-teaser');
+		for(var i = 0; i < teasers.length; i=i+3) {
+			$(teasers[i]).wrap('<div class="slot-0-1 wrap-me"></div>');
+			$(teasers[i+1]).wrap('<div class="slot-2-3 wrap-me"></div>')
+			$(teasers[i+2]).wrap('<div class="slot-4-5 wrap-me"></div>')
+			$('.wrap-me').wrapAll('<div class="row"></div>');
+			$('.wrap-me').removeClass('wrap-me');
+		}
+		*/
+
+		// instantiate media player(s)
+		//$('audio,video').mediaelementplayer();
+		
+		if(exhibitionBG && $('#container.exhibition').length) {
+			
+			var wikitools = $('#nav-wiki-tools');
+			if(wikitools.length) {
+				wikitools.removeClass('grid');
+				$('#article-list').append(wikitools);
+			}
+			
+			$('#container.exhibition').addClass('custom-bg');
+			$('#container.exhibition').after('<div id="bg"></div>'); 
+			
+			var theWindow	= $(window),
+			$bg				= $("#bg"),
+			aspectRatio		= $bg.width() / $bg.height();
+
+			var backgrounds = new Array(
+				'2Goethe_auf_Treppe_Kopie_aw.jpg',
+				'Goethe_u_Carl-August_Seite_1_aw.jpg',
+				'Goethe_u_Carl-August_Seite_2_aw.jpg',
+				'Goethe_u_Carl-August_Seite_3_aw.jpg',
+				'Goethe_u_Carl-August_Seite_4_aw.jpg',
+				'IMG_0415_aw.jpg',
+				'IMG_0420_aw.jpg',
+				'IMG_0427_aw.jpg',
+				'Kreat_Marlene_Schiewer_aw.jpg',
+				'Kreat_Seyma_Kisaaglu_aw.jpg',
+				'P1000971_aw.jpg',
+				'P1030677_aw.jpg',
+				'P1040444_aw.jpg',
+				'Tagebucheintrag_1_aw.jpg',
+				'WP_Parkschule-8a_Fotostory_Seite_02_aw.jpg',
+				'WP_Parkschule-8a_Fotostory_Seite_07_aw.jpg',
+				'WP_Parkschule-8a_Video_Screenshot_aw.jpg',
+				'Zusammen_P1000937_aw.jpg'
+			);
+
+			var rnd = Math.round( (backgrounds.length-1) * Math.random() );
+			$bg.css({'background' : 'url(typo3conf/ext/wpj/Resources/Public/img/backgrounds/' + backgrounds[rnd] + ') no-repeat center center fixed'});
+
+			function resizeBg() {
+				$bg.addClass('bgheight');
+				$bg.addClass('bgwidth');
+			}
+
+			theWindow.resize(function() {
+				resizeBg();
+			}).trigger("resize");
+		}
+	});
+
+</script>

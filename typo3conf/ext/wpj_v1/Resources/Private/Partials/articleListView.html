@@ -1,0 +1,21 @@
+<div class="article-teaser left">
+	<div class="teaser-content clearfix">
+        <f:link.action action="edit" arguments="{article : article}">
+        	<f:image src="fileadmin/wpj_v1/images/{article.uid}.jpg" width="60" height="100cm" alt="preview"/>
+		</f:link.action>
+        <h3>
+        	<f:link.action action="edit" arguments="{article : article}">{article.title}</f:link.action>
+		</h3>
+        <p>
+        	<f:link.action action="edit" arguments="{article : article}">{article.rawBody -> f:format.crop(maxCharacters:90)}</f:link.action>
+		</p>
+		
+    </div>
+	<h4>Tags:</h4>
+	<p class="tags clearfix">
+		<f:for each="{article.tags}" as="tag">
+			<a href="#">{tag.concept.caption} {tag.caption}</a> 
+		</f:for>
+	</p>
+    <p class="meta"><img src="fileadmin/wpj_v1/img/avatar.png" alt="" /> Gruppe A, Bomhardt-Schule, {article.lastModified}</p>
+</div>

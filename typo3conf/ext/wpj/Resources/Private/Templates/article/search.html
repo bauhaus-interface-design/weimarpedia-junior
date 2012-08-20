@@ -1,0 +1,33 @@
+{namespace wpj=Tx_Wpj_ViewHelpers}
+<f:layout name="default" />
+
+<f:section name="main">
+
+	<div id="nav-wiki-tools" class="grid">
+		<f:render partial="navigation_wiki_tools" />
+		<hr class="hideme" />
+	</div>
+
+	<div id="notifications" class="grid">
+		<f:flashMessages />
+	</div>	
+
+	<div id="main" role="main" class="grid">
+		<h2 class="hideme">Inhalt: Suche {demand.searchterm}</h2>
+		<h2>Suche {demand.searchterm}</h2>
+		<div id="article-list">
+			<f:widget.paginate objects="{articles}" as="paginatedArticles"
+				 configuration="{itemsPerPage: 15, insertAbove: 0, insertBelow: 1}">
+				<f:for each="{paginatedArticles}" as="article" iteration="objIterator">
+					
+					{article.uid}
+					
+				</f:for>
+		</div>
+		<div class="pagination">
+		</f:widget.paginate>
+		</div>
+	</div>		
+					
+	<!--<f:cObject typoscriptObjectPath="lib.myImage" data="{image}"/> -->
+</f:section>

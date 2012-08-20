@@ -1,0 +1,27 @@
+<f:layout name="default" />
+
+This Template is responsible for creating a table of domain objects.
+
+
+If you modify this template, do not forget to change the overwrite settings 
+in /Configuration/Kickstarter/settings.yaml:
+	Resources:
+		Private: 
+			Templates:
+				List.html		keep
+
+Otherwise your changes will be overwritten the next time you save the extension in the kickstarter
+
+<f:section name="main">
+<h1>Liste der aktiven Rallyes</h1>
+<p>Diese Rallyes sind aktuell &uuml;ber die Smartphones ladbar.</p>
+<f:flashMessages />
+
+<f:render partial="Rallye/list" arguments="{rallyes:rallyes}" />
+
+<h1>Liste der inaktiven Rallyes</h1>
+<p>Diese Rallyes sind aktuell f&uuml;r die Smartphones unsichtbar.</p>
+<f:render partial="Rallye/list" arguments="{rallyes:hiddenRallyes}" />
+
+<f:link.action action="create">Neue Rallye erstellen</f:link.action>
+</f:section>

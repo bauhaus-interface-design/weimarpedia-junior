@@ -1,0 +1,42 @@
+<f:layout name="default" />
+
+This Template is responsible for creating a table of domain objects.
+
+<f:section name="main">
+<h1>Listing for mediafile</h1>
+
+<f:flashMessages />
+
+<table>
+	<tr>
+		<th><f:translate key="tx_wpj_domain_model_mediafile.title" /></th>
+		<th><f:translate key="tx_wpj_domain_model_mediafile.file" /></th>
+		<th><f:translate key="tx_wpj_domain_model_mediafile.copyright" /></th>
+		<th><f:translate key="tx_wpj_domain_model_mediafile.content_type" /></th>
+		<th><f:translate key="tx_wpj_domain_model_mediafile.description" /></th>
+		<th> </th>
+		<th> </th>
+	</tr>
+	
+<f:widget.paginate objects="{mediafiles}" as="paginatedMediafiles"
+		 configuration="{itemsPerPage: 50, insertAbove: 1, insertBelow: 1}">
+		<f:for each="{paginatedMediafiles}" as="mediafile" iteration="objIterator">
+	
+			<tr>
+				<td><f:link.action action="show" arguments="{mediafile : mediafile}"> {mediafile.title}</f:link.action></td>
+				<td><f:link.action action="show" arguments="{mediafile : mediafile}"> {mediafile.file}</f:link.action></td>
+				<td><f:link.action action="show" arguments="{mediafile : mediafile}"> {mediafile.copyright}</f:link.action></td>
+				<td><f:link.action action="show" arguments="{mediafile : mediafile}"> {mediafile.contentType}</f:link.action></td>
+				<td><f:link.action action="show" arguments="{mediafile : mediafile}"> {mediafile.description}</f:link.action></td>
+				<td><f:link.action action="edit" arguments="{mediafile : mediafile}">Edit</f:link.action></td>
+				<td><f:link.action action="delete" arguments="{mediafile : mediafile}">Delete</f:link.action></td>
+			</tr>
+		</f:for>
+</table>
+
+<div class="pagination">
+</f:widget.paginate>
+</div>
+
+<f:link.action action="new">New mediafile</f:link.action>
+</f:section>

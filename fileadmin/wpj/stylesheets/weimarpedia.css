@@ -1,0 +1,153 @@
+/* global reset */
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outline:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
+
+body { 
+    background: #fff url('../img/weimarpedia_bg.gif') left top;
+	color: #778eb4;
+	font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+	font-size: 100.01%;
+	line-height: 1.2em;
+}
+
+a { color: #778eb4; }
+a:hover { color: #637086; }
+h1 { 
+	font-family: Georgia, Times, "Times New Roman", serif; 
+	color: block; 
+	font-style: italic; 
+	color: #000;
+	text-align: right;
+	padding: 55px 0 1.2em 0;
+}
+h1 span {display: block;}
+
+p { font-size: 72%; }
+
+#wrapper {
+	position: relative;
+	margin: 0 auto;
+	max-width: 960px;
+	background: url('../img/weimarpedia_ornaments.gif') no-repeat right top;
+}
+
+#header { position: relative; border-bottom: 3px solid #96825a; }
+
+#admin {
+	font-size: 75%;
+	margin: 0px auto;
+	width: 960px;
+}
+
+#adminmenu {
+	background: #efece6;
+	border-bottom: 1px solid #778eb4;
+	padding: 10px 10px 30px 10px;
+	display: none;
+}
+
+#logo { float: right; margin: .4em 97px 0 0; }
+#wp { margin-bottom: 1em; }
+#wp h1 { float: right; margin-right: 15px; }
+
+#adminmenu h4 { padding: 0; }
+#adminmenu h4 span { color: #fff; background: #778eb4; padding: 0 .4em; }
+
+#toggle-admin-menu a {position: absolute; top: 0; right: 0; display: block; background: #778eb4; width: 200px; padding: .2em .5em .2em 10px; color: #fff;}
+#nav-main #toggle-admin-menu a:hover { color: #fff; }
+
+#nav-main { margin: 0 0 1em 0; padding: 0; border-bottom: 1px dashed #000; font-size: 72%; letter-spacing: 1px;}
+#nav-main ul { list-style: none; margin: 0; padding: 2em 0 0 0; position: relative;}
+#nav-main li { display: inline; margin: 0 4px 0 0; padding: 0 0 0 12px; background: url('../img/bullets.gif') -500px 50% no-repeat;}
+#nav-main li.first { display: inline; margin: 0 4px 0 0; padding: 0; background: none; }
+#nav-main li a, #nav-main li strong { }
+#nav-main li a { text-decoration: none; }
+#nav-main li strong { font-weight: normal; color: #000; }
+#nav-main li a:hover, #nav-main li a.trail, #nav-main li strong { color: #637086; }
+
+#nav-wiki-main { position: absolute; left: 0; bottom: 0px; margin: 0; padding: 0 0 8px 0; font-family: Georgia, Times, "Times New Roman", serif; font-size: 110%; }
+#nav-wiki-main ul { list-style: none; margin: 0; padding: 0; }
+#nav-wiki-main li { display: inline; margin: 0 1em 0 0; padding: 0; }
+#nav-wiki-main li a, #nav-wiki-main li strong { display: block; float: left; padding: 10px 15px 10px; margin-right: 10px;}
+#nav-wiki-main li a { text-decoration: none; }
+#nav-wiki-main li strong, #nav-wiki-main li a.current { font-weight: normal; color: #fff; background: url('../img/nav-item-bg.png') right 50% no-repeat; }
+#nav-wiki-main li a:hover, #nav-wiki-main li a.trail, #nav-wiki-main li strong { color: #637086; }
+#nav-wiki-main li a.current:hover { color: #fff; }
+
+#nav-wiki-tools { margin: 10px 0 0 0; padding: 0 0 8px 0; letter-spacing: 1px; text-transform: uppercase;}
+#nav-wiki-tools ul { list-style: none; margin: 0; padding: 0; }
+#nav-wiki-tools li { display: inline; margin: 0 1em 0 0; padding: 0; }
+#nav-wiki-tools li.current { background: #96825a; width: 400px;}
+#nav-wiki-tools li a, #nav-wiki-tools li strong { display: block; float: left; padding: 2px 15px 2px; margin-right: 10px; font-size: 72%;}
+#nav-wiki-tools li.current a { text-decoration: none; background: #96825a; }
+#nav-wiki-tools li.current strong, #nav-wiki-tools li.current a { font-weight: normal; color: #fff; font-family: Georgia, Times, "Times New Roman", serif; font-size: 80%; }
+#nav-wiki-tools li a:hover, #nav-wiki-tools li a.trail, #nav-wiki-tools li strong { color: #637086; }
+#nav-wiki-tools li.current a:hover { color: #fff; }
+
+#content { margin: 2em 0 4em 0;}
+
+#article-list { margin-top: 80px;}
+#article-list h3 { float: left; margin: -4px 0 10px 0; width: 200px; font-family: Georgia, Times, "Times New Roman", serif; font-size: 104.25%; font-weight: normal; text-transform: uppercase; line-height: 150%; }
+#article-list h3 a { text-decoration: none;}
+#article-list h3 a span { border-bottom: 4px solid #b5c2d6;}
+
+.article-teaser { float: left; margin: 10px 20px 10px 0; border-top: 1px solid #96825a; width: 300px;}
+.inner-teaser { padding: 0 8px; background: #fff; -moz-box-shadow: 0 0 16px #888; -webkit-box-shadow: 0 0 16px #ccc; box-shadow: 0 0 16px #ccc; }
+.article-teaser img { float: left; margin-right: 10px; border: 1px solid #999;}
+.teaser-content, .meta { padding: 8px 0;}
+.meta h4, .meta.clearfix h4, #article .meta h4, #article .meta.clearfix h4 { padding: 0 4px; font-size: 70%; font-weight: normal; color: #fff; background: #778eb4; text-transform: uppercase; letter-spacing: 1px;}
+.meta.clearfix ul, .meta h4, .meta.clearfix h4 { display: inline; }
+.meta.clearfix ul.taglist li, .meta.clearfix ul.placelist li, .article-teaser .meta.clearfix p {display: inline; font-size: 72%; }
+.article-teaser .author p { display: block; }
+.meta ul.taglist li, .meta ul.placelist li { padding-left: 9px; background: url('../img/bullets.gif') 0 50% no-repeat;}
+.bl { border-bottom: 1px dashed #000; }
+
+#article #col-left { float: left; background: #fff; padding: 12px 0; width: 510px; }
+#article #col-left, #article .asset p { font-family: Georgia, Times, "Times New Roman", serif; }
+#article #col-right { float: right; background: #fff; padding: 12px 0; width: 420px; }
+#article #col-right .meta { margin: 0 12px 5px 12px; }
+#article h3 { font-size: 1.7em; margin-bottom: 15px; }
+#article h4 { text-transform: uppercase; }
+#article h4, #article h5, #article p { font-size: 1em; } 
+#article h3, #article h4, #article h5 { color: #787878; letter-spacing: 1px; }
+#article h3, #article h4, #article h5, #article #col-left p { padding: 0 12px; font-weight: normal; line-height: 170%;}
+#article h5 { color: #8a8a8a; font-style: italic; margin-top: 15px;}
+#article #col-left p { color: #000; margin-bottom: 10px; }
+#article #col-right img { width: 100%; }
+#article #col-right p { font-size: .875em; }
+#article .asset { margin: .5em 0 1em 0; }
+#article .asset p { font-style: italic; line-height: 120%; margin: .7em 0 0 0;}
+#footer {
+	margin: 2em 0 2em 0;
+	padding: 126px 0 0 0;
+	background: url('../img/weimarpedia_footer.gif') center top no-repeat;
+	color: #333;
+	font-family: Georgia, Times, "Times New Roman", serif;
+	font-size: 72%;
+}
+.col {
+	width: 20%;
+	float: left;
+}
+
+#footer .col {
+	width: 50%;
+}
+
+#footer h3, #footer ul { margin: 0 0 10px 20px ; }
+#footer li { display: inline; margin-right: 70px;}
+
+.m-one-line { margin: 1.6em 0 0 0;}
+
+.hideme, h1 strong, dfn, #nav-first a { position: absolute; top: -1000em; left: -1000em; height: 1px; width: 1px; }
+
+.clearfix:after {
+	visibility: hidden;
+	display: block;
+	font-size: 0;
+	content: " ";
+	clear: both;
+	height: 0;
+}
+
+* html .clearfix             { zoom: 1; }
+*:first-child+html .clearfix { zoom: 1; }

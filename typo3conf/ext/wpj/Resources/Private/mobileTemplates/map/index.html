@@ -1,0 +1,148 @@
+{namespace wpj=Tx_Wpj_ViewHelpers}
+<f:layout name="default" />
+
+<f:section name="main">
+	
+	<!--
+	<header id="header">
+		<span>Weimarpedia</span> 
+		
+		<a href="#" id="next-page">Next Page</a>
+	</header>
+	-->
+
+    <div id="main" role="main">
+
+		<section class="page level-1 current" id="map">
+			<div class="sectionhead">
+				<h1>Weimarpedia</h1>
+				<!-- <f:cObject typoscriptObjectPath="lib.mobileHomeLink" /> -->
+			</div>
+			<div id="map_canvas"></div>
+			<div id="showBuildings"><a href="#" id="showBuildingsBtn" class="btn btn-primary">Alle Orte</a></div>
+		</section>
+
+		<section class="page level-2" id="place">
+
+			<div class="sectionhead">
+				<a href="#" class="back btn btn-primary">Zurück</a>
+				<h1></h1>
+				<!-- <f:cObject typoscriptObjectPath="lib.mobileHomeLink" /> -->
+			</div>
+
+			<div class="inner">
+
+				<!-- Standard <ul> with class of "tabs" -->
+				<ul class="tabs">
+				  <!-- Give href an ID value of corresponding "tabs-content" <li>'s -->
+				  <li><a class="active" href="#overviewTab">Übersicht</a></li>
+				  <li><a id="knowledgeArticles" href="#knowledgeTab">Lexikon-Artikel</a></li>
+				  <li><a id="exhibitionArticles" href="#exhibitionTab">Galerie-Artikel</a></li>
+				</ul>
+
+				<!-- Standard <ul> with class of "tabs-content" -->
+				<ul class="tabs-content">
+				  	<li class="active" id="overviewTab">
+						<div id="floors-list">
+							<h2>Stockwerke</h2>
+							<ul class="itemlist"></ul>
+						</div>
+						<div id="article-list">
+							<h2>Artikel</h2>
+							<ul class="itemlist"></ul>
+						</div>
+					</li>
+				  	<li id="knowledgeTab">
+				  		<div>
+							<h2>Lexikon-Artikel</h2>
+							<ul class="itemlist"></ul>
+						</div>
+				  	</li>
+				  	<li id="exhibitionTab">
+				  		<div>
+							<h2>Galerie-Artikel</h2>
+							<ul class="itemlist"></ul>
+						</div>
+				  	</li>
+				</ul>
+			
+				
+
+				
+			</div>
+		</section>
+		
+		<section class="page level-3" id="floorplan">
+			<div class="sectionhead">
+				<a href="#" class="back btn btn-primary">Zurück</a>
+				<h1> </h1>
+				<!-- <f:cObject typoscriptObjectPath="lib.mobileHomeLink" /> -->
+			</div>
+			<div class="inner">
+				<img>
+				<div id="scroll-wrapper">
+					<div id="floormap">
+						<img class="flex" src="">
+					</div>
+					
+					<div id="rooms-list">
+						<h2>Räume</h2>
+						<ul class="itemlist"></ul>
+					</div>
+	
+					<div id="article-list-level3">
+						<h2>Artikel</h2>
+						<ul class="itemlist"></ul>
+					</div>
+				</div>
+			</div>
+		</section>
+		
+		<section class="page level-4" id="article-list-view">
+			<div class="sectionhead">
+				<a href="#" class="back btn btn-primary">Zurück</a>
+				<h1> </h1>
+				<!-- <f:cObject typoscriptObjectPath="lib.mobileHomeLink" /> -->
+			</div>
+			<div class="inner">
+				<img>
+				<div id="scroll-wrapper">
+					<div id="article-list-level4">
+						<h2>Artikel</h2>
+						<ul class="itemlist"></ul>
+					</div>
+				</div>
+			</div>
+		</section>
+		
+		<section class="page level-5" id="article-view">
+			<div class="sectionhead">
+				<a href="#" class="back btn btn-primary">Zurück</a>
+				<h1>Artikel</h1>
+				<!-- <f:cObject typoscriptObjectPath="lib.mobileHomeLink" /> -->
+			</div>
+			<div class="inner">
+				<div id="article-scroll-wrapper">
+					<div class="scroll-content">
+					<h3></h3>
+					<div class="body"> </div>
+					<ul class="itemlist"></ul>
+					</div>
+				</div>
+			</div>
+		</section>
+
+    </div>	
+
+	<script type="text/javascript">
+		<!--
+		var loadPlacesUrl = '<wpj:actionUrl action="loadPlaces" pageType="10"/>';
+		var listPlaceOptionsUrl = '<wpj:actionUrl action="listPlaceOptions" pageType="10"/>';
+		var loadPlaceArticlesUrl = '<wpj:actionUrl action="placeArticles" pageType="10"/>';
+		var loadFloorUrl = '<wpj:actionUrl action="listFloorOptions" pageType="10"/>';
+		var loadRoomUrl = '<wpj:actionUrl action="listRoomArticles" pageType="10"/>';
+		var loadArticleUrl = '<wpj:actionUrl action="showArticle" pageType="10"/>';
+		// -->
+	</script>
+
+</f:section>

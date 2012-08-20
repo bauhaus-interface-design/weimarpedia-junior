@@ -1,0 +1,37 @@
+<f:layout name="default" />
+
+
+<f:section name="main">
+<h1>Alle Artikel f&uuml;rs iPad<f:link.action action="new">(neuen Artikel erstellen)</f:link.action></h1>
+
+<f:flashMessages />
+
+<table>
+	<thead>
+		<tr>
+			<th> </th>
+			<th> </th>
+			<th> </th>
+			<th> </th>
+		</tr>
+	</thead>
+	
+	
+	<f:for each="{articles}" as="article">
+		<tr>
+			<td><f:link.action action="show" arguments="{article : article}"><f:image src="" width="200" height="150" alt="preview"/></f:link.action></td>
+			<td><f:link.action action="show" arguments="{article : article}"> {article.title}<br/>{article.body -> f:format.crop(maxCharacters:100)}</f:link.action></td>
+			<td><f:link.action action="show" arguments="{article : article}"> Tags</f:link.action></td>
+			<td>
+					<f:link.action action="edit" arguments="{article : article}">bearbeiten</f:link.action>&nbsp;|&nbsp;
+					<f:link.action action="delete" arguments="{article : article}">l&ouml;schen</f:link.action>
+					
+			</td>
+			<td></td>
+		</tr>
+	</f:for>
+</table>
+
+
+
+</f:section>

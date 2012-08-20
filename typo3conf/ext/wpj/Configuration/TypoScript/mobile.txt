@@ -1,0 +1,45 @@
+
+[globalVar = GP:tx_wpj_pi1|controller = map] || [userFunc = user_detectMobileDevice(1)] 
+	plugin.tx_wpj.view {
+		layoutRootPath = typo3conf/ext/wpj/Resources/Private/mobileLayouts/
+		templateRootPath = typo3conf/ext/wpj/Resources/Private/mobileTemplates/
+		
+		
+	}
+	
+	
+	config.doctype(
+<!doctype html>
+<!-- Conditional comment for mobile ie7 blogs.msdn.com/b/iemobile/ -->
+<!--[if IEMobile 7 ]>    <html class="no-js iem7" lang="en"> <![endif]-->
+<!--[if (gt IEMobile 7)|!(IEMobile)]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
+	)
+	config.htmlTag_setParams = 
+
+
+	
+	
+	
+	# remove unused css from head
+	page.includeCSS.file10 = typo3conf/ext/wpj/Resources/Public/stylesheets/map-mobile-base.css
+	page.includeCSS.file20 = typo3conf/ext/wpj/Resources/Public/stylesheets/map-mobile-style.css
+	page.includeCSS.file20.media = 
+	page.includeCSS.file30 = 
+	page.includeCSS.file40 = 
+	page.includeCSS.file60 = 
+	
+	page.includeJS.file20 = 
+	page.includeJS.file30 = 
+	
+	page.headerData.20 = TEXT
+	page.headerData.20.value = 
+	
+	
+	
+	# additional lines
+	page.headerData.10.value (
+		<meta name="HandheldFriendly" content="True">
+		<meta name="MobileOptimized" content="320">
+		<meta name="viewport" content="width=device-width">
+	)
+[end]

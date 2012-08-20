@@ -1,0 +1,6 @@
+<f:for each="{places}" as="place">
+	<option value="{place.uid}" coordinates="{place.coordinates}" image="{place.image}">{place.name}
+	{f:if(condition: '{place.lat} != 0', then: ' M')}
+	{f:if(condition: '{place.hasCoordinates}', then: ' P')}
+	</option>
+</f:for>

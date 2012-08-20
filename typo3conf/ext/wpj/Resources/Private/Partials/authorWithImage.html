@@ -1,0 +1,26 @@
+{namespace wpj=Tx_Wpj_ViewHelpers}
+
+<f:if condition="{author}">
+<f:then>
+	<f:link.action controller="article" action="indexByAuthor" arguments="{author : author}" title="Alle Artikel von {author.shortName} anzeigen">
+		<f:image src="{author.avatarImage}" width="30c" height="30c" alt="{author.shortName}" style="float: left;"/>
+	</f:link.action>
+	<f:link.action controller="article" action="indexByAuthor" arguments="{author : author}" title="Alle Artikel von {author.shortName} anzeigen">
+		{author.shortName}
+	</f:link.action>
+	
+	<f:if condition="{author.school}">
+		, 
+		<f:link.action controller="article" action="indexBySchool" arguments="{school : author.school}" title="Alle Artikel von {author.school.name} anzeigen">
+			{author.school.name}
+		</f:link.action>
+	</f:if>
+</f:then>
+<f:else>
+
+	<f:image src="typo3conf/ext/wpj/Resources/Public/img/weimarpedia_platzhalter_logo.gif" width="30c" height="30c" alt="{author.shortName}" style="float: left;"/>
+	Weimarpedia
+	
+</f:else>
+
+</f:if>

@@ -1,0 +1,36 @@
+<f:layout name="default" />
+
+This Template is responsible for creating a single view for a domain object
+
+<f:section name="main">
+<h1>Single View for school</h1>
+
+<f:flashMessages />
+
+<table>
+	<tr>
+		<td><f:translate key="tx_wpj_domain_model_school.name" /></td>
+		<td>{school.name}</td>
+	</tr>
+	<tr>
+		<td><f:translate key="tx_wpj_domain_model_school.city" /></td>
+		<td>{school.city}</td>
+	</tr>
+	<tr>
+		<td><f:translate key="tx_wpj_domain_model_school.state" /></td>
+		<td>{school.state}</td>
+	</tr>
+	<tr>
+		<td><f:translate key="tx_wpj_domain_model_school.country" /></td>
+		<td>{school.country}</td>
+	</tr>
+	<tr>
+		<td><f:translate key="tx_wpj_domain_model_school.url" /></td>
+		<td>{school.url}</td>
+	</tr>
+</table>
+<f:link.action action="edit" arguments="{school : school}">Edit</f:link.action>
+<f:link.action action="delete" arguments="{school : school}">Delete</f:link.action>
+
+<f:link.action action="index">Back to listing</f:link.action>
+</f:section>

@@ -1,0 +1,40 @@
+<f:layout name="default" />
+
+This Template is responsible for creating a table of domain objects.
+
+<f:section name="main">
+<h1>Liste der Schulen</h1>
+
+<f:flashMessages />
+
+<table>
+	<tr>
+		<th>Schulname</th>
+		<th>Stadt</th>
+		<th>URL</th>
+		<th>Nutzer</th>
+		<th>Artikel</th>
+		<th> </th>
+		<th> </th>
+	</tr>
+
+	<f:for each="{schools}" as="school">
+		<tr>
+			<td>{school.name}<br />
+			<i>{school.schooltype.name}</i></td>
+			<td>{school.city}<br />
+			{school.state} {school.country}</td>
+			<td>{school.url}</td>
+			<td></td>
+			<td>
+				<f:link.action class="wpj-button" controller="article" action="indexBySchool" arguments="{school : school}">Alle&nbsp;Artikel&nbsp;zeigen</f:link.action>
+			</td>
+			
+			<td><f:link.action class="wpj-button" action="edit" arguments="{school : school}">Bearbeiten</f:link.action></td>
+			<td><f:link.action class="wpj-button" action="delete" arguments="{school : school}">L&ouml;schen</f:link.action></td>
+		</tr>
+	</f:for>
+</table>
+
+<f:link.action class="wpj-button" action="new">Neue Schule anlegen</f:link.action>
+</f:section>

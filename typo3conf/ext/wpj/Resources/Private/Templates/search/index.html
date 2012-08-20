@@ -1,0 +1,127 @@
+{namespace wpj=Tx_Wpj_ViewHelpers}
+<f:layout name="default" />
+
+	this template is only used if searchterm is valid
+
+<f:section name="main">
+	<div id="nav-wiki-tools" class="grid">
+		<f:render partial="navigation_wiki_tools" />
+		<hr class="hideme" />
+	</div>
+
+	<div id="notifications" class="grid">
+		<f:flashMessages />
+	</div>	
+
+	<div id="main" role="main" class="grid">
+		<h2>Suche nach &#187;{demand.searchterm}&#171; {demand.scopeOutput}</h2>
+		
+		<f:if condition="{demand.isAuthorScope}">
+			
+			
+### Author Search ###
+<f:then>
+	<f:if condition="<f:count subject='{authors}' /> > 0">
+	  
+	  ### authors found
+		<f:then>
+	    
+			<h3><f:count subject="{authors}" /> Autor(en)</h3>
+			<ul>
+			<f:for each="{authors}" as="author">
+				<li><f:render partial="authorWithImage" arguments="{author: author}"/></li>
+			</f:for>
+			</ul>
+
+		</f:then>
+	  
+	  ### no authors found
+		<f:else>
+	    	<h3>Es wurden keine passenden Autoren gefunden.</h3>
+		</f:else>
+	</f:if>
+	
+	<f:if condition="<f:count subject='{schools}' /> > 0">
+	  ### schools found
+		<f:then>
+			<h3><f:count subject="{schools}" /> Schule(n)</h3>
+			<ul>
+			<f:for each="{schools}" as="school">
+				<f:link.action controller="article" action="indexBySchool" arguments="{school : school}" title="Alle Artikel von {school.name} anzeigen">
+					{school.name}
+				</f:link.action>
+			</f:for>
+			</ul>
+	
+		</f:then>
+	</f:if>
+</f:then>
+
+### Artikel-Suche ###
+<f:else>
+	<h3><f:count subject="{articles}" /> Artikel</h3>
+	
+	<div id="article-list" class="clearfix">
+		<f:for each="{articles}" as="article" iteration="objIterator">
+			<f:render partial="articleListView" arguments="{article: article, i: objIterator}"/>
+		</f:for>		
+	</div>
+	
+	<f:if condition="<f:count subject='{meta_tags}' /> > 0">
+	  ### meta_tags found
+		<f:then>
+			<h3><f:count subject="{meta_tags}" /> Schule(n)</h3>
+			<ul>
+			<f:for each="{meta_tags}" as="meta_tag" iteration="objIterator">
+				<f:link.action controller="article" action="indexByTag" arguments="{school : school, i: objIterator}" title="Alle Artikel von {school.name} anzeigen">
+					{meta_tag.name}
+				</f:link.action>
+			</f:for>
+			</ul>
+	
+		</f:then>
+	</f:if>
+	
+	<f:if condition="<f:count subject='{meta_authors}' /> > 0">
+	  
+	  ### meta_authors found
+		<f:then>
+	    
+			<h3><f:count subject="{meta_authors}" /> Autor(en)</h3>
+			<ul>
+			<f:for each="{meta_authors}" as="author" iteration="objIterator">
+				<li><f:render partial="authorWithImage" arguments="{author: author, i: objIterator}"/></li>
+			</f:for>
+			</ul>
+
+		</f:then>
+	  
+	</f:if>
+	
+	<f:if condition="<f:count subject='{meta_schools}' /> > 0">
+	  ### meta_schools found
+		<f:then>
+			<h3><f:count subject="{meta_schools}" /> Schule(n)</h3>
+			<ul>
+			<f:for each="{meta_schools}" as="school" iteration="objIterator">
+				<f:link.action controller="article" action="indexBySchool" arguments="{school : school, i: objIterator}" title="Alle Artikel von {school.name} anzeigen">
+					{school.name}
+				</f:link.action>
+			</f:for>
+			</ul>
+	
+		</f:then>
+	</f:if>
+</f:else>
+			
+		
+		
+		
+		</f:if>	
+		
+		
+		
+		
+		
+	</div>		
+</f:section>

@@ -1,0 +1,46 @@
+<f:layout name="default" />
+
+This Template is responsible for displaying a single view for a domain object
+
+If you modify this template, do not forget to change the overwrite settings 
+in /Configuration/Kickstarter/settings.yaml:
+	Resources:
+		Private: 
+			Templates:
+				Show.html		keep
+
+Otherwise your changes will be overwritten the next time you save the extension in the kickstarter
+
+<f:section name="main">
+<h1>Single View for Rallye</h1>
+
+<f:flashMessages />
+
+<table>
+	<tr>
+		<td><f:translate key="tx_wpjr_domain_model_rallye.name" /></td>
+		<td>{rallye.name}</td>
+	</tr>
+	<tr>
+		<td><f:translate key="tx_wpjr_domain_model_rallye.description" /></td>
+		<td>{rallye.description}</td>
+	</tr>
+	<tr>
+		<td><f:translate key="tx_wpjr_domain_model_rallye.comment" /></td>
+		<td>{rallye.comment}</td>
+	</tr>
+	<tr>
+		<td><f:translate key="tx_wpjr_domain_model_rallye.image" /></td>
+		<td>{rallye.image}</td>
+	</tr>
+	<tr>
+		<td><f:translate key="tx_wpjr_domain_model_rallye.duration" /></td>
+		<td>{rallye.duration}</td>
+	</tr>
+	<tr>
+		<td><f:translate key="tx_wpjr_domain_model_rallye.author" /></td>
+		<td>{rallye.author}</td>
+	</tr>
+</table>
+<f:link.action action="create">New Rallye</f:link.action>
+</f:section>

@@ -1,0 +1,102 @@
+{namespace wpj=Tx_Wpj_ViewHelpers}
+<f:layout name="default" />
+
+<f:section name="main">
+	<div id="nav-wiki-tools" class="grid">
+		<f:render partial="navigation_admin_articles" />
+		<hr class="hideme" />
+	</div>
+
+	<div id="notifications">
+		<f:flashMessages />
+	</div>	
+	
+	<div id="main" role="main" class="grid">
+		
+	<table>
+		<tr>
+			<th></th>
+			<th>Titel</th>
+			<th>Typ</th>
+			<th>Autor(en)</th>
+			<th>ge&auml;ndert</th>
+			<th>erstellt</th>
+			
+			<th>Tags</th>
+			<th>Versionen</th>
+			<th>Empfehlung</th>
+			<th></th>
+			<th></th>
+			<th></th>
+		</tr>
+	
+		<f:widget.paginate objects="{articles}" as="paginatedArticles"
+				 configuration="{itemsPerPage: 50, insertAbove: 0, insertBelow: 1}">
+			<f:for each="{paginatedArticles}" as="article">
+			<tr>
+				<td>{article.uid}</td>
+				<td>{article.title}</td>
+				<td>{article.articletype.name}</td>
+				<td>
+					<f:for each="{article.authors}" as="author">
+						{author.shortName}<br/>
+					</f:for>
+				</td>
+				<td><f:format.date format="d.m.Y H:i">{article.updatedAt}</f:format.date></td>
+				<td><f:format.date format="d.m.Y H:i">{article.createdAt}</f:format.date></td>
+				
+				<td></td>
+				<td></td>
+				<td>
+					<a href="#" class="wpj-button vote-button vote_{article.voting}" id="vote_{article.uid}"><span>★</span></a>	
+				</td>
+
+				<td>
+				<f:if condition="{article.reviewed}>0">
+					<f:then>
+						<f:link.action class="wpj-button" action="setReview" controller="article" arguments="{reviewed:0,article: article}">Freigabe&nbsp;stoppen</f:link.action>
+					</f:then>
+					<f:else>
+						<f:link.action class="wpj-button" action="setReview" controller="article" arguments="{reviewed:1,article: article}">freigeben</f:link.action>
+					</f:else>
+				</f:if>
+				</td>
+				<td><f:link.action class="wpj-button" controller="article" action="show" arguments="{article : article}">Ansehen/Bearbeiten</f:link.action></td>
+				<td><f:link.action class="wpj-button" action="delete" arguments="{article : article}" onclick="return confirm('Wirklich entfernen?');">Delete</f:link.action></td>
+			</tr>
+			</f:for>
+		<div class="pagination top">
+		</f:widget.paginate>
+		</div>
+	</table>
+
+</div>		
+
+<style>
+	
+	.vote-button{
+		text-decoration:none;
+	}
+	a.vote_0 {
+		color: #ccc;		
+	}
+	a.vote_1 {
+		color: #000;		
+	}
+	a.vote_2 {
+		color: #a44;
+		border: 1px solid #a44;	
+		padding: 5px 8px 6px;
+	}
+	a.vote_2 span:before {
+		content: '★';
+	}
+</style>
+
+<script src="typo3conf/ext/wpj/Resources/Public/js/admin.js" type="text/javascript"></script>
+<script type="text/javascript">
+	<!--
+	var voteUrl = '<wpj:actionUrl controller="articleAdmin" action="setVoting" pageType="10"/>';
+	// -->
+</script>
+</f:section>

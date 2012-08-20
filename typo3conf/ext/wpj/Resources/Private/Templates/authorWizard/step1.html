@@ -1,0 +1,41 @@
+<f:layout name="default" />
+
+This template displays a EDIT form for the current domain object.
+
+<f:section name="main">
+	
+	
+	<p>Im letzten Schritt dieses Assistenten drucken Sie eine &Uuml;bersicht der erstellten Logins. Diese &Uuml;bersicht kann sp&auml;ter nicht erneut erzeugt werden. Stellen Sie sicher, dass ein funktionierender Drucker angeschlossen ist.</p>
+	
+	
+<h1>1. Angaben zur Schule</h1>
+<f:flashMessages />
+
+
+<h2>Schule ausw&auml;hlen oder</h2>
+<f:form method="post" action="step1Select" name="schoolselector" object="{selectedSchool}">
+	<f:form.select name="selectedSchool" options="{schools}" optionLabelField="name"/>
+	<f:form.submit value="weiter" /><br />&nbsp;
+</f:form>
+
+<h2>Schule neu anlegen</h2>
+
+<f:render partial="formErrors" />
+<f:form method="post" action="step1Create" name="newschool" object="{newschool}">
+	<label for="title">Name der Schule</label><br />
+	<f:form.textfield property="name" /><br />
+	<label for="title">Stadt</label><br />
+	<f:form.textfield property="city" /><br />
+	<label for="title">Bundesland</label><br />
+	<f:form.textfield property="state" /><br />
+	<label for="title">Land</label><br />
+	<f:form.textfield property="country" /><br />
+	<label for="title">Internetadresse</label><br />
+	<f:form.textfield property="url" /><br />
+	<f:form.submit class="wpj-button" value="weiter" />
+</f:form>
+
+
+
+
+</f:section>

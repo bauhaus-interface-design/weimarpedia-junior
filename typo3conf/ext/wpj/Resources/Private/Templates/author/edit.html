@@ -1,0 +1,28 @@
+<f:layout name="default" />
+
+This template displays a EDIT form for the current domain object.
+
+<f:section name="main">
+<h1>Edit author</h1>
+
+<f:flashMessages />
+
+<f:render partial="formErrors" />
+
+<f:form method="post" action="update" name="author" object="{author}">
+	
+	<label for="title">Login</label><br />
+	<f:form.textfield property="username" /><br />
+	
+	<label for="name">Gruppenname</label><br />
+	<f:form.textfield property="name" /><br />
+	<label for="address">Teilnehmer</label><br />
+	<f:form.textfield property="address" /><br />
+	<label for="company">Betreuer</label><br />
+	<f:form.textfield property="company" /><br />
+	<label for="email">Email (optional)</label><br />
+	<f:form.textfield property="email" /><br />
+	
+	<f:form.submit value="Nutzer aktualisieren" />
+</f:form>
+</f:section>

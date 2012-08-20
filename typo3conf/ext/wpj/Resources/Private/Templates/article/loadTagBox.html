@@ -1,0 +1,14 @@
+<f:if condition="<f:count subject='{tags}' /> > 0">
+	<f:then>
+		
+		<f:for each="{tags}" as="tag">
+			<li id="tag_{tag.uid}"><f:link.action action="indexByTag" arguments="{controller: 'article', tag: tag}">
+				{tag.taxonomy.name} {tag.name}
+			</f:link.action></li>	
+		</f:for>
+		
+	</f:then>
+	<f:else>
+		<li>Keine Einordung bisher</li>
+	</f:else>
+</f:if>

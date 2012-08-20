@@ -1,0 +1,23 @@
+<f:layout name="modalIframe" />
+
+This template displays a NEW form for the current domain object.
+
+<f:section name="main">
+<h1>{newplace.accuracyLabel} anlegen</h1>
+
+<f:flashMessages />
+
+<f:render partial="formErrors" />
+
+<f:form method="post" action="create" name="newplace" object="{newplace}">
+		
+	<f:form.hidden property="parent" /><br />
+	
+	<label for="title">Name</label><br />
+	<f:form.textfield property="name" /><br />
+
+	<label for="description">Beschreibung</label><br />
+	<f:form.textarea property="description" rows="3" cols="20"/><br />
+	<f:form.submit value="Erstellen" />
+</f:form>
+</f:section>

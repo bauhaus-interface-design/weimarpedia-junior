@@ -1,0 +1,65 @@
+{namespace wpj=Tx_Wpj_ViewHelpers}
+
+
+
+<f:layout name="default" />
+
+<f:section name="main">
+	<div id="notifications">
+		<f:flashMessages />
+	</div>	
+
+	<div id="main" role="main" class="grid">
+
+		<div class="row welcome">
+			<div id="logo" class="slot-4-5 forceright">
+				<img src="typo3conf/ext/wpj/Resources/Public/img/weimarpedia.png" />
+				<h1>Neue Wege der kulturellen Bildung im Weltkulturerbe Weimarer Klassik</h1>
+			</div>
+			<div class="slot-0-1-2-3">
+				<h1>Willkommen bei Weimarpedia!</h1>
+				<p>Weimarpedia erm&ouml;glicht Euch das Welterbe Weimars selbstst&auml;ndig und kreativ zu entdecken <a href="http://weimarpedia.de/index.php?id=2">weitere Informationen</a>.</p>
+				<div class="feature">
+					<f:link.action controller="article" action="show" arguments="{article : featuredArticle}" title="Artikel {featuredArticle.title} lesen">
+						<f:image src="{featuredArticle.thumbnailUrl}" width="633c" height="263c" alt="{featuredArticle.title}"/>
+					</f:link.action>
+					<div class="info">
+							<p>
+								<strong><f:format.crop maxCharacters="50">{featuredArticle.title}</f:format.crop></strong>
+								<span class="authors"><f:render partial="authorWithImage" arguments="{author: featuredArticle.author}"/></span>
+							</p>
+						</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="slot-0 scope">
+				<h2><f:link.action controller="article" action="index"><span>Lexikon</span></f:link.action></h2>
+				<p>Im <f:link.action controller="article" action="index">Weimarpedia-Lexikon</f:link.action> erstellt Ihr ein Wissensarchiv &uuml;ber die kulturellen Sch&auml;tze Weimars (Personen, Orte, Objekte, Themen)</p>
+			</div>
+			<div class="slot-1 scope">
+				<h2><f:link.action controller="article" action="exhibition"><span>Galerie</span></f:link.action></h2>
+				<p>In der <f:link.action controller="article" action="exhibition">Galerie</f:link.action> findet Ihr kreative Produkte, die Sch&uuml;ler innerhalb des Weimarpedia-Projektes entwickelt haben.</p>
+			</div>
+			<div class="slot-2 scope">
+				<h2><f:link.action controller="map"><span>Karte</span></f:link.action></h2>
+				<p>Ihr könnt das Wissen aus dem Lexikon auch auf der <f:link.action controller="map">Karte</f:link.action> durchstöbern. Dort gibts auch Infos zu Objekten in den Museen. Vorsicht Beta-Version!</p>
+			</div>
+			<div class="slot-3 scope">
+				<h2><a href="http://weimarpedia.de/index.php?id=11"><span>Materialien</span></a></h2>
+				<p>Weiterhin gibt es f&uuml;r Eure Lehrer <a href="http://weimarpedia.de/index.php?id=11">Materialien</a> zur Vorbereitung des Aufenthaltes in Weimar.</p>
+			</div>
+		</div>
+
+		<h2>Die neuesten Beiträge</h2>
+		<div id="article-list">
+			
+			<f:for each="{articles}" as="article" iteration="objIterator">
+				<f:render partial="articleListView" arguments="{article: article, i: objIterator}"/>
+			</f:for>
+		</div>
+		
+	</div>
+
+</f:section>

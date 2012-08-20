@@ -1,0 +1,107 @@
+page.headerData.20 = TEXT
+page.headerData.20.value (
+	<meta name="viewport" content="width=device-width, minimum-scale=1.0, minimum-scale=1.0, maximum-scale=1.0" />
+	
+)
+page.headerData.30 = TEXT
+page.headerData.30.value (
+	<link rel="apple-touch-icon" href="typo3conf/ext/wpj/Resources/Public/wpj_touch_icon.png" />
+	<link rel="shortcut icon" href="favicon.ico" />
+)
+page.headerData.40 = TEXT
+page.headerData.40.value (
+	<script type="text/javascript">document.documentElement.className += 'js';</script>
+)
+	
+
+page.includeJS {
+	file20 = typo3conf/ext/wpj/Resources/Public/js/jquery-1.6.1.min.js
+}
+
+page.includeCSS {
+	file1 = typo3conf/ext/wpj/Resources/Public/stylesheets/weimarpedia.css
+	file1.media = screen,projection,handheld
+	file3 = typo3conf/ext/wpj/Resources/Public/video-player/mediaelementplayer.min.css
+	file4 = typo3conf/ext/wpj/Resources/Public/stylesheets/print.css
+	file4.media = print
+
+}
+
+plugin.tx_cssstyledcontent._CSS_DEFAULT_STYLE >
+plugin.tx_indexedsearch._CSS_DEFAULT_STYLE >
+plugin.tx_felogin_pi1._CSS_DEFAULT_STYLE >
+plugin.tx_wpj._CSS_DEFAULT_STYLE >
+
+
+config {
+    # Bei Live-Schaltung _UNBEDINGT_ entfernen:
+    no_cache = 1
+    doctype = xhtml_trans
+    htmlTag_setParams = xmlns="http://www.w3.org/1999/xhtml" xml:lang="de-DE"
+    xmlprologue = none
+    htmlTag_langKey = de
+    
+    minifyJS = 1
+    
+    ### Spamschutz
+    spamProtectEmailAddresses = 2
+    spamProtectEmailAddresses_atSubst = (at)
+}
+
+page = PAGE
+page {
+
+	config {
+		additionalHeaders = Content-type:text/html
+		xhtml_cleaning = 1
+		admPanel = 0
+        disablePrefixComment = 1
+        disableBaseWrap = 1
+        removeDefaultJS = 1
+		removeDefaultCSS = 1
+        inlineStyle2TempFile = 1
+        metaCharset = utf-8
+        index_enable = 1 
+        index_externals = 0
+	}
+
+    typeNum = 0
+    bodyTag = <body>
+
+    10 = TEMPLATE
+    10 {
+        template = FILE
+        template {
+            file = typo3conf/ext/wpj/template.html
+        }
+
+        marks {
+            content = CONTENT
+            content {
+                table = tt_content
+                select {
+                    pidInList = this
+                    orderBy = sorting
+                    where = colPos = 0
+                }
+               
+            }
+            right = CONTENT
+            right {
+                table = tt_content
+                select {
+                    pidInList = this
+                    orderBy = sorting
+                    where = colPos = 2
+                }
+               
+            }
+            homeLink = TEXT
+            homeLink {
+            	value = Startseite
+            	typolink.parameter=1
+            }
+        }
+		
+    }
+}

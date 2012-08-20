@@ -1,0 +1,4 @@
+# cat=basic type=user[EXT:rbac/Classes/Install/PostInstallHook.php:Tx_Rbac_Install_PostInstallHook->setupRbac]
+label=Importing TypoScript settings into Database
+updateMessage=0
+

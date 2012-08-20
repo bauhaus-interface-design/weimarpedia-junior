@@ -1,0 +1,24 @@
+{namespace wpj=Tx_Wpj_ViewHelpers}
+
+<label for="title">Name</label><br />
+	<f:form.textfield property="name" /><br />
+	<p>max. 30 Zeichen</p><br />
+	
+<label for="title">Beschreibung</label><br />
+	<f:form.textarea property="description" cols="60" rows="5" /><br />
+	<p>Anzahl der Aufgaben, ungef&auml;hrer Zeitaufwand, Startpunkt</p><br />
+	
+<label for="title">Interne Beschreibung</label><br />
+	<f:form.textarea property="comment" cols="60" rows="3" /><br /><br />
+	
+<label for="title">Bild</label><br />
+	<wpj:form.upload property="image" /><br />
+	<p></p><br />
+	
+<label for="title">Dauer (min)</label><br />
+	<f:form.textfield property="duration" size="3"/><br />
+	<p>nur zur internen Nutzung</p><br />
+
+<label for="title">Mit Auswertung?</label><br />
+	<f:form.select property="presentation" options="{1: 'Ja', 0: 'Nein'}"/><br />
+	<p>K&ouml;nnen die Daten zur&uuml;ckgesendet werden?</p><br />	

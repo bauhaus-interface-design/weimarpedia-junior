@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<T3locallang>
+	<meta type="array">
+		<type>database</type>
+		<description>Language labels for database tables/fields belonging to extension 'wpjr'</description>
+	</meta>
+	<data type="array">
+		<languageKey index="default" type="array">
+			<label index="tx_wpjr_domain_model_rallye">Rallye</label>
+			<label index="tx_wpjr_domain_model_rallye.name">Name</label>
+			<label index="tx_wpjr_domain_model_rallye.description">Description</label>
+			<label index="tx_wpjr_domain_model_rallye.comment">Comment</label>
+			<label index="tx_wpjr_domain_model_rallye.image">Image</label>
+			<label index="tx_wpjr_domain_model_rallye.duration">Duration</label>
+			<label index="tx_wpjr_domain_model_rallye.author">Author</label>
+			<label index="tx_wpjr_domain_model_task">Task</label>
+			<label index="tx_wpjr_domain_model_task.parent">Parent</label>
+			<label index="tx_wpjr_domain_model_task.tx_wpjr_sorting">Sorting</label>
+			<label index="tx_wpjr_domain_model_task.title">Title</label>
+			<label index="tx_wpjr_domain_model_task.intro">Intro</label>
+			<label index="tx_wpjr_domain_model_task.instruction">Instruction</label>
+			<label index="tx_wpjr_domain_model_task.image1">Image1</label>
+			<label index="tx_wpjr_domain_model_task.image2">Image2</label>
+			<label index="tx_wpjr_domain_model_task.image3">Image3</label>
+			<label index="tx_wpjr_domain_model_task.image4">Image4</label>
+			<label index="tx_wpjr_domain_model_task.duration">Duration</label>
+			<label index="tx_wpjr_domain_model_task.resulttype">Resulttype</label>
+			<label index="tx_wpjr_domain_model_task.resultoptions">Resultoptions</label>
+			<label index="tx_wpjr_domain_model_task.resultrequired">Resultrequired</label>
+			<label index="tx_wpjr_domain_model_task.rallye">Rallye</label>
+			<label index="tx_wpjr_domain_model_task.place">Place</label>
+			<label index="tx_wpjr_domain_model_result">Result</label>
+			<label index="tx_wpjr_domain_model_result.user">User</label>
+			<label index="tx_wpjr_domain_model_result.content">Content</label>
+			<label index="tx_wpjr_domain_model_result.timestamp">Timestamp</label>
+			<label index="tx_wpjr_domain_model_result.task">Task</label>
+			<label index="tx_wpjr_domain_model_rallyeplace">Rallye Place</label>
+			<label index="tx_wpjr_domain_model_rallyeplace.name">Name</label>
+			<label index="tx_wpjr_domain_model_rallyeplace.description">Description</label>
+			<label index="tx_wpjr_domain_model_rallyeplace.image">Image</label>
+			<label index="tx_wpjr_domain_model_rallyeplace.address">Address</label>
+			<label index="tx_wpjr_domain_model_rallyeplace.lat">Lat</label>
+			<label index="tx_wpjr_domain_model_rallyeplace.lng">Lng</label>
+			<label index="tx_wpjr_domain_model_rallyeplace.accuracy">Accuracy</label>
+		</languageKey>
+	</data>
+</T3locallang>

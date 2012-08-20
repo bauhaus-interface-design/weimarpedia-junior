@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<T3locallang>
+    <meta type="array">
+        <description>Ontext Sensitive Help (CSH) for table tx_wpj_domain_model_media</description>
+        <type>CSH</type>
+        <csh_table>tx_wpj_domain_model_media</csh_table>
+    </meta>
+    <data type="array">
+        <languageKey index="default" type="array">
+			<label index="description.description">description</label>
+			<label index="reviewed.description">reviewed</label>
+			<label index="position.description">position</label>
+			<label index="media.description">media</label>
+		</languageKey>
+    </data>
+</T3locallang>

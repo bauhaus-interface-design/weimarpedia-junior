@@ -1,0 +1,15 @@
+{namespace wpj=Tx_Wpj_ViewHelpers}
+<ul class="nav clearfix" id="nav-wiki">
+<!--
+	<wpj:menu controller="map" action="index">Karte</wpj:menu>
+-->
+	<wpj:menu controller="article" action="index" customclass="wpj-item">Lexikon</wpj:menu>
+	<wpj:menu controller="article" action="exhibition" customclass="wpj-item">Galerie</wpj:menu>
+
+	<li id="searchbox">
+		<f:form method="post" controller="search" name="demand" object="{demand}">
+			<f:form.hidden id="scopeField" property="scope" />
+			<label for="searchField">Suche</label> <f:form.textfield id="searchField" property="searchterm" name="searchterm"/> <f:form.submit value="suchen" />
+		</f:form>
+	</li>
+</ul>

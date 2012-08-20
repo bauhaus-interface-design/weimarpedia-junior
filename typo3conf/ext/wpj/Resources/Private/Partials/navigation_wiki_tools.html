@@ -1,0 +1,7 @@
+{namespace wpj=Tx_Wpj_ViewHelpers}
+<ul class="clearfix">
+	<!--<wpj:menu controller="article" action="index">Alle Artikel</wpj:menu>-->
+	<wpj:ifAdminLevel minLevel="1">
+		<wpj:menu controller="article" action="show">Neuen Artikel anlegen</wpj:menu>
+	</wpj:ifAdminLevel>
+</ul>	

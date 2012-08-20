@@ -1,0 +1,103 @@
+<f:layout name="default" />
+
+This Template is responsible for creating a table of domain objects.
+
+
+If you modify this template, do not forget to change the overwrite settings 
+in /Configuration/Kickstarter/settings.yaml:
+	Resources:
+		Private: 
+			Templates:
+				List.html		keep
+
+Otherwise your changes will be overwritten the next time you save the extension in the kickstarter
+
+<f:section name="main">
+<h1>Aufgaben von {rallye.name}</h1>
+
+<f:flashMessages />
+
+<table id="sort">
+	<thead>
+	<tr>
+		<th>Titel / Ort</th>
+		<th>Ort</th>
+		<th></th>
+		<th>Einf&uuml;hrung</th>
+		<th>Aufgabe</th>
+		<th>Foto 1</th>
+		<th>2</th>
+		<th>3</th>
+		<th>4</th>
+		<th>Ergebnis</th>
+		<th> </th>
+		<th> </th>
+	</tr>
+	</thead>
+	<tbody>
+	<f:for each="{tasks}" as="task" iteration="objIterator">
+		<tr id="{task.uid}">
+			<td><strong> {task.title }</strong><br/> <br/> <i>{task.place.name}</i></td>
+			<td>
+				<f:if condition="{task.place}">
+					<img src="http://maps.google.com/maps/api/staticmap?center={task.place.lat},{task.place.lng}&zoom=17&size=100x100&maptype=hybrid&sensor=false&markers={task.place.lat},{task.place.lng}" alt="Karte"/>
+				</f:if>
+			</td>	
+			<td> <img src="data:image/gif;base64,{task.place.image}" alt="" height="100px" style="border:1px solid #ddd;"/></td>
+			<td><f:format.crop maxCharacters="120">{task.intro}</f:format.crop> 
+					</td>
+			<td><f:format.crop maxCharacters="120">{task.instruction}</f:format.crop></td>
+			<td> <img src="data:image/gif;base64,{task.image1}" alt="" height="100px" style="border:1px solid #ddd;"/></td>
+			<td> <img src="data:image/gif;base64,{task.image2}" alt="" height="100px" style="border:1px solid #ddd;"/></td>
+			<td> <img src="data:image/gif;base64,{task.image3}" alt="" height="100px" style="border:1px solid #ddd;"/></td>
+			<td> <img src="data:image/gif;base64,{task.image4}" alt="" height="100px" style="border:1px solid #ddd;"/></td>
+			
+			<td> 
+				{task.resultTypeLabel} <br /> <br />
+				<f:if condition="{task.resultrequired} == 1">
+					<f:then>Pflichtfeld</f:then>
+					<f:else><i>optional</i></f:else>
+				</f:if>
+				</td>
+			
+			<td><f:link.action class="wpj-button" action="updateTask" arguments="{rallye : rallye,task : task}">Bearbeiten</f:link.action></td>
+			<td><f:link.action class="wpj-button" action="deleteTask" arguments="{rallye : rallye,task : task}" onclick="return confirm('Wirklich entfernen?');">Entfernen</f:link.action></td>
+		</tr>
+	</f:for>
+	</tbody>
+</table>
+
+<f:link.action class="wpj-button" action="createTask" arguments="{rallye : rallye}">Neue Aufgabe</f:link.action>
+
+<p>Umsortieren der Aufgaben per Drag-and-Drop</p>
+
+<style>
+	.ui-state-highlight { height: 4em; line-height: 1.2em; }
+</style>
+<script type="text/javascript">
+
+	$(document).ready(function(){
+		$("#sort tbody").sortable({
+			placeholder: "ui-state-highlight",
+			update: function(event, ui) { 
+				var params = [];
+				$('#sort tbody tr').each( function(index,elm){
+					params.push($(elm).attr('id'));
+				}); 
+				$.ajax({
+					type: 'POST',
+					url: sortUrl,
+					data: ({'tx_wpjr_pi1[ids]' : params.join(",")}),
+					error:function(error){ console.log("ERROR" + error); },
+					success:function(data){  }
+			    });
+			}
+		}).disableSelection();
+	});
+
+	
+
+</script>
+<script type="text/javascript" src="typo3conf/ext/wpj/Resources/Public/js/jquery-ui-1.8.9.custom.min.js"></script>
+
+</f:section>

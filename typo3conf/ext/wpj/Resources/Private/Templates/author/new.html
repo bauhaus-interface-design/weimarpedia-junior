@@ -1,0 +1,32 @@
+<f:layout name="default" />
+
+This template displays a NEW form for the current domain object.
+
+<f:section name="main">
+<h1>Neuer Nutzer</h1>
+
+<f:flashMessages />
+
+<f:render partial="formErrors" />
+
+<f:form method="post" action="create" name="newauthor" object="{newauthor}">
+
+	<label for="title">Login</label><br />
+	<f:form.textfield property="username" /><br />
+	
+	<label for="title">Passwort</label><br />
+	<f:form.password property="password" /><br />
+	
+	<label for="name">Gruppenname</label><br />
+	<f:form.textfield property="name" /><br />
+	<label for="address">Teilnehmer</label><br />
+	<f:form.textfield property="address" /><br />
+	<label for="company">Betreuer</label><br />
+	<f:form.textfield property="company" /><br />
+	<label for="email">Email (optional)</label><br />
+	<f:form.textfield property="email" /><br />
+	
+	
+	<f:form.submit value="Nutzer anlegen" />
+</f:form>
+</f:section>

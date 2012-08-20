@@ -1,0 +1,184 @@
+{namespace wpj=Tx_Wpj_ViewHelpers}
+<f:layout name="default" />
+
+This Template is responsible for creating a table of domain objects.
+
+<f:section name="main">
+<wpj:includeFile path="EXT:wpj/Resources/Public/js/jquery.treeview/jquery.treeview.css" />
+	<h1>Ortsverzeichnis</h1>
+
+	<div id="notifications">
+		<f:flashMessages />
+	</div>	
+
+	Ausgangspunkt
+	<select id="rootSelector">
+		
+		<optgroup label="zuletzt">
+			<f:for each="{lastPlaces}" as="place">
+				<option value="{place.uid}"{f:if(condition:'{place.uid}=={lastPlaceParent.uid}',then:' selected="selected"')}>{place.name}</option>
+				<f:for each="{place.children}" as="cplace">
+					<option value="{cplace.uid}">&middot; {cplace.name}</option>
+				</f:for>
+			</f:for>
+		</optgroup>
+		
+		<optgroup label="alle St&auml;dte">
+			<f:for each="{places}" as="place">
+				<option value="{place.uid}">{place.name}</option>
+			</f:for>
+		</optgroup>
+		
+		<optgroup label="oder von ganz vorn">
+			<option value="{root.uid}">{root.name}</option>
+		</optgroup>
+		
+	</select>
+	<br />
+	<br />
+	
+	<ul id="placeTree">
+		<li class="hasChildren">
+			<span></span>
+			<ul>
+				<li><span class="placeholder">&nbsp;</span></li>
+			</ul>
+		</li>
+	</ul>
+	
+	<br/><br/>
+	Ort geolokalisieren: 
+	<input type="text" id="findPlaceTf"/>
+	<input type="submit" value="suchen" id="findPlaceBtn"/>
+	<ul id="placeResults"></ul>
+	
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.3/jquery.min.js"></script>
+
+	<script src="typo3conf/ext/wpj/Resources/Public/js/jquery.cookie.js" type="text/javascript"></script>
+	<script src="typo3conf/ext/wpj/Resources/Public/js/jquery.treeview/jquery.treeview.js" type="text/javascript"></script>
+	<script src="typo3conf/ext/wpj/Resources/Public/js/jquery.treeview/jquery.treeview.edit.js" type="text/javascript"></script>
+	<script src="typo3conf/ext/wpj/Resources/Public/js/jquery.treeview/jquery.treeview.async.js" type="text/javascript"></script>
+
+	<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?sensor=false"></script>
+	<script type="text/javascript">
+	
+
+	function codeAddress() {
+		geocoder.geocode( { 'address': $('#findPlaceTf').val() }, function(results, status) {
+			if (status == google.maps.GeocoderStatus.OK) {
+				$('#placeResults').empty();
+				for (var i=0;i<results.length;i++){
+					var result = results[i];
+					
+					var li = $('<li></li>');
+					
+					// info
+					var info = '';
+					var placeData = [];
+					for (var j=0;j<result.address_components.length;j++){
+						var adr = result.address_components[j];
+						info += " - " + adr.long_name + " / ";
+						info += " - " + adr.types + "<br/>";
+						
+						if (adr.types[0] == 'establishment' || adr.types[0] == 'point_of_interest') placeData["7"] = adr.long_name;
+						else if (adr.types[0] == 'route' ) placeData["6"] = adr.long_name;
+						else if (adr.types[0] == 'locality' ) placeData["5"] = adr.long_name;
+						else if (adr.types[0] == 'administrative_area_level_1' ) placeData["4"] = adr.long_name;
+						else if (adr.types[0] == 'country' ) placeData["3"] = adr.long_name;
+					}
+					
+					
+					// titel
+					var titel = "<strong>"+result.formatted_address+"</strong><br/> <br/>";
+					$(li).append(titel);
+					// link
+					var link = $('<a>Eintrag zusammenstellen</a>');
+					link.click(checkPlace);
+					link.data('placeData', placeData);
+					$(li).append(link);
+					
+					
+					$(li).append("<p>"+info+"<br/></p>");
+					$('ul#placeResults').append(li);
+				}
+				
+				
+			} else {
+				alert("Geocodierung war nicht moeglich: " + status);
+			}
+		});
+	}
+	
+	function checkPlace(){
+		//console.log($(this).data('placeData'));
+		var createNow = ($(this).data('status') == 'create') ? true:false;
+		$(this).data('status',"create");
+		$(this).text("Eintrag erstellen");
+		
+		$('ul#placeResults li').removeClass('current');
+		var li = $(this).parent();
+		$(li).addClass('current');
+		
+		$.ajax({
+			url: '<wpj:actionUrl action="createPlaces" pageType="10"/>',
+			type: 'POST',
+			data: ({
+				'placeData': $(this).data('placeData'),
+				'createNow': createNow
+			}),
+			success: function(result){
+				$('ul#placeResults li.current p').html(result);
+				
+			}
+		});
+	}
+	
+	var geocoder;
+	$(document).ready(function(){
+		$("#placeTree").treeview({
+			url: "<wpj:actionUrl controller="place" action="loadChildren" arguments="{place : child}" pageType="10"/>",
+			persist: "cookie"
+		});
+		
+		$("#rootSelector").change(function(event){
+			$('#placeTree li:first-child').attr("id", $("#rootSelector").val());
+			$('#placeTree li:first-child span').text( $("#rootSelector option:selected").text() );
+			$('#placeTree li:first-child').addClass("hasChildren");
+			$('#placeTree li:first-child').removeClass('collapsable');
+			$('#placeTree li:first-child ul').empty();
+			
+			$('#placeTree li:first-child div:first-child').trigger('click');
+			$('#placeTree li:first-child div:first-child').trigger('click');
+		});
+		$("#rootSelector").trigger('change');
+		
+		geocoder = new google.maps.Geocoder();
+		$('#findPlaceBtn').click(codeAddress);
+	});
+	
+	
+	
+	
+	
+	
+	/***************************
+	 *	 Fancybox
+	 */
+	if(!window.Wpj){
+	  Wpj = {};
+	}
+	Wpj.initFancybox = function() {
+		$(".newPlace").fancybox({
+			'type' : 'iframe',
+			'width' : '50%',
+			'height' : '70%',
+			'onCleanup': function(){
+				$("#rootSelector").trigger('change');
+				$('#placeTree li:first-child div').trigger('click');
+			}
+		});	
+	}
+
+	</script>
+	
+</f:section>

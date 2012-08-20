@@ -1,0 +1,25 @@
+<f:layout name="default" />
+
+This template displays a NEW form for the current domain object.
+
+<f:section name="main">
+<h1>New school</h1>
+
+<f:flashMessages />
+
+<f:render partial="formErrors" />
+
+<f:form method="post" action="create" name="newschool" object="{newschool}">
+	<label for="title">Name der Schule</label><br />
+	<f:form.textfield property="name" /><br />
+	<label for="title">Stadt</label><br />
+	<f:form.textfield property="city" /><br />
+	<label for="title">Bundesland</label><br />
+	<f:form.textfield property="state" /><br />
+	<label for="title">Land</label><br />
+	<f:form.textfield property="country" /><br />
+	<label for="title">Internetadresse</label><br />
+	<f:form.textfield property="url" /><br />
+	<f:form.submit value="Create new" />
+</f:form>
+</f:section>

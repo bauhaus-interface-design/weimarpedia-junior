@@ -1,0 +1,57 @@
+<f:layout name="modalwindow" />
+<f:section name="main">
+
+	<h3>Ort auswählen</h3>
+	
+	<h4>Wo möchtest du suchen?</h4>
+	<p>
+		<a class="wpj-button" id="insideBtn">Raum innerhalb eines Gebäudes</a> oder 
+		<a class="wpj-button" id="outsideBtn">Gebäude / Ortschaft / Land</a>
+	</p>
+	<p>Verknüpfe deinen Beitrag so genau, wie möglich. Du kannst sogar auf einzelne Räume in Gebäuden verweisen.</p>
+	
+	<div id="insideBuildingDiv" style="display: none">
+		<div id="insideStep1">
+			<h4>1. Gebäude suchen</h4>
+			<p><input id="searchFieldBuilding" type="text" /></p>
+			<ul></ul> 
+		</div>
+		<div id="insideStep2" style="display: none">
+			<h4>2. Raum <span id="buildingName"/>suchen</h4>
+			<div class="clearfix">
+				<div class="l50">
+					<ul class="selection" id="floorList"></ul> 
+				</div>
+				<div class="r50">
+					<ul class="selection" id="roomList"></ul> 
+					<a class="wpj-button assignBtn">Raum zuweisen und schließen</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<div id="outsideBuildingDiv" style="display: none">
+		<div id="outsideStep1">
+			<h4>Ort suchen</h4>
+			<p>
+				<input id="searchFieldPlace" type="text" />
+				<a class="wpj-button assignBtn">Ort zuweisen und schließen</a>
+			</p>
+		</div>
+	</div>
+
+
+<style>
+
+	input#searchFieldBuilding.ui-autocomplete-loading,
+	ul.box-loading{
+		background: url('typo3conf/ext/wpj/Resources/Public/img/spinner.gif') no-repeat top right;
+	}
+	
+	li.selected-item{
+		border: 1px solid #B5C2D6;
+	}
+
+</style>
+
+</f:section>

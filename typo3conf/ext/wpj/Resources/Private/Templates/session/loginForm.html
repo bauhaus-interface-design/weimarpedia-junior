@@ -1,0 +1,24 @@
+<f:layout name="default" />
+
+<f:section name="main">
+	<div id="main" role="main" class="grid">
+	<div class="row">
+	<h1>Anmelden</h1>
+
+	<div id="notifications">
+	<f:flashMessages />
+	</div>
+
+	<f:render partial="formErrors" />
+	
+	<p>Um bei Weimarpedia mitzumachen, musst du die <a href="http://weimarpedia.de/index.php?id=2">Teilnahmevoraussetzungen</a> erfüllen</p>
+	<f:form method="post" action="login" >
+		<label for="title">Login</label><br />
+		<f:form.textfield name="uname" value="{uname}"/><br />
+		<label for="title">Passwort</label><br />
+		<f:form.password name="uident" value="{uident}"/><br />
+		<f:form.submit class="wpj-button" value="Anmelden" />
+	</f:form>
+	</div>
+	</div>
+</f:section>

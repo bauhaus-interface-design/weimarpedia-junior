@@ -1,0 +1,32 @@
+{namespace wpj=Tx_Wpj_ViewHelpers}
+
+<ul>
+<f:for each="{article.medias}" as="media">
+	<li>
+		<!-- media.uid {media.uid} / {media.mediafile.uid} / {media.mediafile.url}  -->
+		
+		<f:if condition="{media.mediafile.isImage}">
+			
+			<a href="<wpj:imageSource src="{media.mediafile.url}" width="1004cm" height="568"/>" class="openInFancybox">
+				<f:image src="{media.mediafile.url}" width="396cm" height="500" alt="{media.description}"/>
+			</a>
+		</f:if>	
+		<f:if condition="{media.mediafile.isVideo}">
+			<f:render partial="videoPlayer" arguments="{mediafile:media.mediafile, width:300, height:200}"/>
+		</f:if>	
+		<f:if condition="{media.mediafile.isAudio}">
+			<f:render partial="audioPlayer" arguments="{mediafile:media.mediafile, width:300}"/>
+		</f:if>
+		<f:if condition="{media.mediafile.isPdf}">
+			<br/>
+			<a href="{media.mediafile.url}" title="PDF herunterladen">
+				<f:image src="{media.mediafile.url}" width="396cm" height="500" alt="PDF"/><br/>
+				[PDF-Datei herunterladen]
+			</a>
+			<br/>
+		</f:if>	
+
+		<div class="alohaEditor mediadescription" id="mediaDesc_{media.uid}"><f:format.html parseFuncTSPath="">{media.description}</f:format.html></div>
+	</li>
+</f:for>
+</ul>

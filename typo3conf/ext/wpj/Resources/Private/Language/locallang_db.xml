@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<T3locallang>
+	<meta type="array">
+		<type>database</type>
+		<description>Language labels for database tables/fields belonging to extension 'wpj'</description>
+	</meta>
+	<data type="array">
+		<languageKey index="default" type="array">
+			<label index="tx_wpj_domain_model_article">Article</label>
+			<label index="tx_wpj_domain_model_article.title">Title</label>
+			<label index="tx_wpj_domain_model_article.body">Body</label>
+			<label index="tx_wpj_domain_model_article.reviewed">Reviewed</label>
+			<label index="tx_wpj_domain_model_article.tags">Tags</label>
+			<label index="tx_wpj_domain_model_article.medias">Medias</label>
+			<label index="tx_wpj_domain_model_article.articletype">Article Type</label>
+			<label index="tx_wpj_domain_model_article.authors">Authors</label>
+			<label index="tx_wpj_domain_model_place">Place</label>
+			<label index="tx_wpj_domain_model_place.name">Name</label>
+			<label index="tx_wpj_domain_model_place.lat">Lat</label>
+			<label index="tx_wpj_domain_model_place.lng">Lng</label>
+			<label index="tx_wpj_domain_model_place.coordinates">Coordinates</label>
+			<label index="tx_wpj_domain_model_place.reviewed">Reviewed</label>
+			<label index="tx_wpj_domain_model_place.accuracy">Accuracy</label>
+			<label index="tx_wpj_domain_model_place.description">Description</label>
+			<label index="tx_wpj_domain_model_place.parent">Parent</label>
+			<label index="tx_wpj_domain_model_tag">Tag</label>
+			<label index="tx_wpj_domain_model_tag.name">Name</label>
+			<label index="tx_wpj_domain_model_tag.place">Place</label>
+			<label index="tx_wpj_domain_model_tag.taxonomy">Taxonomie</label>
+			<label index="tx_wpj_domain_model_media">Media</label>
+			<label index="tx_wpj_domain_model_media.description">Description</label>
+			<label index="tx_wpj_domain_model_media.reviewed">Reviewed</label>
+			<label index="tx_wpj_domain_model_media.position">Position</label>
+			<label index="tx_wpj_domain_model_media.media">Media</label>
+			<label index="tx_wpj_domain_model_author">Author</label>
+			<label index="tx_wpj_domain_model_author.login">Login</label>
+			<label index="tx_wpj_domain_model_author.password">Password</label>
+			<label index="tx_wpj_domain_model_author.name">Name</label>
+			<label index="tx_wpj_domain_model_author.first_name">First Name</label>
+			<label index="tx_wpj_domain_model_author.last_name">Last Name</label>
+			<label index="tx_wpj_domain_model_author.description">Description</label>
+			<label index="tx_wpj_domain_model_author.email">Email</label>
+			<label index="tx_wpj_domain_model_author.disabled">Disabled</label>
+			<label index="tx_wpj_domain_model_author.tx_wpj_starttime">Starttime</label>
+			<label index="tx_wpj_domain_model_author.tx_wpj_endtime">Endtime</label>
+			<label index="tx_wpj_domain_model_author.tx_wpj_group">Group</label>
+			<label index="tx_wpj_domain_model_author.profile_article">Profile Article</label>
+			<label index="tx_wpj_domain_model_author.task_article">Task Article</label>
+			<label index="tx_wpj_domain_model_author.school">School</label>
+			<label index="tx_wpj_domain_model_articletype">Article Type</label>
+			<label index="tx_wpj_domain_model_articletype.name">Name</label>
+			<label index="tx_wpj_domain_model_articletype.public">Public</label>
+			<label index="tx_wpj_domain_model_articletype.taxonomies">Taxonomies</label>
+			<label index="tx_wpj_domain_model_school_type">School Type</label>
+			<label index="tx_wpj_domain_model_school_type.name">Name</label>
+			<label index="tx_wpj_domain_model_school">School</label>
+			<label index="tx_wpj_domain_model_school.name">Name</label>
+			<label index="tx_wpj_domain_model_school.city">City</label>
+			<label index="tx_wpj_domain_model_school.state">State</label>
+			<label index="tx_wpj_domain_model_school.country">Country</label>
+			<label index="tx_wpj_domain_model_school.url">Url</label>
+			<label index="tx_wpj_domain_model_school.type">Type</label>
+			<label index="tx_wpj_domain_model_school.profile_article">Profile Article</label>
+			<label index="tx_wpj_domain_model_taxonomie">Taxonomie</label>
+			<label index="tx_wpj_domain_model_taxonomie.name">Name</label>
+			<label index="tx_wpj_domain_model_mediafile">Mediafile</label>
+			<label index="tx_wpj_domain_model_mediafile.title">Title</label>
+			<label index="tx_wpj_domain_model_mediafile.file">File</label>
+			<label index="tx_wpj_domain_model_mediafile.copyright">Copyright</label>
+			<label index="tx_wpj_domain_model_mediafile.content_type">Content Type</label>
+			<label index="tx_wpj_domain_model_mediafile.description">Description</label>
+		</languageKey>
+	</data>
+</T3locallang>

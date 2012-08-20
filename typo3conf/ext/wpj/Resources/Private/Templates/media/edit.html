@@ -1,0 +1,19 @@
+<f:layout name="default" />
+
+This template displays a EDIT form for the current domain object.
+
+<f:section name="main">
+<h1>Edit media</h1>
+
+<f:flashMessages />
+
+<f:render partial="formErrors" />
+
+<f:form method="post" action="update" name="media" object="{media}">
+	<label for="title"><f:translate key="tx_wpjv1_domain_model_media.content_type" /></label><br />
+	<f:form.textfield property="content_type" /><br />
+	<label for="title"><f:translate key="tx_wpjv1_domain_model_media.file" /></label><br />
+	<f:form.textfield property="file" /><br />
+	<f:form.submit value="Edit" />
+</f:form>
+</f:section>

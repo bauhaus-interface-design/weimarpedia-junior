@@ -1,0 +1,48 @@
+
+
+<table>
+	<tr>
+		<th></th>
+		<th>Name</th>
+		<th>Interner Kommentar</th>
+		<th>Dauer</th>
+		<th>Autor</th>
+		
+		<th> </th>
+		<th> </th>
+		<th> </th>
+		<th> </th>
+	</tr>
+
+	<f:for each="{rallyes}" as="rallye">
+		<tr>
+			<td><img src="data:image/gif;base64,{rallye.image}" alt="" height="100px" style="border:1px solid #ddd;"/></td>
+			<td><strong>{rallye.name}</strong><br /><br /><f:format.nl2br> {rallye.description} </f:format.nl2br></td>
+			<td><f:format.nl2br> {rallye.comment} </f:format.nl2br></td>
+			<td><strong>{rallye.duration}</strong>&nbsp;min<br />
+				<strong><f:count subject="{rallye.tasks}" /></strong>&nbsp;Aufgaben	<br /><br />
+				<f:if condition="{rallye.hasPresentation}">
+					<f:then><strong>mit</strong></f:then>
+					<f:else>ohne</f:else>
+				</f:if> Auswertung	 <br />			
+			</td>
+			<td>{rallye.author.name}</td>
+			
+			<td><f:link.action class="wpj-button" action="listTasks" arguments="{rallye : rallye}">Aufgaben</f:link.action></td>
+			<td><f:link.action class="wpj-button" action="edit" arguments="{rallye : rallye}">Info&nbsp;bearbeiten</f:link.action></td>
+			<td>
+			<f:if condition="{rallye.disabled}">jetzt 
+				<f:then>
+					<f:link.action class="wpj-button" action="activate" arguments="{rallye : rallye}">aktivieren</f:link.action>
+				</f:then>	
+				<f:else>
+					<f:link.action class="wpj-button" action="deactivate" arguments="{rallye : rallye}">deaktivieren</f:link.action>
+				</f:else>
+			</f:if>
+			</td>
+			
+			<td><f:link.action class="wpj-button" action="delete" arguments="{rallye : rallye}" onclick="return confirm('Wirklich entfernen?');">l&ouml;schen</f:link.action></td>
+
+		</tr>
+	</f:for>
+</table>

@@ -1,0 +1,67 @@
+{namespace wpj=Tx_Wpj_ViewHelpers}
+<f:layout name="default" />
+
+<f:section name="main">
+
+	<div id="nav-wiki-tools" class="grid">
+		<ul class="clearfix">
+			<wpj:menu controller="article" action="exhibition">Alle Artikel</wpj:menu>
+			<wpj:menu controller="article" action="exhibition" selection="1">Aktuelle Empfehlungen</wpj:menu>
+			<wpj:menu controller="article" action="exhibition" selection="2">Dauerfavoriten</wpj:menu>
+		</ul>
+		<hr class="hideme" />
+	</div>
+	
+	<div id="notifications">
+		<f:flashMessages />
+	</div>	
+	
+	<div id="main" role="main" class="grid">
+		<h2 class="hideme">Inhalt: Artikelübersicht</h2>
+		<div id="article-list">
+			<f:widget.paginate objects="{articles}" as="paginatedArticles"
+				 configuration="{itemsPerPage: 15, insertAbove: 0, insertBelow: 1}">
+				<f:for each="{paginatedArticles}" as="article" iteration="objIterator">
+					
+					<div class="row">
+						<div class="slot-0-1-2-3">
+							<article class="article-teaser {article.articletypeCssClass}">
+								<div class="inner-teaser">
+									<div class="row">
+										<div class="slot-0-1">
+											<div class="inner">
+										<f:link.action controller="article" action="show" arguments="{article : article}" title="Artikel {article.title} lesen">
+											<f:image src="{article.thumbnailUrl}" width="350c" height="270c" alt="{article.title}"/>
+										</f:link.action>
+											</div>
+										</div>
+										<div class="slot-0-1">
+											<div class="teaser-content">
+											<h3><f:link.action controller="article" action="show" arguments="{article : article}" title="Artikel {article.title} lesen"><span class="hideme">Artikel: </span><span><f:format.crop maxCharacters="48">{article.title}</f:format.crop></span></f:link.action></h3>
+											<p><f:format.crop maxCharacters="96">{article.body -> f:format.stripTags()}</f:format.crop></p>
+											</div>
+											<div class="author meta clearfix bt">
+												<h4>Autoren/Gruppe</h4>
+												<ul class="authorlist">
+													<li><f:render partial="authorWithImage" arguments="{author: article.author}"/></li>
+												</ul>
+											</div>
+										</div>
+									</div>
+									<span class="state {article.reviewedCSSClass} {article.ownerCSSClass}"></span>
+								</div>
+								<div class="mediaIcons clearfix">
+									<wpj:articleMediaIcons article="{article}"/>
+								</div>
+								<hr class="hideme" />
+							</article>
+						</div>
+					</div>
+					
+				</f:for>
+		</div>
+		<div class="pagination">
+		</f:widget.paginate>
+		</div>
+	</div>		
+</f:section>

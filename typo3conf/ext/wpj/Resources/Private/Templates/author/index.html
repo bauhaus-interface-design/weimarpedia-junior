@@ -1,0 +1,67 @@
+<f:layout name="default" />
+
+This Template is responsible for creating a table of domain objects.
+
+<f:section name="main">
+<h2>Liste der Autoren</h2>
+
+<f:flashMessages />
+
+<table>
+	<tr>
+		<th>Login</th>
+		<th>Schule</th>
+		<th>Gruppenname</th>
+		<th>Teilnehmer</th>
+		<th>Email</th>
+		<th>G&uuml;ltigkeit</th>
+		<th>zuletzt online</th>
+		
+		<th>Aktiv?</th>
+		<th> </th>
+		<th> </th>
+		<th> </th>
+	</tr>
+	
+	
+<f:widget.paginate objects="{authors}" as="paginatedAuthors"
+		 configuration="{itemsPerPage: 30, insertAbove: 1, insertBelow: 1}">
+		<f:for each="{paginatedAuthors}" as="author" iteration="objIterator">
+			<tr>
+				<td>{author.username}</td>
+				<td>{author.school.name} {author.school.schooltype.name}</td>
+				<td>{author.name}</td>
+				<td>{author.address}</td>
+				<td>{author.email}</td>
+				<td>
+					
+					<f:format.date format="d.m.Y - ">{author.starttime}</f:format.date> 
+					<f:format.date format="d.m.Y">{author.endtime}</f:format.date>
+					<f:if condition="{author.loginIsExpired}"> X</f:if>
+				</td>
+				<td><f:format.date format="d.m.Y \u\m H:i">{author.lastLogin}</f:format.date></td>
+				
+				<td>
+				<f:if condition="{author.disabled}">jetzt 
+					<f:then>
+						<f:link.action action="disable" arguments="{author : author}">aktivieren</f:link.action>
+					</f:then>	
+					<f:else>
+						<f:link.action action="disable" arguments="{author : author}">sperren</f:link.action>
+					</f:else>
+				</f:if>
+				</td>
+				<td><f:link.action class="wpj-button" action="edit" arguments="{author : author}">Bearbeiten</f:link.action></td>
+				<td><f:link.action class="wpj-button" action="updatePassword" arguments="{author : author}" onclick="return confirm('Wirklich ein neues Passwort erstellen und das alte verwerfen?');">Passwort&nbsp;neu&nbsp;generieren</f:link.action></td>
+				<td><f:link.action class="wpj-button" action="delete" arguments="{author : author}" onclick="return confirm('Wirklich entfernen?');">L&ouml;schen</f:link.action></td>
+			</tr>
+		</f:for>
+		
+</table>
+<div class="pagination">
+</f:widget.paginate>
+</div>
+
+<f:link.action class="wpj-button" action="new">Neuen Nutzer anlegen</f:link.action><br />
+<f:link.action class="wpj-button" controller="authorWizard" action="step1">Assistent zum Anlegen von Schulgruppen-Logins</f:link.action>
+</f:section>

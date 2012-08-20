@@ -1,0 +1,29 @@
+{namespace wpj=Tx_Wpj_ViewHelpers}
+<f:layout name="default" />
+
+<f:section name="main">
+	<div id="nav-wiki-tools">
+		<hr class="hideme" />
+	</div>
+
+	<div id="notifications">
+		<f:flashMessages />
+	</div>	
+	
+	<div id="content">
+		<p>[Diese Funktion ist noch nicht fertig gestellt]</p>
+		
+<wpj:comment>
+	<wpj:sql  name="users" table="fe_users" fields="uid,name" />
+	<wpj:func func="var_dump" arguments="{0: users}" />
+</wpj:comment>
+
+		<f:image src="{author.avatarImage}" width="60c" height="60c" alt="{author.shortName}"/>
+
+		<p>
+			<f:link.action action="avatarForm">Avatarbild hochladen oder mit der eingebauten Videokamera aufnehmen</f:link.action>
+			<br />
+			<f:link.action action="edit">Gruppenname, Teilnehmer und Betreuer bearbeiten</f:link.action>
+		</p>
+	</div>		
+</f:section>

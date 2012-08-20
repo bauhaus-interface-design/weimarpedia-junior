@@ -1,0 +1,28 @@
+<f:layout name="default" />
+
+This template displays a EDIT form for the current domain object.
+
+If you modify this template, do not forget to change the overwrite settings 
+in /Configuration/Kickstarter/settings.yaml:
+	Resources:
+		Private: 
+			Templates:
+				Update.html		keep
+
+Otherwise your changes will be overwritten the next time you save the extension in the kickstarter
+
+<f:section name="main">
+<h1>Ort bearbeiten</h1>
+
+<f:flashMessages />
+
+<f:render partial="formErrors" />
+
+<f:form enctype="multipart/form-data" method="post" action="update" name="rallyePlace" object="{rallyePlace}" arguments="{isEdited:1}">
+<f:render partial="RallyePlace/formFields" arguments="{domainObject:domainObject}" />
+	<f:form.submit value="Speichern" />
+</f:form>
+
+
+<div id="mapCanvas" style="width:100%;height:400px;border: 1px solid #888;"></div>
+</f:section>

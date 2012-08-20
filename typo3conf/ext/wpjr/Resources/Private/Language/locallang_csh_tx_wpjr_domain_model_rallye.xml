@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<T3locallang>
+    <meta type="array">
+        <description>Context Sensitive Help (CSH) for table tx_wpjr_domain_model_rallye</description>
+        <type>CSH</type>
+        <csh_table>tx_wpjr_domain_model_rallye</csh_table>
+    </meta>
+    <data type="array">
+        <languageKey index="default" type="array">
+			<label index="name.description">name</label>
+			<label index="description.description">description</label>
+			<label index="comment.description">comment</label>
+			<label index="image.description">image</label>
+			<label index="duration.description">duration</label>
+			<label index="author.description">author</label>
+		</languageKey>
+    </data>
+</T3locallang>

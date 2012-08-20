@@ -1,0 +1,19 @@
+Classes:
+	Controller: 		merge
+
+Resources:
+	Private: 
+		Partials:			
+			Rallye.html		keep	
+		Templates:			
+			Rallye.html		keep	
+		Layouts:			keep
+		
+
+Configuration:
+	TypoScript:
+			setup.txt	keep			
+			
+ext_localconf.php: merge
+ext_tables.php: merge
+ext_tables.sql: merge

@@ -1,0 +1,152 @@
+page.headerData.10 = TEXT
+page.headerData.10.value (
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+)
+page.headerData.20 = TEXT
+page.headerData.20.value (
+	<!--[if lt IE 9 ]><link rel="stylesheet" href="typo3conf/ext/wpj/Resources/Public/stylesheets/986_grid.css" type="text/css"><![endif]-->
+)
+page.headerData.30 = TEXT
+page.headerData.30.value (
+	<link rel="apple-touch-icon" href="typo3conf/ext/wpj/Resources/Public/wpj_touch_icon.png">
+)
+
+page.headerData.40 = TEXT
+page.headerData.40.value (
+	<link rel="shortcut icon" href="favicon.ico">
+)
+
+page.includeJS {
+	file20 = typo3conf/ext/wpj/Resources/Public/js/jquery-1.6.2.min.js
+	file30 = typo3conf/ext/wpj/Resources/Public/js/modernizr-2.0.6.min.js
+}
+
+page.includeCSS {
+	# keep in mind to remove unused files in mobile setup (mobile.txt)
+
+	file10 = typo3conf/ext/wpj/Resources/Public/stylesheets/style.css 
+	
+	file20 = typo3conf/ext/wpj/Resources/Public/stylesheets/720_grid.css
+	file20.media = screen and (min-width: 720px)
+	file30 = typo3conf/ext/wpj/Resources/Public/stylesheets/986_grid.css
+	file30.media = screen and (min-width: 986px)
+	file40 = typo3conf/ext/wpj/Resources/Public/stylesheets/1236_grid.css
+	file40.media = screen and (min-width: 1236px)
+	file50 = typo3conf/ext/wpj/Resources/Public/video-js/video-js.css
+	file60 = typo3conf/ext/wpj/Resources/Public/stylesheets/print.css
+	file60.media = print
+	
+}
+
+
+
+plugin.tx_cssstyledcontent._CSS_DEFAULT_STYLE >
+plugin.tx_indexedsearch._CSS_DEFAULT_STYLE >
+plugin.tx_felogin_pi1._CSS_DEFAULT_STYLE >
+plugin.tx_wpj._CSS_DEFAULT_STYLE >
+
+config {
+    # Bei Live-Schaltung _UNBEDINGT_ entfernen:
+    no_cache = 1
+    doctype = html_5
+    xmlprologue = none
+    htmlTag_langKey = de
+    renderCharset = utf-8
+    
+    compressJs = 0
+    
+    ### Spamschutz
+    spamProtectEmailAddresses = 2
+    spamProtectEmailAddresses_atSubst = (at)
+}
+
+#class no-js only used by modernizr
+config.doctype(
+<!doctype html>
+<!--[if lt IE 7 ]> <html lang="de" class="no-js ie6"> <![endif]-->
+<!--[if IE 7 ]>    <html lang="de" class="no-js ie7"> <![endif]-->
+<!--[if IE 8 ]>    <html lang="de" class="no-js ie8"> <![endif]-->
+<!--[if IE 9 ]>    <html lang="de" class="no-js ie9"> <![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!-->
+)
+config.htmlTag_setParams = lang="de" class="no-js"><!--<![endif]--
+
+page = PAGE
+page {
+
+	config {
+		additionalHeaders = Content-type:text/html
+		xhtml_cleaning = 1
+		admPanel = 0
+        disablePrefixComment = 1
+        disableBaseWrap = 1
+        removeDefaultJS = 1
+		removeDefaultCSS = 1
+        inlineStyle2TempFile = 1
+        metaCharset = utf-8
+        index_enable = 1 
+        index_externals = 0
+	}
+
+    typeNum = 0
+    bodyTag = <body>
+
+    10 = TEMPLATE
+    10 {
+        template = FILE
+        template {
+            file = typo3conf/ext/wpj/template.html
+        }
+
+        marks {
+            content = CONTENT
+            content {
+                table = tt_content
+                select {
+                    pidInList = this
+                    orderBy = sorting
+                    where = colPos = 0
+                }
+               
+            }
+            right = CONTENT
+            right {
+                table = tt_content
+                select {
+                    pidInList = this
+                    orderBy = sorting
+                    where = colPos = 2
+                }
+               
+            }
+            homeLink = TEXT
+            homeLink {
+            	value = Startseite
+            	typolink.parameter=1
+            }
+        }
+		
+    }
+    
+    20 = TEXT
+	20.value (
+		
+		<!-- Piwik --> 
+		<script type="text/javascript">
+		var pkBaseURL = (("https:" == document.location.protocol) ? "https://www.weimarpedia.de/piwik/" : "http://www.weimarpedia.de/piwik/");
+		document.write(unescape("%3Cscript src='" + pkBaseURL + "piwik.js' type='text/javascript'%3E%3C/script%3E"));
+		</script><script type="text/javascript">
+		try {
+		var piwikTracker = Piwik.getTracker(pkBaseURL + "piwik.php", 1);
+		piwikTracker.trackPageView();
+		piwikTracker.enableLinkTracking();
+		} catch( err ) {}
+		</script><noscript><p><img src="http://www.weimarpedia.de/piwik/piwik.php?idsite=1" style="border:0" alt="" /></p></noscript>
+		<!-- End Piwik Tracking Code -->
+
+		)
+	}
+    
+    
+    
+

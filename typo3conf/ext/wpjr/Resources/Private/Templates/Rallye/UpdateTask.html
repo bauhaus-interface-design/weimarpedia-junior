@@ -1,0 +1,25 @@
+<f:layout name="default" />
+
+This template displays a EDIT form for the current domain object.
+
+If you modify this template, do not forget to change the overwrite settings 
+in /Configuration/Kickstarter/settings.yaml:
+	Resources:
+		Private: 
+			Templates:
+				Update.html		keep
+
+Otherwise your changes will be overwritten the next time you save the extension in the kickstarter
+
+<f:section name="main">
+<h1>Aufgabe bearbeiten</h1>
+
+<f:flashMessages />
+
+<f:render partial="formErrors" />
+
+<f:form enctype="multipart/form-data" method="post" action="updateTask" name="task" object="{task}" arguments="{isEdited:1,rallye:rallye}">
+<f:render partial="Task/formFields" arguments="{rallyePlaces:rallyePlaces ,resultTypes:resultTypes , domainObject:domainObject}" />
+	<f:form.submit class="wpj-button" value="Speichern" />
+</f:form>
+</f:section>

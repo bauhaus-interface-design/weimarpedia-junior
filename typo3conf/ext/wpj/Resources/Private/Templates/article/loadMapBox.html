@@ -1,0 +1,7 @@
+<ul>
+<f:for each="{article.tags}" as="tag">
+	<li><f:link.action action="indexByTag" arguments="{controller: 'article', tag: tag}" id="tag_{tag.uid}">
+		{tag.taxonomy.name} {tag.name}
+	</f:link.action></li>	
+</f:for>
+</ul>

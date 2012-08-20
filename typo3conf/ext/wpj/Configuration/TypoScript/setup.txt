@@ -1,0 +1,78 @@
+
+
+
+
+<INCLUDE_TYPOSCRIPT: source="FILE: typo3conf/ext/wpj/Configuration/TypoScript/extbase.txt">
+<INCLUDE_TYPOSCRIPT: source="FILE: typo3conf/ext/wpj/Configuration/TypoScript/header.txt">
+<INCLUDE_TYPOSCRIPT: source="FILE: typo3conf/ext/wpj/Configuration/TypoScript/mobile.txt">
+
+
+ajax2 = PAGE
+ajax2 {  
+  typeNum = 10
+  100 < tt_content.list.20.wpj_pi1
+
+  config {
+    disableAllHeaderCode = 1
+    additionalHeaders = Content-type:text/html
+    metaCharset = UTF-8
+    xhtml_cleaning = 0
+    admPanel = 0
+  }
+}
+xml = PAGE
+xml {  
+  typeNum = 20
+  20 < tt_content.list.20.wpj_pi1
+
+  config {
+    disableAllHeaderCode = 1
+    additionalHeaders = Content-type:text/xml
+    metaCharset = UTF-8
+    xhtml_cleaning = 0
+    admPanel = 0
+  }
+}
+
+lib.grayscaleImage = COA
+lib.grayscaleImage {
+	10 = IMAGE
+	10.file.import.field = thumbnailUrl
+	10.file.params = -colorspace GRAY
+}
+
+
+lib.navigation_main = HMENU
+lib.navigation_main {
+  special = directory
+  special.value = 7  
+  1 = TMENU
+  1 {
+    NO.linkWrap = <li>|</li>
+    CUR = 1
+    CUR.doNotLinkIt = 1
+    CUR.linkWrap = <li>|</li>
+	expAll = 1
+  }
+}
+page.10.marks.menu < lib.navigation_main
+
+
+
+lib.homeLink = TEXT
+lib.homeLink {
+	value = Startseite
+	typolink.parameter=1
+}
+            
+lib.mobileHomeLink = TEXT
+lib.mobileHomeLink {
+	value = Home
+	typolink.parameter=1
+}            
+# TESTS 
+
+
+
+
+

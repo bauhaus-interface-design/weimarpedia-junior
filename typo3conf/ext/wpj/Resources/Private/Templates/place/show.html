@@ -1,0 +1,44 @@
+<f:layout name="default" />
+
+This Template is responsible for creating a single view for a domain object
+
+<f:section name="main">
+<h1>Single View for place</h1>
+
+<f:flashMessages />
+
+<table>
+	<tr>
+		<td><f:translate key="tx_wpj_domain_model_place.name" /></td>
+		<td>{place.name}</td>
+	</tr>
+	<tr>
+		<td><f:translate key="tx_wpj_domain_model_place.lat" /></td>
+		<td>{place.lat}</td>
+	</tr>
+	<tr>
+		<td><f:translate key="tx_wpj_domain_model_place.lng" /></td>
+		<td>{place.lng}</td>
+	</tr>
+	<tr>
+		<td><f:translate key="tx_wpj_domain_model_place.coordinates" /></td>
+		<td>{place.coordinates}</td>
+	</tr>
+	<tr>
+		<td><f:translate key="tx_wpj_domain_model_place.reviewed" /></td>
+		<td>{place.reviewed}</td>
+	</tr>
+	<tr>
+		<td><f:translate key="tx_wpj_domain_model_place.accuracy" /></td>
+		<td>{place.accuracy}</td>
+	</tr>
+	<tr>
+		<td><f:translate key="tx_wpj_domain_model_place.description" /></td>
+		<td>{place.description}</td>
+	</tr>
+</table>
+<f:link.action action="edit" arguments="{place : place}">Edit</f:link.action>
+<f:link.action action="delete" arguments="{place : place}">Delete</f:link.action>
+
+<f:link.action action="index">Back to listing</f:link.action>
+</f:section>

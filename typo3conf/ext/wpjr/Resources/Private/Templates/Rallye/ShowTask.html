@@ -1,0 +1,74 @@
+<f:layout name="default" />
+
+This Template is responsible for displaying a single view for a domain object
+
+If you modify this template, do not forget to change the overwrite settings 
+in /Configuration/Kickstarter/settings.yaml:
+	Resources:
+		Private: 
+			Templates:
+				Show.html		keep
+
+Otherwise your changes will be overwritten the next time you save the extension in the kickstarter
+
+<f:section name="main">
+<h1>Single View for Task</h1>
+
+<f:flashMessages />
+
+<table>
+	<tr>
+		<td><f:translate key="tx_wpjr_domain_model_task.parent" /></td>
+		<td>{task.parent}</td>
+	</tr>
+	<tr>
+		<td><f:translate key="tx_wpjr_domain_model_task.tx_wpjr_sorting" /></td>
+		<td>{task.sorting}</td>
+	</tr>
+	<tr>
+		<td><f:translate key="tx_wpjr_domain_model_task.title" /></td>
+		<td>{task.title}</td>
+	</tr>
+	<tr>
+		<td><f:translate key="tx_wpjr_domain_model_task.intro" /></td>
+		<td>{task.intro}</td>
+	</tr>
+	<tr>
+		<td><f:translate key="tx_wpjr_domain_model_task.instruction" /></td>
+		<td>{task.instruction}</td>
+	</tr>
+	<tr>
+		<td><f:translate key="tx_wpjr_domain_model_task.image1" /></td>
+		<td>{task.image1}</td>
+	</tr>
+	<tr>
+		<td><f:translate key="tx_wpjr_domain_model_task.image2" /></td>
+		<td>{task.image2}</td>
+	</tr>
+	<tr>
+		<td><f:translate key="tx_wpjr_domain_model_task.image3" /></td>
+		<td>{task.image3}</td>
+	</tr>
+	<tr>
+		<td><f:translate key="tx_wpjr_domain_model_task.image4" /></td>
+		<td>{task.image4}</td>
+	</tr>
+	<tr>
+		<td><f:translate key="tx_wpjr_domain_model_task.duration" /></td>
+		<td>{task.duration}</td>
+	</tr>
+	<tr>
+		<td><f:translate key="tx_wpjr_domain_model_task.resulttype" /></td>
+		<td>{task.resulttype}</td>
+	</tr>
+	<tr>
+		<td><f:translate key="tx_wpjr_domain_model_task.resultoptions" /></td>
+		<td>{task.resultoptions}</td>
+	</tr>
+	<tr>
+		<td><f:translate key="tx_wpjr_domain_model_task.resultrequired" /></td>
+		<td>{task.resultrequired}</td>
+	</tr>
+</table>
+<f:link.action action="create">New Task</f:link.action>
+</f:section>

@@ -1,0 +1,7 @@
+Extension im Extbase-Kickstarter anlegen
+
+
+
+
+
+Typoscript auf der Seite 

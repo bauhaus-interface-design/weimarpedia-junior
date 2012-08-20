@@ -1,0 +1,56 @@
+<f:layout name="default" />
+
+This Template is responsible for creating a single view for a domain object
+
+<f:section name="main">
+<h1>Single View for author</h1>
+
+<f:flashMessages />
+
+<table>
+	<tr>
+		<td><f:translate key="tx_wpj_domain_model_author.login" /></td>
+		<td>{author.login}</td>
+	</tr>
+	<tr>
+		<td><f:translate key="tx_wpj_domain_model_author.password" /></td>
+		<td>{author.password}</td>
+	</tr>
+	<tr>
+		<td><f:translate key="tx_wpj_domain_model_author.name" /></td>
+		<td>{author.name}</td>
+	</tr>
+	<tr>
+		<td><f:translate key="tx_wpj_domain_model_author.first_name" /></td>
+		<td>{author.first_name}</td>
+	</tr>
+	<tr>
+		<td><f:translate key="tx_wpj_domain_model_author.last_name" /></td>
+		<td>{author.last_name}</td>
+	</tr>
+	<tr>
+		<td><f:translate key="tx_wpj_domain_model_author.description" /></td>
+		<td>{author.description}</td>
+	</tr>
+	<tr>
+		<td><f:translate key="tx_wpj_domain_model_author.email" /></td>
+		<td>{author.email}</td>
+	</tr>
+	<tr>
+		<td><f:translate key="tx_wpj_domain_model_author.disabled" /></td>
+		<td>{author.disabled}</td>
+	</tr>
+	<tr>
+		<td><f:translate key="tx_wpj_domain_model_author.tx_wpj_starttime" /></td>
+		<td>{author.tx_wpj_starttime}</td>
+	</tr>
+	<tr>
+		<td><f:translate key="tx_wpj_domain_model_author.tx_wpj_endtime" /></td>
+		<td>{author.tx_wpj_endtime}</td>
+	</tr>
+</table>
+<f:link.action action="edit" arguments="{author : author}">Edit</f:link.action>
+<f:link.action action="delete" arguments="{author : author}">Delete</f:link.action>
+
+<f:link.action action="index">Back to listing</f:link.action>
+</f:section>

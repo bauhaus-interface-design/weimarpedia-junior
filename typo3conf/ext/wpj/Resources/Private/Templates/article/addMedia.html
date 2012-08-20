@@ -1,0 +1,81 @@
+<f:layout name="modalIframe" />
+<f:section name="main">
+
+
+<div class="tabs">
+	<ul>
+		<li><a href="#tabs-1">Neue Datei hochladen</a></li>
+		<li><a href="#tabs-2">Bibliothek</a></li>
+	</ul>
+	<div id="tabs-1">
+		
+		<div id="notifications">
+			<f:flashMessages />
+		</div>
+
+		<div>
+			<h2>Neue Datei hochladen</h2>
+			<f:form enctype="multipart/form-data" method="post" action="uploadMediafile" name="article" object="{article}">
+				<f:form.hidden name="article_id" value="{article.uid}" />
+				<f:form.upload property="mediafile" />
+				<f:form.submit value="hochladen" id="submitUpload"/> und 
+				<f:form.checkbox name="closeWindow" checked="true" value="true"/>Fenster schliessen
+			</f:form>
+			<div id="waitForUpload"> <f:image src="typo3conf/ext/wpj/Resources/Public/img/spinner.gif" alt="warten..."/> Bitte warten, die Datei wird auf den Server geladen. Das kann einige Minuten dauern...</div>
+		</div>
+			
+		<hr/>
+		
+		<div>
+			<h2>Zugewiesene Bilder</h2>
+			<f:for each="{article.medias}" as="media">
+				<div>
+					<f:image src="{media.previewUrl}" width="150cm" height="150" alt="preview"/>
+					<!--<p><f:format.html parseFuncTSPath="">{media.description}</f:format.html></p>-->
+					<p><f:link.action action="removeMedia" arguments="{media : media, article : article}">Datei entfernen</f:link.action></p>	
+				</div>
+			</f:for>
+		</div>
+	</div>
+
+	<div id="tabs-2">
+		
+		<div id="notifications">
+			<f:flashMessages />
+		</div>
+		
+		<div>
+			<h2>Bilder oder Videos aus der Bibliothek</h2>
+			<div class="clearfix">
+				<f:widget.paginate objects="{mediafiles}" as="paginatedMediafiles"
+					 configuration="{itemsPerPage: 50, insertAbove: 0, insertBelow: 1}">
+					<f:for each="{paginatedMediafiles}" as="mediafile">
+						<div>
+							<f:image src="{mediafile.url}" width="150cm" height="150" alt="preview"/>
+							<!--<p>{mediafile.description}</p>-->
+							<p><f:link.action action="addMediafile" arguments="{mediafile : mediafile, article : article}">dem Artikel hinzuf&uuml;gen</f:link.action></p>
+						</div>
+					</f:for>
+			</div>
+			</f:widget.paginate>
+		</div>
+	</div>
+</div>
+
+
+<script type="text/javascript">
+
+	$(document).ready(function(){
+		// show message while uploading
+		$('#waitForUpload').hide();
+		$('#submitUpload').click(function(){
+			$(this).prop("value", "bitte warten...");
+			$('#waitForUpload').fadeIn();
+		});
+		
+	});
+
+	
+
+</script>
+</f:section>

@@ -1,0 +1,36 @@
+<f:layout name="default" />
+
+This Template is responsible for creating a single view for a domain object
+
+<f:section name="main">
+<h1>Single View for mediafile</h1>
+
+<f:flashMessages />
+
+<table>
+	<tr>
+		<td><f:translate key="tx_wpj_domain_model_mediafile.title" /></td>
+		<td>{mediafile.title}</td>
+	</tr>
+	<tr>
+		<td><f:translate key="tx_wpj_domain_model_mediafile.file" /></td>
+		<td>{mediafile.file}</td>
+	</tr>
+	<tr>
+		<td><f:translate key="tx_wpj_domain_model_mediafile.copyright" /></td>
+		<td>{mediafile.copyright}</td>
+	</tr>
+	<tr>
+		<td><f:translate key="tx_wpj_domain_model_mediafile.content_type" /></td>
+		<td>{mediafile.content_type}</td>
+	</tr>
+	<tr>
+		<td><f:translate key="tx_wpj_domain_model_mediafile.description" /></td>
+		<td>{mediafile.description}</td>
+	</tr>
+</table>
+<f:link.action action="edit" arguments="{mediafile : mediafile}">Edit</f:link.action>
+<f:link.action action="delete" arguments="{mediafile : mediafile}">Delete</f:link.action>
+
+<f:link.action action="index">Back to listing</f:link.action>
+</f:section>

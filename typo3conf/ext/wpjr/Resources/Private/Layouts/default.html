@@ -1,0 +1,21 @@
+{namespace wpj=Tx_Wpj_ViewHelpers}
+<wpj:includeFile path="EXT:wpj/Resources/Public/stylesheets/jquery.fancybox-1.3.4.css" />
+<div id="container"<f:format.html parseFuncTSPath="">{wrapperCssClass}</f:format.html>>
+	<header class="grid">
+		<h2 class="hideme">Navigation</h2>
+		<ul id="nav-wiki" class="nav rallye clearfix">
+			<li class="wpj-item"><f:link.action extensionName="wpj"><small>&#171; Weimarpedia</small></f:link.action></li>
+			<li class="wpj-item"><f:link.action action="list" controller="Rallye">Rallyes</f:link.action></li>
+			<li class="wpj-item"><f:link.action action="list" controller="RallyePlace">Orte</f:link.action></li>
+			<li class="wpj-item"><f:link.action action="list" controller="Result">Auswertung</f:link.action></li>
+		</ul>
+		
+		<hr class="hideme" />
+		<div id="branding" class="rallye"></div>
+	</header>
+	<div id="main" role="main" class="grid">
+	<f:render section="main" />
+	</div>
+</div>
+
+

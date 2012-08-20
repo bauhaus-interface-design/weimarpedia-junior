@@ -1,0 +1,13 @@
+{namespace wpj=Tx_Wpj_ViewHelpers}
+
+<h2>{place.name} / {place.parent.name}</h2>
+
+
+<h3 class="hideme">Inhalt: Artikelübersicht</h3>
+<div id="article-list" class="clearfix">
+	<f:for each="{articles}" as="article">
+		<f:render partial="articleListView" arguments="{article: article}"/>
+	</f:for>
+</div>
+
+

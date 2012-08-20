@@ -1,0 +1,64 @@
+plugin.tx_wpj {
+	persistence {
+		storagePid = 1
+	}
+}
+
+plugin.tx_wpj.persistence {
+         
+    classes {
+        Tx_Wpj_Domain_Model_author {
+            mapping {
+                tableName = fe_users
+                recordType = Tx_Wpj_Domain_Model_author
+                columns.tx_wpj_admin.mapOnProperty = admin
+            }
+        }
+        
+    }
+        
+}
+
+module.tx_wpj {
+    persistence < plugin.tx_wpj.persistence
+}
+
+config.tx_extbase.persistence {
+    updateReferenceIndex = 0
+    enableAutomaticCacheClearing = 1
+    classes {
+        Tx_Extbase_Domain_Model_FrontendUser {
+            subclasses {
+                Tx_Wpj_Domain_Model_author = Tx_Wpj_Domain_Model_author
+            }
+        }
+
+        Tx_Wpj_Domain_Model_author {
+            mapping {
+                tableName = fe_users
+                recordType = Tx_Wpj_Domain_Model_author
+                columns {
+                	tx_wpj_admin.mapOnProperty = admin
+                	disable.mapOnProperty = disable
+                	starttime.mapOnProperty = starttime
+                	endtime.mapOnProperty = endtime
+                	tx_wpj_school {
+                        foreignClass = Tx_Wpj_Domain_Model_school
+                        mapOnProperty = school
+                	}
+                }
+            }
+        }
+        
+      
+        
+        Tx_Wpj_Domain_Model_article {
+            mapping {
+                columns.t3ver_oid.mapOnProperty = t3ver_oid
+                columns.pid.mapOnProperty = pid
+                columns.t3ver_label.mapOnProperty = t3ver_label
+            }
+        }
+        
+    }
+}

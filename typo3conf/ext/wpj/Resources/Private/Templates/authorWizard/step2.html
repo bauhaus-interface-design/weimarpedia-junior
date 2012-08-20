@@ -1,0 +1,29 @@
+<f:layout name="default" />
+
+This template displays a NEW form for the current domain object.
+
+<f:section name="main">
+<h1>Neuer Nutzer</h1>
+
+<f:flashMessages />
+
+<f:render partial="formErrors" />
+
+<f:form method="post" action="step2Process" name="newauthor" object="{newauthor}">
+	
+	<label for="title">Gruppenname</label><br />
+	<f:form.textfield property="name" /><br />
+	<label for="title">Namen der Teilnehmer (mit Komma getrennt)</label><br />
+	<f:form.textarea rows="5" cols="30" property="address" /><br />
+	
+	<label for="company">Klassenstufe (Zahl) (optional)</label><br />
+	<f:form.textfield property="fax" /><br />
+	<label for="company">Programm (optional)</label><br />
+	<f:form.textfield property="company" /><br />
+	<label for="email">Email (optional)</label><br />
+	<f:form.textfield property="email" /><br />
+	
+	<f:form.submit name="status" value="naechste Gruppe" /> oder 
+	<f:form.submit name="status" value="Fertig" />
+</f:form>
+</f:section>

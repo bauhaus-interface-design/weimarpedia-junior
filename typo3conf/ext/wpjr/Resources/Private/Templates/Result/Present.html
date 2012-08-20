@@ -1,0 +1,84 @@
+{namespace wpjr=Tx_Wpjr_ViewHelpers}
+
+
+
+<f:layout name="presentation" />
+
+<f:section name="main">
+
+	<div id="header">
+		<div class="container">
+			<h1>
+				<span>Rallyename:</span> {resultSet.rallye.name} | 
+				<span>Datum:</span> <f:format.date format="d.m.y">{resultSet.dateBegin}</f:format.date>
+			</h1>
+		</div>
+	</div>
+	<div id="branding"></div>
+	<div id="content">
+		<div id="slides">
+			
+			<!-- Title page -->
+			<div class="slide">
+				<h2>{resultSet.rallye.name}</h2>
+				<p>{resultSet.rallye.description}</p>
+			</div>
+			
+			<!-- optional user page -->
+			<f:for each="{resultSet.meta.users}" as="user" iteration="j">
+				<div class="slide">
+					<div class="indented">
+						<img src="data:image/jpg;base64,{user.photo}" alt="" height="400px"/>
+					</div>
+					<h3 class="indented">
+						<span class="uc">Gruppe</span> <span class="group g{j.cycle}">{j.cycle}</span>
+					</h3>
+					<p class="indented">{user.name}</p>
+					
+				</div>	
+			</f:for>
+			
+			<f:for each="{resultSet.meta.tasks}" as="ctask" iteration="j">
+				
+				<!-- Task overview page -->
+				<div class="slide task-slide">
+					<h2><span>Aufgabe {j.cycle}:</span> {ctask.task.title}</h2>
+					
+					<!-- task images -->
+					<wpjr:rallyeImages task="{ctask.task}"/>
+					
+					<hr/>
+					<h4 class="indented">Einleitung</h4>
+					<p class="indented">{ctask.task.intro}</p>
+					<hr/>
+					<h4 class="indented">Aufgabe</h4>
+					<p class="indented">{ctask.task.instruction}</p>
+					
+				</div>
+
+
+				<f:for each="{ctask.results}" as="result" iteration="i">
+					<!-- One page for each answer -->
+					<div class="slide">
+						<h3 class="indented">Antwort: <span class="uc">Gruppe</span> <span class="group g{i.cycle}">{i.cycle}</span></h3>
+						<div class="indented">
+							<f:if condition="{ctask.task.isText}">
+								{result.text}
+							</f:if>	
+							<f:if condition="{ctask.task.isPhoto}">
+								<div class="indented">
+									<img src="data:image/jpg;base64,{result.photo}" alt="" height="400px"/>
+								</div>
+							</f:if>
+						</div>
+					</div>
+				</f:for>
+					
+					
+			</f:for>
+
+		</div>
+	</div> 
+	
+
+</f:section>
