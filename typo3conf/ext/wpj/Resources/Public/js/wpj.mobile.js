@@ -163,7 +163,10 @@ var WPM = {
 	overlay: null,
 	markerCluster: null,
 	places: null,
-  DISABLE_HASH_LISTENER : 0
+	bounds: null,
+	placesCache: [],
+	cacheKey: null,
+  	DISABLE_HASH_LISTENER : 0
 }
 
 var elem = document.documentElement;
@@ -265,8 +268,8 @@ WPM.View.load = function(scope, uid) {
 WPM.View.loadingIndicator = function(s, e) {
 
 	var t = new Date();
-	var status = s || 'on';
-	var error = e || null;
+	var status = s || 'on';
+	var error = e || null;
 
 	if(!$('#busy').length) {
 		$('body').append('<div id="busy" style="display: none;"></div>');
@@ -472,106 +475,112 @@ WPM.loadPlaces = function(){
 
 WPM.updatePlaces = function(){
 	
-	var bounds = WPM.map.getBounds();
+	WPM.bounds = WPM.map.getBounds();
 	
+	// standardize request
+	var latDiff = WPM.bounds.getNorthEast().lat() - WPM.bounds.getSouthWest().lat();
+	var latDigits = (Math.floor( (Math.log(latDiff) / Math.log(10)) ) + 1)*-1; // positive number of digits we want to round
+	var latCoef = Math.pow(10,latDigits); // coefficient with the number of digits
+	var a = Math.floor( WPM.bounds.getSouthWest().lat() * latCoef) / latCoef;
+	var b = Math.ceil( WPM.bounds.getNorthEast().lat() * latCoef) / latCoef;
 	
-	// debug
-	/*marker = new google.maps.Marker({
-        position: new google.maps.LatLng(bounds.getSouthWest().lat(), bounds.getSouthWest().lng()),
-        map: WPM.map,
-       
-    });
-	return;
-	*/
+	var lngDiff = WPM.bounds.getNorthEast().lng() - WPM.bounds.getSouthWest().lng();
+	var lngDigits = (Math.floor( (Math.log(lngDiff) / Math.log(10)) ) + 1)*-1; // positive number of digits we want to round
+	var lngCoef = Math.pow(10,lngDigits); // coefficient with the number of digits
+	var c = Math.floor( WPM.bounds.getSouthWest().lng() * lngCoef) / lngCoef;
+	var d = Math.ceil( WPM.bounds.getNorthEast().lng() * lngCoef) / lngCoef;
+	console.log( "# ",a, b, c, d);
 	
-	// normalize request
-	var params = ({
-			'tx_wpj_pi1[sLat]': bounds.getSouthWest().lat(),
-			'tx_wpj_pi1[wLng]': bounds.getSouthWest().lng(),
-			'tx_wpj_pi1[nLat]': bounds.getNorthEast().lat(),
-			'tx_wpj_pi1[eLng]': bounds.getNorthEast().lng(),
-			'tx_wpj_pi1[zoom]':  WPM.map.getZoom()			
-		})
-
-	console.log(
-		WPM.map.getZoom(), " # ", 
-		bounds.getSouthWest().lat(), 
-		bounds.getNorthEast().lat()
-	);
-	
-	var diff = bounds.getNorthEast().lat() - bounds.getSouthWest().lat();
-	var digits = Math.floor(Math.log(diff) / Math.log(10)) + 1;
-	console.log( diff,  digits);
-	
-	//Math.floor
-	var a = ( bounds.getNorthEast().lat() * 10^-digits); //  / 10^-digits
-	console.log( a );
 	
 	// check if request cached
+	WPM.cacheKey = ([a,b,c,d]).join('-');
+	if (WPM.placesCache[WPM.cacheKey] != null) {		
+		// load cached data
+		WPM.processPlacesRequest(WPM.placesCache[WPM.cacheKey]);
+	} else {
+		var params = ({
+			'tx_wpj_pi1[sLat]': a,
+			'tx_wpj_pi1[wLng]': c,
+			'tx_wpj_pi1[nLat]': b,
+			'tx_wpj_pi1[eLng]': d,
+			'tx_wpj_pi1[zoom]': WPM.map.getZoom()			
+		})
+	
+		
+		$.ajax({
+			url: loadPlacesUrl,
+			type: 'POST',
+			dataType: 'json',
+			data: params,
+			success: function(result){
+				// cache request
+				WPM.placesCache[WPM.cacheKey] = result;
+				WPM.processPlacesRequest(result);
+			}
+		});
+		
+	};
 	
 	
-	$.ajax({
-		url: loadPlacesUrl,
-		type: 'POST',
-		dataType: 'json',
-		data: params,
-		success: function(result){
-			var places = WPM.places = result['places'];
-			//$('#debugbox').text("geladen: \n" + places.length + " Ort(e)");
-
-			/*
-			var infowindow = new google.maps.InfoWindow(
-			{ 
-				content: '...',
-				pixelOffset: new google.maps.Size(40,50),
-				maxWidth: 100
-			});
-			*/
-
-			WPM.markerCluster.clearMarkers();
-			if (places.length>0) {
-                var markersArray = [];
-                for (i=0; i<WPM.places.length; i++) {
-                    var latlng = new google.maps.LatLng(places[i].lat, places[i].lng);
-
-					var image = new google.maps.MarkerImage('typo3conf/ext/wpj/Resources/Public/marker/' + places[i].icon,
-				      new google.maps.Size(80, 40),
-				      new google.maps.Point(0, 0),
-				      new google.maps.Point(40, 40),
-				      new google.maps.Size(80, 40)
-				      );
-
-					var marker = new google.maps.Marker({
-						position: latlng,
-						icon: image,
-						html: places[i].name,
-						uid: places[i].uid
-					});
-
-					markersArray.push(marker);
-					google.maps.event.addListener(marker, 'click', function(event) {
-
-						var boxText = document.createElement("div");
-						boxText.className = "phoney";
-
-						var link = $('<a href="#"class="phoneytext">' + this.html + '</a>').appendTo($(boxText));
-						link.bind('click', {uid: this.uid}, WPM.infoBoxClickHandler);
-	
-						WPM.iB.setContent(boxText);
-						WPM.iB.open(WPM.map, this);
-
-					});
-                }
-				
-          		WPM.markerCluster.addMarkers(markersArray);
-          		
-				$('#showBuildingsBtn').show();
-           } else {
-           		$('#showBuildingsBtn').hide();
-           }
-		}
-	});
 }
+
+WPM.processPlacesRequest = function(result){
+	var places = WPM.places = result['places'];
+	//$('#debugbox').text("geladen: \n" + places.length + " Ort(e)");
+	
+	
+	/*
+	var infowindow = new google.maps.InfoWindow(
+	{ 
+		content: '...',
+		pixelOffset: new google.maps.Size(40,50),
+		maxWidth: 100
+	});
+	*/
+
+	WPM.markerCluster.clearMarkers();
+	if (places.length>0) {
+        var markersArray = [];
+        for (i=0; i<WPM.places.length; i++) {
+            var latlng = new google.maps.LatLng(places[i].lat, places[i].lng);
+
+			var image = new google.maps.MarkerImage('typo3conf/ext/wpj/Resources/Public/marker/' + places[i].icon,
+		      new google.maps.Size(80, 40),
+		      new google.maps.Point(0, 0),
+		      new google.maps.Point(40, 40),
+		      new google.maps.Size(80, 40)
+		      );
+
+			var marker = new google.maps.Marker({
+				position: latlng,
+				icon: image,
+				html: places[i].name,
+				uid: places[i].uid
+			});
+
+			markersArray.push(marker);
+			google.maps.event.addListener(marker, 'click', function(event) {
+
+				var boxText = document.createElement("div");
+				boxText.className = "phoney";
+
+				var link = $('<a href="#"class="phoneytext">' + this.html + '</a>').appendTo($(boxText));
+				link.bind('click', {uid: this.uid}, WPM.infoBoxClickHandler);
+
+				WPM.iB.setContent(boxText);
+				WPM.iB.open(WPM.map, this);
+
+			});
+        }
+		
+  		WPM.markerCluster.addMarkers(markersArray);
+  		
+		$('#showBuildingsBtn').show();
+   } else {
+   		$('#showBuildingsBtn').hide();
+   }
+}
+
 
 WPM.initMap = function(selector, latLng, zoom) {
 
