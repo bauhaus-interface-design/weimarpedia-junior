@@ -485,7 +485,27 @@ WPM.updatePlaces = function(){
 	*/
 	
 	// normalize request
-	// ...
+	var params = ({
+			'tx_wpj_pi1[sLat]': bounds.getSouthWest().lat(),
+			'tx_wpj_pi1[wLng]': bounds.getSouthWest().lng(),
+			'tx_wpj_pi1[nLat]': bounds.getNorthEast().lat(),
+			'tx_wpj_pi1[eLng]': bounds.getNorthEast().lng(),
+			'tx_wpj_pi1[zoom]':  WPM.map.getZoom()			
+		})
+
+	console.log(
+		WPM.map.getZoom(), " # ", 
+		bounds.getSouthWest().lat(), 
+		bounds.getNorthEast().lat()
+	);
+	
+	var diff = bounds.getNorthEast().lat() - bounds.getSouthWest().lat();
+	var digits = Math.floor(Math.log(diff) / Math.log(10)) + 1;
+	console.log( diff,  digits);
+	
+	//Math.floor
+	var a = ( bounds.getNorthEast().lat() * 10^-digits); //  / 10^-digits
+	console.log( a );
 	
 	// check if request cached
 	
@@ -494,13 +514,7 @@ WPM.updatePlaces = function(){
 		url: loadPlacesUrl,
 		type: 'POST',
 		dataType: 'json',
-		data: ({
-			'tx_wpj_pi1[sLat]': bounds.getSouthWest().lat(),
-			'tx_wpj_pi1[wLng]': bounds.getSouthWest().lng(),
-			'tx_wpj_pi1[nLat]': bounds.getNorthEast().lat(),
-			'tx_wpj_pi1[eLng]': bounds.getNorthEast().lng(),
-			'tx_wpj_pi1[zoom]':  WPM.map.getZoom()			
-		}),
+		data: params,
 		success: function(result){
 			var places = WPM.places = result['places'];
 			//$('#debugbox').text("geladen: \n" + places.length + " Ort(e)");

@@ -83,9 +83,6 @@ class Tx_Wpj_Controller_mapController extends Tx_Extbase_MVC_Controller_ActionCo
   	* @return void
   	*/
 	public function loadPlacesAction() {
-		$layerBuildings = $this->request->getArgument('layerBuildings');
-		$layerObjects = $this->request->getArgument('layerObjects');
-		$layerPersons = $this->request->getArgument('layerPersons');
 		
 		$sLat = floatVal( $this->request->getArgument('sLat') );
 		$wLng = floatVal( $this->request->getArgument('wLng') );
