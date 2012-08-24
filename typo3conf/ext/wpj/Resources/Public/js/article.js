@@ -176,6 +176,7 @@ Wpj.alertOnUnload = function(){
 
 Wpj.TagBox = {};
 Wpj.TagBox.init = function(){
+	$("#saveTags").hide();
 	Wpj.TagBox.load('');
   	$('#saveTags').bind("click", Wpj.TagBox.addTag);
   	$("#openPlaceWindow").fancybox({
@@ -212,6 +213,7 @@ Wpj.TagBox.load = function(list){
 		$("#tagField").tagit({
 			source: suggestTagUrl,
 			changed: function(){
+				$("#saveTags").fadeIn();
 				$("#saveTags").addClass('highlight');
 			}
 		});
@@ -286,6 +288,7 @@ Wpj.TagBox.addTag = function(){
 				// load updated properties
 				Wpj.TagBox.load('#tagList');
 				$("#tagField").val('');
+				$("#saveTags").hide(); // hide button again
 			}
 		},
 	});
