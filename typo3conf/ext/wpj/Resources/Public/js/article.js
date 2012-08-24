@@ -468,8 +468,10 @@ Wpj.AuthorsBox.load = function(){
 		url: loadAuthorsBoxUrl,
 		success: function(result){
 			var html = $(result);
+			$('li', html).addClass('clearfix');
 			$('#authorslist').replaceWith(html);
-			$('#authorslist').fadeIn('slow');
+			html.wrap('<div class="authorlist" />');
+			$('.authorlist').hide().fadeIn('slow');
 		}
 	});
 }

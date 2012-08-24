@@ -1,5 +1,4 @@
-//@import "_twitter/bootstrap.less";
-@import "_twitter/preboot.less";
+@import "preboot.less";
 
 // Colors
 @wpj_blue: #778EB4;
@@ -14,6 +13,7 @@
 
 @white: #fff;
 @black: #333;
+@grey_dark: #666;
 @grey: #999;
 
 @smaller_headline: 1.2em;
@@ -70,7 +70,7 @@
 
 body {
 	background: #fff url(../img/weimarpedia_bg.gif);
-	//background: #996600;
+	font-family: @fonts_sans;
 	color: @black;
 }
 
@@ -314,7 +314,7 @@ h2 {
 	padding-right: .5em;
 }
 .scope h2 a { text-decoration: none; }
-.scope h2 span { border-bottom: 3px solid @wpj_blue_dark; text-transform: uppercase;}
+.scope h2 span { border-bottom: 3px solid @wpj_blue; text-transform: uppercase;}
 
 .article-teaser {
 	position: relative;
@@ -336,7 +336,12 @@ h2 {
 		img { width: 70px; height: 60px; border: 1px solid @grey; }
 		padding: 0 0 .5em 0;
 	}
-	.meta { padding-top: .3em;}
+	.meta { 
+		padding-top: .3em;
+		h4 {
+			margin: .5em 0;
+		}
+	}
 }
 
 .exhibition {
@@ -345,9 +350,11 @@ h2 {
 		.teaser-content {
 			h3 {
 				margin-top: .5em;
+				line-height: 160%;
 			}
 			p {
 				font-size: .78em;
+				color: @grey_dark;
 			}
 		}
 		.teaser-content, .author {
@@ -410,13 +417,20 @@ h2 {
 
 // Article-Teaser Meta
 
-.meta.clearfix h4 { padding: 0 4px; font-size: .58em; font-weight: normal; color: @white; background: @wpj_blue; text-transform: uppercase; letter-spacing: 1px;}
-.meta.clearfix ul, .meta h4, .meta.clearfix h4 { display: inline; }
-.authorlist { font-size: .72em; list-style: none;}
+.meta.clearfix h4 {font-size: .58em; font-weight: normal; text-transform: uppercase; letter-spacing: 1px;}
+.meta.clearfix h4 span {color: @white; background: @wpj_blue;padding: 0 4px;}
+.meta.clearfix ul, .meta h4, .meta.clearfix h4 { display: block; margin-top: .7em; }
+.authorlist { font-size: .60em; letter-spacing: 1px; list-style: none; padding-left: 0; display: block;}
 
 .article-teaser .state { display: none; }
 .article-teaser .state.my-article, .article-teaser .state.not-reviewed  { display: block; position: absolute; right: -15px; top: -15px; width: 60px; height: 60px; }
-.authorlist { font-size: .72em; }
+.article-teaser {
+	.authorlist { 
+		margin-top: .5em; 
+		margin-bottom: .5em; 
+		img { display: block; margin-bottom: 10px; }
+	}
+}
 .state.my-article { background: url(../img/article_state.png) no-repeat right -233px; }
 .state.my-article.not-reviewed { background: url(../img/article_state.png) no-repeat right 0; }
 .state.not-reviewed { background: url(../img/article_state.png) no-repeat right -466px; }
@@ -518,6 +532,18 @@ aside {
 			}
 		}
 	}
+
+	.authorlist {
+		li { line-height: 1.5em; }
+		img { display: block; margin-right: 10px; }
+		font-size: .72em; 
+		.wpj-button {
+			display: block;
+			margin: 2em 0 2em 0;
+			text-align: center;
+		}
+	}
+
 }
 
 #modalwindow {
