@@ -25,6 +25,7 @@
 
 /**
  * Controller to manage current user profile
+ * see session controller for login and logout
  *
  * @version $Id$
  * @copyright Copyright belongs to the respective authors
@@ -56,7 +57,7 @@ class Tx_Wpj_Controller_accountController extends Tx_Wpj_Controller_protectedCon
 	}
 	
 	/**
-  	* show personal profile page with option links
+  	* Shows personal profile page with option links
   	*/
 	public function indexAction() {
 		$this->view->assign('author', $this->author);
@@ -65,7 +66,6 @@ class Tx_Wpj_Controller_accountController extends Tx_Wpj_Controller_protectedCon
 	
 	/**
 	 * Displays a form to edit selected attributes 
-	 *
 	 */
 	public function editAction() {
 		$this->view->assign('author', $this->author);
@@ -84,7 +84,7 @@ class Tx_Wpj_Controller_accountController extends Tx_Wpj_Controller_protectedCon
 	
 
 	/**
-	 * Displays a form to upload or create (using adobe flash) an avatar image
+	 * Displays a form to upload or create an avatar image (using adobe flash)
 	 *
 	 */
 	public function avatarFormAction() {
@@ -96,7 +96,7 @@ class Tx_Wpj_Controller_accountController extends Tx_Wpj_Controller_protectedCon
 	}
 	
 	/**
-	 * recieves an jpg-stream from flash and saves as image
+	 * receives an jpg-stream from flash and saves as image
 	 *
 	 */
 	public function uploadAvatarRawAction() {
@@ -106,16 +106,14 @@ class Tx_Wpj_Controller_accountController extends Tx_Wpj_Controller_protectedCon
 		    $fp = fopen( $path.$filename,"wb");
 		    fwrite( $fp, $GLOBALS[ 'HTTP_RAW_POST_DATA' ] );
 		    fclose( $fp );
-		    
 			return "success";
 		}
-		
 		return "failed";
 	}
 	
 	
 	/**
-	 * upload the avatar image
+	 * uploads the avatar image
 	 *
 	 */
 	public function uploadAvatarFileAction() {
