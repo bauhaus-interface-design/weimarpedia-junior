@@ -81,8 +81,8 @@ class Tx_Wpj_Controller_articleAdminController extends Tx_Wpj_Controller_protect
 	 */
 	public function indexKnowledgeAction() {
 		$articles = $this->articleRepository->findAll('', 'knowledge'); // ($reviewed=1, $type="knowledge", $order="tstamp", $orderSequence="DESC", $limit=NULL)
-		$template = 'typo3conf/ext/' . $this->request->getControllerExtensionKey() . '/Resources/Private/Templates/articleAdmin/index.html';		
-		$this->view->setTemplatePathAndFilename($template);
+		//$template = ;		
+		$this->view->setTemplatePathAndFilename('typo3conf/ext/' . $this->request->getControllerExtensionKey() . '/Resources/Private/Templates/articleAdmin/index.html');
     	$this->view->assign('articles', $articles);
 		return $this->view->render();
 	}
@@ -134,15 +134,27 @@ class Tx_Wpj_Controller_articleAdminController extends Tx_Wpj_Controller_protect
 	}
 
 	/**
-	 * 
+	 * Manage obsolete versions of articles
+     * this function is currently unfinished
 	 */
-	public function backupWizardAction() {
-		$versions = $this->articleRepository->findAllVersionsByArticles();
+	public function cleanupVersionsWizardAction() {
+		$versions = $this->articleRepository->findAllObsoleteVersions();
 		$this->view->assign('versions', $versions);
 	}
+    
+    
+    /**
+     * Manage obsolete versions of articles
+     * this function is currently unfinished
+     */
+    public function cleanUpVersionsAction() {
+        $this->articleRepository->cleanUpObsoleteVersions();
+        $this->redirect('cleanupVersionsWizard');
+    }
 
 	/**
-	 * 
+	 * sets the voting for an article 
+     * requested by ajax
 	 *
 	 * @param Tx_Wpj_Domain_Model_article $article The article
 	 * @param int $voting 
@@ -161,24 +173,6 @@ class Tx_Wpj_Controller_articleAdminController extends Tx_Wpj_Controller_protect
 			$this->flashMessageContainer->add('Nix da!');
 			$this->redirect('index');
 		}
-	}
-	
-
-
-
-	/**
-	 * just for testing purposes...
-	 *
-	 */
-	private function setIndexView(){
-		$extbaseFrameworkConfiguration = $this->configurationManager->getConfiguration(Tx_Extbase_Configuration_ConfigurationManagerInterface::CONFIGURATION_TYPE_FRAMEWORK);
-		$templateRootPath = t3lib_div::getFileAbsFileName($extbaseFrameworkConfiguration['view']['templateRootPath']);
-		
-		$templatePathAndFilename = t3lib_div::getFileAbsFilename( 'ArticleAdmin/Index.html');
-		//var_dump($extbaseFrameworkConfiguration);die();
-		$this->view->setTemplatePathAndFilename($templatePathAndFilename);
-		//var_dump($templatePathAndFilename);die();
-		
 	}
 	
 }
