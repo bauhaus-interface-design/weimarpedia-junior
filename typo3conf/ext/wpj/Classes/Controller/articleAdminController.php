@@ -81,11 +81,9 @@ class Tx_Wpj_Controller_articleAdminController extends Tx_Wpj_Controller_protect
 	 */
 	public function indexKnowledgeAction() {
 		$articles = $this->articleRepository->findAll('', 'knowledge'); // ($reviewed=1, $type="knowledge", $order="tstamp", $orderSequence="DESC", $limit=NULL)
-		
-		
-		$this->view->setTemplatePathAndFilename('typo3conf/ext/' . $this->request->getControllerExtensionKey() . '/Resources/Private/Templates/articleAdmin/index.html');
-    	
-		$this->view->assign('articles', $articles);
+		$template = 'typo3conf/ext/' . $this->request->getControllerExtensionKey() . '/Resources/Private/Templates/articleAdmin/index.html';		
+		$this->view->setTemplatePathAndFilename($template);
+    	$this->view->assign('articles', $articles);
 		return $this->view->render();
 	}
 
@@ -94,7 +92,9 @@ class Tx_Wpj_Controller_articleAdminController extends Tx_Wpj_Controller_protect
 	 */
 	public function indexExhibitionAction() {
 		$articles = $this->articleRepository->findAll('', 'exhibition'); // ($reviewed=1, $type="knowledge", $order="tstamp", $orderSequence="DESC", $limit=NULL)
-		$this->view->assign('articles', $articles);
+		$template = 'typo3conf/ext/' . $this->request->getControllerExtensionKey() . '/Resources/Private/Templates/articleAdmin/index.html';      
+        $this->view->setTemplatePathAndFilename($template);
+        $this->view->assign('articles', $articles);
 		return $this->view->render();
 	}	
 
@@ -103,7 +103,9 @@ class Tx_Wpj_Controller_articleAdminController extends Tx_Wpj_Controller_protect
 	 */
 	public function indexLastModifiedAction() {
 		$articles = $this->articleRepository->findAll('', '', "tstamp", "DESC", 30); // ($reviewed=1, $type="knowledge", $order="tstamp", $orderSequence="DESC", $limit=NULL)
-		$this->view->assign('articles', $articles);
+		$template = 'typo3conf/ext/' . $this->request->getControllerExtensionKey() . '/Resources/Private/Templates/articleAdmin/index.html';      
+        $this->view->setTemplatePathAndFilename($template);
+        $this->view->assign('articles', $articles);
 		return $this->view->render();
 	}
 
@@ -112,12 +114,11 @@ class Tx_Wpj_Controller_articleAdminController extends Tx_Wpj_Controller_protect
 	 */
 	public function indexNotReviewedAction() {
 		$articles = $this->articleRepository->findAll(0, ''); // ($reviewed=1, $type="knowledge", $order="tstamp", $orderSequence="DESC", $limit=NULL)
-		$this->view->assign('articles', $articles);
+		$template = 'typo3conf/ext/' . $this->request->getControllerExtensionKey() . '/Resources/Private/Templates/articleAdmin/index.html';      
+        $this->view->setTemplatePathAndFilename($template);
+        $this->view->assign('articles', $articles);
 		return $this->view->render();
 	}
-	
-	
-	
 	
 	
 	/**
