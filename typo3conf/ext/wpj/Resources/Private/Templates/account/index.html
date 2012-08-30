@@ -11,7 +11,7 @@
 	</div>	
 	
 	<div id="content">
-		<p>[Diese Funktion ist noch nicht fertig gestellt]</p>
+		<h2>Profil bearbeiten</h2>
 		
 <wpj:comment>
 	<wpj:sql  name="users" table="fe_users" fields="uid,name" />
@@ -20,10 +20,10 @@
 
 		<f:image src="{author.avatarImage}" width="60c" height="60c" alt="{author.shortName}"/>
 
-		<p>
-			<f:link.action action="avatarForm">Avatarbild hochladen oder mit der eingebauten Videokamera aufnehmen</f:link.action>
-			<br />
-			<f:link.action action="edit">Gruppenname, Teilnehmer und Betreuer bearbeiten</f:link.action>
-		</p>
+		<ul>
+			<li><f:link.action action="avatarForm">Avatarbild hochladen oder mit der eingebauten Videokamera aufnehmen</f:link.action></li>
+			<li><f:link.action action="edit">Gruppenname, Teilnehmer und Betreuer bearbeiten</f:link.action></li>
+		</ul>
+		
 	</div>		
 </f:section>

@@ -54,7 +54,7 @@ class Tx_Wpj_Controller_articleAdminController extends Tx_Wpj_Controller_protect
 	
 	/**
 	 * Initializes the current action
-	 * only allow admins with level >= 10
+	 * only allow admins with level >= 10 to use this controller
 	 *
 	 * @return void
 	 */
@@ -70,7 +70,7 @@ class Tx_Wpj_Controller_articleAdminController extends Tx_Wpj_Controller_protect
 	 * List all articles
 	 */
 	public function indexAction() {
-		$articles = $this->articleRepository->findAll(''); // ($reviewed=1, $type="knowledge", $order="tstamp", $orderSequence="DESC", $limit=NULL)
+		$articles = $this->articleRepository->findAll('', ''); // ($reviewed=1, $type="knowledge", $order="tstamp", $orderSequence="DESC", $limit=NULL)
 		$this->view->assign('articles', $articles);
 		return $this->view->render();
 	}
@@ -80,18 +80,11 @@ class Tx_Wpj_Controller_articleAdminController extends Tx_Wpj_Controller_protect
 	 * List all articles with type knowledge 
 	 */
 	public function indexKnowledgeAction() {
-		$articles = $this->articleRepository->findAll(''); // ($reviewed=1, $type="knowledge", $order="tstamp", $orderSequence="DESC", $limit=NULL)
+		$articles = $this->articleRepository->findAll('', 'knowledge'); // ($reviewed=1, $type="knowledge", $order="tstamp", $orderSequence="DESC", $limit=NULL)
 		
-//		//$templatePathAndFilename = t3lib_div::getFileAbsFilename('typo3conf/ext/wpj/Resources/Private/Templates/article/index.html');
-//		$templatePathAndFilename = '/wpj/Resources/Private/Templates/article/index.html';
-//		//var_dump($templatePathAndFilename);die();
-//		//$this->view->setTemplatePathAndFilename($templatePathAndFilename);
-//		
-//		$templatePathAndFilename = t3lib_extMgm::extPath('wpj').'Resources/Private/Templates/Article/Index.html';
-//		//var_dump($templatePathAndFilename);die();
-//		$this->view->setTemplatePathAndFilename($templatePathAndFilename);
-//		
-//		
+		
+		$this->view->setTemplatePathAndFilename('typo3conf/ext/' . $this->request->getControllerExtensionKey() . '/Resources/Private/Templates/articleAdmin/index.html');
+    	
 		$this->view->assign('articles', $articles);
 		return $this->view->render();
 	}
