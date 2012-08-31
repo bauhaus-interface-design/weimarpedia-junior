@@ -16,7 +16,7 @@ Tx_Extbase_Utility_Extension::configurePlugin(
 		'author' => 'index, show, new, create, edit, update, delete, updatePassword',
 		'mediafile' => 'index, show, new, create, edit, update, delete',
 		'map' => 'index,search,suggest,loadPlaces,placeArticles,listPlaceOptions,listFloorOptions,listRoomArticles,showArticle',
-		'articleAdmin' => 'index,indexKnowledge,indexExhibition,indexLastModified,indexNotReviewed,delete,backupWizard,setVoting',
+		'articleAdmin' => 'index,indexKnowledge,indexExhibition,indexLastModified,indexNotReviewed,delete,cleanupVersionsWizard,cleanUpVersions,setVoting',
 		'mapAdmin' => 'index,delete,loadChildren,loadBuildings,savePolygone',
 		'school' => 'index, show, new, create, edit, update, delete',
 		'authorWizard' => 'step1,step1Select,step1Create,step2,step2Process,step3,step3Process',

@@ -25,7 +25,7 @@
 
 /**
  * Controller to manage current user profile
- * see session controller for login and logout
+ * see session controller for login and logout actions
  *
  * @version $Id$
  * @copyright Copyright belongs to the respective authors
@@ -57,7 +57,7 @@ class Tx_Wpj_Controller_accountController extends Tx_Wpj_Controller_protectedCon
 	}
 	
 	/**
-  	* Shows personal profile page with option links
+  	* Shows personal profile page with option links (create avatar image, change group name...)
   	*/
 	public function indexAction() {
 		$this->view->assign('author', $this->author);
@@ -65,7 +65,7 @@ class Tx_Wpj_Controller_accountController extends Tx_Wpj_Controller_protectedCon
 	
 	
 	/**
-	 * Displays a form to edit selected attributes 
+	 * Displays a form to edit profile attributes like group name or email
 	 */
 	public function editAction() {
 		$this->view->assign('author', $this->author);
@@ -113,7 +113,7 @@ class Tx_Wpj_Controller_accountController extends Tx_Wpj_Controller_protectedCon
 	
 	
 	/**
-	 * uploads the avatar image
+	 * uploads the avatar image file
 	 *
 	 */
 	public function uploadAvatarFileAction() {
@@ -123,7 +123,7 @@ class Tx_Wpj_Controller_accountController extends Tx_Wpj_Controller_protectedCon
 		    $path = $this->author->getAvatarAbsPath()."/".$filename;
 			$result = t3lib_div::upload_copy_move( $_FILES['tx_wpj_pi1']['tmp_name']['account']['avatarFile'], $path );
 	 		
-			$this->flashMessageContainer->add($result.'Die Datei wurde hochgeladen. '.$path);
+			$this->flashMessageContainer->add($result.'Dein Bild wurde hochgeladen. '.$path);
 		}
 		$this->redirect('index');
 	}

@@ -15,7 +15,6 @@
 		
 	<table>
 		<tr>
-			<th></th>
 			<th>Titel</th>
 			<th>Typ</th>
 			<th>Autor(en)</th>
@@ -34,18 +33,21 @@
 				 configuration="{itemsPerPage: 50, insertAbove: 0, insertBelow: 1}">
 			<f:for each="{paginatedArticles}" as="article">
 			<tr>
-				<td>{article.uid}</td>
-				<td>{article.title}</td>
+				<td>{article.title} <br/><span class="small">ID: {article.uid}</span></td>
 				<td>{article.articletype.name}</td>
 				<td>
 					<f:for each="{article.authors}" as="author">
 						{author.shortName}<br/>
 					</f:for>
 				</td>
-				<td><f:format.date format="d.m.Y H:i">{article.updatedAt}</f:format.date></td>
-				<td><f:format.date format="d.m.Y H:i">{article.createdAt}</f:format.date></td>
+				<td><f:format.date format="d.m.y H:i">{article.updatedAt}</f:format.date></td>
+				<td><f:format.date format="d.m.y H:i">{article.createdAt}</f:format.date></td>
 				
-				<td></td>
+				<td class="small">
+					<f:for each="{article.tags}" as="tag">
+						{tag.name},  
+					</f:for>
+				</td>
 				<td></td>
 				<td>
 					<a href="#" class="wpj-button vote-button vote_{article.voting}" id="vote_{article.uid}"><span>★</span></a>	

@@ -37,6 +37,14 @@ class Tx_Wpj_Domain_Repository_articleRepository extends Tx_Extbase_Persistence_
 	
 	protected $query;
 	
+    /**
+     * define conditions for obsolete article versions
+     * @var String
+     */
+    protected $obsoleteVersionsSql = ' WHERE pid=-1 AND t3ver_oid>0 AND tstamp<'.(time()-60*60*24*356).' AND deleted=0 
+ORDER BY tstamp DESC
+LIMIT 100';
+    
 	public function initializeObject() {
 		$this->query = $this->createQuery();
 	}
@@ -388,13 +396,27 @@ SELECT * FROM `tx_wpj_domain_model_article` WHERE pid=-1 AND t3ver_oid='.$articl
 	 * @param Tx_Wpj_Domain_Model_article 
 	 * @return object
 	 */
-	public function findAllVersionsByArticles(){
+	public function findAllObsoleteVersions(){
 		$this->query = $this->createQuery();
-		$this->query->getQuerySettings()->setReturnRawQueryResult( TRUE );
+		$this->query->getQuerySettings()->setReturnRawQueryResult( TRUE ); 
 		return $this->query->statement('
-SELECT COUNT(*) as backups, MAX(tstamp) as tstamp, uid,pid,title FROM `tx_wpj_domain_model_article` GROUP BY t3ver_oid HAVING pid=-1 AND backups>10 
- ORDER BY tstamp DESC')->execute();
+SELECT uid,title,tstamp FROM `tx_wpj_domain_model_article`  ' . $obsoleteVersionsSql)->execute();
 	}
+
+
+    /**
+     * 
+     *
+     * @param Tx_Wpj_Domain_Model_article 
+     * @return object
+     */
+    public function cleanUpObsoleteVersions(){
+        $this->query = $this->createQuery();
+        $this->query->getQuerySettings()->setReturnRawQueryResult( TRUE ); 
+        return $this->query->statement('
+UPDATE `tx_wpj_domain_model_article` SET deleted=1 ' . $obsoleteVersionsSql )->execute();
+    }
+    
 
 	/**
 	 * 
