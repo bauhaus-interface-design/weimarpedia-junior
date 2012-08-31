@@ -70,12 +70,12 @@
 	<f:if condition="<f:count subject='{meta_tags}' /> > 0">
 	  ### meta_tags found
 		<f:then>
-			<h3><f:count subject="{meta_tags}" /> Schule(n)</h3>
+			<h3><f:count subject="{meta_tags}" /> Tag(s)</h3>
 			<ul>
 			<f:for each="{meta_tags}" as="meta_tag" iteration="objIterator">
-				<f:link.action controller="article" action="indexByTag" arguments="{school : school, i: objIterator}" title="Alle Artikel von {school.name} anzeigen">
+				<li><f:link.action controller="article" action="indexByTag" arguments="{tag : meta_tag, i: objIterator}" title="Alle Artikel mit Tag {meta_tag.name} anzeigen">
 					{meta_tag.name}
-				</f:link.action>
+				</f:link.action></li>
 			</f:for>
 			</ul>
 	
@@ -104,9 +104,9 @@
 			<h3><f:count subject="{meta_schools}" /> Schule(n)</h3>
 			<ul>
 			<f:for each="{meta_schools}" as="school" iteration="objIterator">
-				<f:link.action controller="article" action="indexBySchool" arguments="{school : school, i: objIterator}" title="Alle Artikel von {school.name} anzeigen">
+				<li><f:link.action controller="article" action="indexBySchool" arguments="{school : school, i: objIterator}" title="Alle Artikel von {school.name} anzeigen">
 					{school.name}
-				</f:link.action>
+				</f:link.action></li>
 			</f:for>
 			</ul>
 	

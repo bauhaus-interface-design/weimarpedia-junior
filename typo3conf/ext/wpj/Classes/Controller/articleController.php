@@ -520,7 +520,7 @@ class Tx_Wpj_Controller_articleController extends Tx_Wpj_Controller_protectedCon
 	 */
 	public function indexByAuthorAction(Tx_Wpj_Domain_Model_author $author) {
 		$reviewed = ( !$GLOBALS['TSFE']->loginUser ) ? 1 : "";
-		$articles = $this->articleRepository->findByAuthor($author, $reviewed);
+		$articles = $this->articleRepository->findByAuthor($author, $reviewed, '');
 		$this->view->assign('articles', $articles);
 		$this->view->assign('author', $author);
 	}
@@ -533,7 +533,7 @@ class Tx_Wpj_Controller_articleController extends Tx_Wpj_Controller_protectedCon
 		$authors = $this->authorRepository->findBySchool($school);
 		$this->view->assign('authors', $authors);
 		$reviewed = ( !$GLOBALS['TSFE']->loginUser ) ? 1 : "";
-		$articles = $this->articleRepository->findByAuthors($authors, $reviewed);
+		$articles = $this->articleRepository->findByAuthors($authors, $reviewed, '');
 		$this->view->assign('articles', $articles);
 	}
 		

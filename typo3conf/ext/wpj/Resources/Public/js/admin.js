@@ -12,7 +12,7 @@ $(document).ready(function(){
 	}
 });
 
-Wpj.VoteButtonClick = function(){
+Wpj.VoteButtonClick = function(e){
 	var article_id = $(this).attr('id').split("_").pop();
 	var vote = $(this).hasClass('vote_1') ? 2 : $(this).hasClass('vote_2') ? 0 : 1;
 	
@@ -34,4 +34,5 @@ Wpj.VoteButtonClick = function(){
 			}
 		},
 	});
+	e.preventDefault();
 }

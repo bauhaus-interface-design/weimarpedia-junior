@@ -401,7 +401,7 @@ SELECT * FROM `tx_wpj_domain_model_article` WHERE pid=-1 AND t3ver_oid='.$articl
 		$this->query = $this->createQuery();
 		$this->query->getQuerySettings()->setReturnRawQueryResult( TRUE ); 
 		return $this->query->statement('
-SELECT uid,title,tstamp FROM `tx_wpj_domain_model_article`  ' . $obsoleteVersionsSql)->execute();
+SELECT uid,title,tstamp FROM `tx_wpj_domain_model_article` ' . $obsoleteVersionsSql)->execute();
 	}
 
 
