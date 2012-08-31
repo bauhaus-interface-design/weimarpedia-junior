@@ -7,11 +7,13 @@ if(!window.Wpj){
 }
 
 $(document).ready(function(){
+
 	Wpj.initAdminMenu();
 	Wpj.Search.init();
+	Wpj.initMobileNav();
 
 	// notification box fade out
-	$('#notifications').delay(2000).fadeOut();
+	$('#notifications').delay(3000).fadeOut();
 
 	// Germanizing the pagination
 	
@@ -161,6 +163,19 @@ Wpj.Search.submit = function(scope){
 	$('#scopeField').attr('value', s);
 	
 	$('form[name=demand]').submit();
+}
+
+Wpj.initMobileNav = function() {
+	var dropdown = $('<select />');
+	dropdown.attr('id', 'nav-mobile');
+	dropdown.append('<option value="./">Hauptnavigation</option>');
+	$('#nav-main li').each(function(i) {
+		dropdown.append('<option value="' + $('a', this).attr('href') + '">' + $('a', this).text() + '</option>');
+	})
+	dropdown.bind('change', function(){
+		window.location.href=$('option:selected', this).attr('value');
+	})
+	$('header h2').after(dropdown);
 }
 
 // gallery related stuff

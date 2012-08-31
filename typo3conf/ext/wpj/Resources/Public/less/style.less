@@ -175,6 +175,10 @@ hr { display: block; height: 1px; border: 0; border-top: 1px dashed @wpj_brown; 
 	}
 }
 
+#nav-mobile {
+	display: none;
+}
+
 #searchLinks {
 	z-index: 999;
 	font-size: .78em;
@@ -753,12 +757,17 @@ ul.tagit input[type="text"] {
 
 @media only screen and (max-width: 720px) {
 	
+	.grid.full {
+		padding: 0;
+	}
+	
 	#main {
 		padding-top: 0;
 		margin-top: .5em;
 	}
 
 	header {
+		padding: 10px 20px 0 20px;
 		border-bottom: none;
 	}
 
@@ -767,7 +776,7 @@ ul.tagit input[type="text"] {
 		width: 60px;
 		height: 45px;
 		position: absolute;
-		top: 37px;
+		top: 5px;
 		right: 20px;
 	}
 
@@ -794,9 +803,14 @@ ul.tagit input[type="text"] {
 	.forceright { float: none !important;}
 
 	#nav-main { 
-		padding-top: 1em;
+		display:none;
 	}
-
+	#nav-mobile {
+		font-size: .78em;
+		display: block;
+		width: 70%;
+		margin: 0 0 .3em .5em;
+	}
 	#nav-wiki li {
 		float: none;
 		display: block;
@@ -822,6 +836,14 @@ ul.tagit input[type="text"] {
 	#medialist {
 		img { width: 100%; height: auto; }
 	}
+
+	.article-teaser {
+		h3 { width: 180px;}
+		.authorlist {
+			font-size: .72em;
+		}
+	}
+
 }
 
 table { margin: 0 0 1.2em 0; width: 960px;}
