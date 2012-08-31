@@ -38,15 +38,16 @@ class Tx_Wpj_Domain_Repository_articleRepository extends Tx_Extbase_Persistence_
 	protected $query;
 	
     /**
-     * define conditions for obsolete article versions
+     * conditions for obsolete article versions
      * @var String
      */
-    protected $obsoleteVersionsSql = ' WHERE pid=-1 AND t3ver_oid>0 AND tstamp<'.(time()-60*60*24*356).' AND deleted=0 
-ORDER BY tstamp DESC
-LIMIT 100';
+    protected $obsoleteVersionsSql;
+    
+    
     
 	public function initializeObject() {
 		$this->query = $this->createQuery();
+        $this->obsoleteVersionsSql = ' WHERE pid=-1 AND t3ver_oid>0 AND tstamp<' . (time()-60*60*24*356) . ' AND deleted=0 ORDER BY tstamp DESC LIMIT 100';
 	}
 	
 	/**
