@@ -84,6 +84,7 @@ class Tx_Wpj_Controller_authorController extends Tx_Wpj_Controller_protectedCont
 	 */
 	public function createAction(Tx_Wpj_Domain_Model_author $newauthor) {
 		$newauthor->setAdmin(1);
+        $newauthor->setPassword(md5($newauthor->getPassword()));
 		$this->authorRepository->add($newauthor);
 		$this->authorRepository->repairUsergroup(); // TODO: replace this hack, if exbase is ready
 		$this->flashMessageContainer->add('Der Nutzer wurde angelegt.');
@@ -137,5 +138,19 @@ class Tx_Wpj_Controller_authorController extends Tx_Wpj_Controller_protectedCont
 		$this->redirect('index');
 	}
 	
+    
+    /**
+     * 
+     *
+     * @param object $search
+     * @dontverifyrequesthash
+     */
+    public function searchAction($search) {
+        $authors = $this->authorRepository->search($search['search']); 
+        $template = 'typo3conf/ext/' . $this->request->getControllerExtensionKey() . '/Resources/Private/Templates/author/index.html';      
+        $this->view->setTemplatePathAndFilename($template);
+        $this->view->assign('authors', $authors);
+        $this->view->assign('searchdesc', ($search['search']) ? 'mit ›'.$search['search'].'‹' : '');
+    }
 }
 ?>

@@ -3,7 +3,18 @@
 This Template is responsible for creating a table of domain objects.
 
 <f:section name="main">
-<h2>Liste der Autoren</h2>
+<h2>
+	Liste der Autoren
+	{searchdesc}
+</h2>
+
+
+
+<f:form method="post" controller="author" action="search" name="search">
+	<label for="authorSearchField" class="hideme">Suche</label> 
+	<f:form.textfield id="authorSearchField" property="search"/> 
+	<f:form.submit value="suchen" />
+</f:form>
 
 <f:flashMessages />
 
