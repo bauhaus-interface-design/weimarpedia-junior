@@ -10,9 +10,14 @@ $(document).ready(function(){
 	Wpj.initAdminMenu();
 	Wpj.Search.init();
 
-		// notification box fade out
+	// notification box fade out
 	$('#notifications').delay(2000).fadeOut();
 
+	// Germanizing the pagination
+	
+	$('.pagination .previous a').text('zurück');
+	$('.pagination .next a').text('weiter');
+	
 	// gallery related stuff
 
 	if(exhibitionBG && $('#container.exhibition').length) {

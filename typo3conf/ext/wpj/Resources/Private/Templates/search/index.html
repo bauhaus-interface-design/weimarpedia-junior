@@ -26,13 +26,14 @@
 	  ### authors found
 		<f:then>
 	    
-			<h3><f:count subject="{authors}" /> Autor(en)</h3>
+			<h3 class="bll"><f:count subject="{authors}" /> Autor(en)</h3>
+			<div class="metalist">
 			<ul>
 			<f:for each="{authors}" as="author">
-				<li><f:render partial="authorWithImage" arguments="{author: author}"/></li>
+				<li class="clearfix"><f:render partial="authorWithImage" arguments="{author: author}"/></li>
 			</f:for>
 			</ul>
-
+			</div>
 		</f:then>
 	  
 	  ### no authors found
@@ -44,15 +45,16 @@
 	<f:if condition="<f:count subject='{schools}' /> > 0">
 	  ### schools found
 		<f:then>
-			<h3><f:count subject="{schools}" /> Schule(n)</h3>
+			<h3 class="bll"><f:count subject="{schools}" /> Schule(n)</h3>
+			<div class="metalist">
 			<ul>
 			<f:for each="{schools}" as="school">
-				<f:link.action controller="article" action="indexBySchool" arguments="{school : school}" title="Alle Artikel von {school.name} anzeigen">
+				<li class="clearfix"><f:link.action controller="article" action="indexBySchool" arguments="{school : school}" title="Alle Artikel von {school.name} anzeigen">
 					{school.name}
-				</f:link.action>
+				</f:link.action></li>
 			</f:for>
 			</ul>
-	
+			</div>
 		</f:then>
 	</f:if>
 </f:then>
@@ -70,7 +72,8 @@
 	<f:if condition="<f:count subject='{meta_tags}' /> > 0">
 	  ### meta_tags found
 		<f:then>
-			<h3><f:count subject="{meta_tags}" /> Tag(s)</h3>
+			<h3 class="bll"><f:count subject="{meta_tags}" /> Tag(s)</h3>
+			<div class="metalist tags">
 			<ul>
 			<f:for each="{meta_tags}" as="meta_tag" iteration="objIterator">
 				<li><f:link.action controller="article" action="indexByTag" arguments="{tag : meta_tag, i: objIterator}" title="Alle Artikel mit Tag {meta_tag.name} anzeigen">
@@ -78,7 +81,7 @@
 				</f:link.action></li>
 			</f:for>
 			</ul>
-	
+			</div>
 		</f:then>
 	</f:if>
 	
@@ -87,12 +90,14 @@
 	  ### meta_authors found
 		<f:then>
 	    
-			<h3><f:count subject="{meta_authors}" /> Autor(en)</h3>
+			<h3 class="bll"><f:count subject="{meta_authors}" /> Autor(en)</h3>
+			<div class="authorlist">
 			<ul>
 			<f:for each="{meta_authors}" as="author" iteration="objIterator">
-				<li><f:render partial="authorWithImage" arguments="{author: author, i: objIterator}"/></li>
+				<li class="clearfix"><f:render partial="authorWithImage" arguments="{author: author, i: objIterator}"/></li>
 			</f:for>
 			</ul>
+			</div>
 
 		</f:then>
 	  
@@ -101,7 +106,8 @@
 	<f:if condition="<f:count subject='{meta_schools}' /> > 0">
 	  ### meta_schools found
 		<f:then>
-			<h3><f:count subject="{meta_schools}" /> Schule(n)</h3>
+			<h3 class="bll"><f:count subject="{meta_schools}" /> Schule(n)</h3>
+			<div class="metalist">
 			<ul>
 			<f:for each="{meta_schools}" as="school" iteration="objIterator">
 				<li><f:link.action controller="article" action="indexBySchool" arguments="{school : school, i: objIterator}" title="Alle Artikel von {school.name} anzeigen">
@@ -109,7 +115,7 @@
 				</f:link.action></li>
 			</f:for>
 			</ul>
-	
+			</div>
 		</f:then>
 	</f:if>
 </f:else>
