@@ -1,5 +1,4 @@
 {namespace wpj=Tx_Wpj_ViewHelpers}
-
 <wpj:gridCss i="{i}">
 	<article class="article-teaser {article.articletypeCssClass}{article.mediatypeCSSClass}">
 		<div class="inner-teaser">
@@ -11,7 +10,7 @@
 		<span class="hideme">Artikel: </span><span><f:format.crop maxCharacters="28">{article.title}</f:format.crop></span></f:link.action></h3>
 			</div>
 			<div class="author meta clearfix">
-				<h4>Autoren/Gruppe</h4>
+				<h4><span>Autoren/Gruppe</span></h4>
 				<ul class="authorlist">
 					<li><f:render partial="authorWithImage" arguments="{author: article.author}"/></li>
 				</ul>

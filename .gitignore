@@ -4,3 +4,4 @@ uploads/wpj/avatars
 uploads/wpj/mediafiles
 deprecation*.loguploads/wpj/mediafiles
 *.tmproj
+/uploads/wpj/applications

@@ -9,14 +9,62 @@ if(!window.Wpj){
 $(document).ready(function(){
 	Wpj.initAdminMenu();
 	Wpj.Search.init();
-	
-	
-	// frank
-	
-	// notification box fade out
+
+		// notification box fade out
 	$('#notifications').delay(2000).fadeOut();
+
+	// gallery related stuff
+
+	if(exhibitionBG && $('#container.exhibition').length) {
 		
-	
+		var wikitools = $('#nav-wiki-tools');
+		if(wikitools.length) {
+			wikitools.removeClass('grid');
+			$('#article-list').append(wikitools);
+		}
+		
+		$('#container.exhibition').addClass('custom-bg');
+		$('#container.exhibition').after('<div id="bg"></div>'); 
+		
+		var theWindow	= $(window),
+		$bg				= $("#bg"),
+		aspectRatio		= $bg.width() / $bg.height();
+
+		var backgrounds = new Array(
+			'2Goethe_auf_Treppe_Kopie_aw.jpg',
+			'Goethe_u_Carl-August_Seite_1_aw.jpg',
+			'Goethe_u_Carl-August_Seite_2_aw.jpg',
+			'Goethe_u_Carl-August_Seite_3_aw.jpg',
+			'Goethe_u_Carl-August_Seite_4_aw.jpg',
+			'IMG_0415_aw.jpg',
+			'IMG_0420_aw.jpg',
+			'IMG_0427_aw.jpg',
+			'Kreat_Marlene_Schiewer_aw.jpg',
+			'Kreat_Seyma_Kisaaglu_aw.jpg',
+			'P1000971_aw.jpg',
+			'P1030677_aw.jpg',
+			'P1040444_aw.jpg',
+			'Tagebucheintrag_1_aw.jpg',
+			'WP_Parkschule-8a_Fotostory_Seite_02_aw.jpg',
+			'WP_Parkschule-8a_Fotostory_Seite_07_aw.jpg',
+			'WP_Parkschule-8a_Video_Screenshot_aw.jpg',
+			'Zusammen_P1000937_aw.jpg'
+		);
+
+		var rnd = Math.round( (backgrounds.length-1) * Math.random() );
+		$bg.css({'background' : 'url(typo3conf/ext/wpj/Resources/Public/img/backgrounds/' + backgrounds[rnd] + ') no-repeat center center fixed'});
+
+		function resizeBg() {
+			$bg.addClass('bgheight');
+			$bg.addClass('bgwidth');
+		}
+
+		theWindow.resize(function() {
+			resizeBg();
+		}).trigger("resize");
+	}
+
+
 });
 
 // open/close adminMenu / cookie
@@ -108,4 +156,20 @@ Wpj.Search.submit = function(scope){
 	$('#scopeField').attr('value', s);
 	
 	$('form[name=demand]').submit();
+}
+
+// gallery related stuff
+
+var exhibitionBG = true;
+
+var isiPad   = navigator.userAgent.match(/iPad/i) != null;
+var isiPhone = navigator.userAgent.match(/iPhone/i) != null;
+
+if(isiPad || isiPhone) {
+
+	var iOSVersion5 = navigator.userAgent.match(/OS 5/i) != null;
+
+	if(!iOSVersion5) {
+		exhibitionBG = false;
+	}
 }
