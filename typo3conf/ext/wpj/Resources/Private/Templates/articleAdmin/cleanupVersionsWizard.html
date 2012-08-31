@@ -17,7 +17,7 @@
 	
 	<p>
 		<f:link.action class="wpj-button" action="cleanUpVersions" controller="articleAdmin">Diese ungenutzten Artikel-Versionen löschen</f:link.action><br/>
-		
+		<br/>
 		Die folgende Liste zeigt Versionen von Artikeln, die nicht sichtbar sind und älter als ein Jahr alt sind. Sie sollten gelegentlich gelöscht werden.
 	</p>
 	
@@ -33,7 +33,7 @@
 			<tr>
 				<td>{version.uid}</td>
 				<td>{version.title}</td>
-				<td><f:format.date format="d.m.y H:i">@{version.tstamp}</f:format.date></td>
+				<td><f:format.date format="d.m.y H:i">@{version.tstamp}</f:format.date> {version.tstamp}</td>
 			</tr>
 			</f:for>
 		

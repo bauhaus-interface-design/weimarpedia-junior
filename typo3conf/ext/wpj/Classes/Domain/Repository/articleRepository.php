@@ -44,11 +44,6 @@ class Tx_Wpj_Domain_Repository_articleRepository extends Tx_Extbase_Persistence_
     protected $obsoleteVersionsSql;
     
     
-    
-	public function initializeObject() {
-		$this->query = $this->createQuery();
-        $this->obsoleteVersionsSql = ' WHERE pid=-1 AND t3ver_oid>0 AND tstamp<' . (time()-60*60*24*356) . ' AND deleted=0 ORDER BY tstamp DESC LIMIT 100';
-	}
 	
 	/**
 	 * Finds all articles ...
@@ -391,6 +386,13 @@ SELECT * FROM `tx_wpj_domain_model_article` WHERE pid=-1 AND t3ver_oid='.$articl
  ORDER BY tstamp DESC')->execute();
 	}
 	
+    
+    
+    public function buildObsoleteVersionsSql() {
+        $this->obsoleteVersionsSql = ' WHERE (pid=-1 AND t3ver_oid>0 AND deleted=0 AND tstamp<' . (time()-60*60*24*356) . ')
+         ORDER BY tstamp ASC LIMIT 100;';    
+    }
+
 	/**
 	 * 
 	 *
@@ -398,10 +400,11 @@ SELECT * FROM `tx_wpj_domain_model_article` WHERE pid=-1 AND t3ver_oid='.$articl
 	 * @return object
 	 */
 	public function findAllObsoleteVersions(){
+	    $this->buildObsoleteVersionsSql();
 		$this->query = $this->createQuery();
 		$this->query->getQuerySettings()->setReturnRawQueryResult( TRUE ); 
-		return $this->query->statement('
-SELECT uid,title,tstamp FROM `tx_wpj_domain_model_article` ' . $obsoleteVersionsSql)->execute();
+        $this->query->statement('SELECT uid,title,tstamp FROM `tx_wpj_domain_model_article` '. $this->obsoleteVersionsSql);
+		return $this->query->execute();
 	}
 
 
@@ -412,10 +415,11 @@ SELECT uid,title,tstamp FROM `tx_wpj_domain_model_article` ' . $obsoleteVersions
      * @return object
      */
     public function cleanUpObsoleteVersions(){
+        $this->buildObsoleteVersionsSql();
         $this->query = $this->createQuery();
         $this->query->getQuerySettings()->setReturnRawQueryResult( TRUE ); 
-        return $this->query->statement('
-UPDATE `tx_wpj_domain_model_article` SET deleted=1 ' . $obsoleteVersionsSql )->execute();
+        $this->query->statement('UPDATE `tx_wpj_domain_model_article` SET deleted=1 ' . $this->obsoleteVersionsSql );
+        return $this->query->execute();
     }
     
 

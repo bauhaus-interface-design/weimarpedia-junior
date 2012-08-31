@@ -469,6 +469,8 @@ class Tx_Wpj_Controller_articleController extends Tx_Wpj_Controller_protectedCon
 		}
 		$this->view->assign('articles', $articles);
 		$this->view->assign('wrapperCssClass', ' class="knowledge"');
+        
+        $this->setPageTitel("Lexikon");
 	}
 
 	/**
@@ -491,6 +493,8 @@ class Tx_Wpj_Controller_articleController extends Tx_Wpj_Controller_protectedCon
 		}
 		$this->view->assign('articles', $articles);
 		$this->view->assign('wrapperCssClass', ' class="exhibition"');
+        
+        $this->setPageTitel("Galerie");
 	}
 		
 	
@@ -595,6 +599,8 @@ class Tx_Wpj_Controller_articleController extends Tx_Wpj_Controller_protectedCon
         	
         if ($additionalHeaderData_create) $this->response->addAdditionalHeaderData($additionalHeaderData_create);
         
+        $this->setPageTitel($article->getTitle());
+
 	}
 
 	/**
@@ -667,6 +673,8 @@ class Tx_Wpj_Controller_articleController extends Tx_Wpj_Controller_protectedCon
 		$articles = $this->articleRepository->search($demand); // TODO: check userrights / manipulations
 		$this->view->assign('articles', $articles);
 		$this->view->assign('demand', $demand);
+        
+        $this->setPageTitel($demand->getSearchterm());
 	}
 	
 	
@@ -722,5 +730,13 @@ class Tx_Wpj_Controller_articleController extends Tx_Wpj_Controller_protectedCon
 		if ( !$GLOBALS['TSFE']->loginUser ) return false;
 		return ( (int)$GLOBALS["TSFE"]->fe_user->user['tx_wpj_admin'] >= 0);
 	}
+
+
+    private function setPageTitel($title){
+        $GLOBALS['TSFE']->config['config']['noPageTitle'] = 2;
+        $GLOBALS['TSFE']->additionalHeaderData['titletag'] = "<title>$title - Weimarpedia Junior</title>";
+    }
+    
+    
 	
 }
