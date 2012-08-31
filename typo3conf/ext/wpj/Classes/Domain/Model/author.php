@@ -168,7 +168,7 @@ class Tx_Wpj_Domain_Model_author extends Tx_Extbase_Domain_Model_FrontendUser {
      */       
     public function getLoginIsValid() {
         $t = time();
-    	return ( ($this->endtime == 0 && $this->starttime < $t) || ($this->starttime < $t || $this->endtime > $t) );
+    	return ( ($this->wpj_endtime == 0 && $this->starttime < $t) || ($this->starttime < $t || $this->wpj_endtime > $t) );
     } 
      
      /**
@@ -235,7 +235,7 @@ class Tx_Wpj_Domain_Model_author extends Tx_Extbase_Domain_Model_FrontendUser {
 	
 	public function setStarttimeAndDuration($starttime, $duration) {
 		$this->starttime = $starttime;
-		$this->endtime = $starttime + $duration;
+		$this->wpj_endtime = $starttime + $duration;
 	}
 	
 	public function addStandardGroup(){
@@ -243,5 +243,6 @@ class Tx_Wpj_Domain_Model_author extends Tx_Extbase_Domain_Model_FrontendUser {
 		//$authorRepository->repairUsergroup();
 	}
 	
+    
 }
 ?>

@@ -13,7 +13,7 @@ Tx_Extbase_Utility_Extension::configurePlugin(
 		'media' => 'index, show, new, create, edit, update, delete',
 		'session' => 'loginForm, login, logout',
 		'account' => 'index, edit, update, avatarForm, uploadAvatarRaw, uploadAvatarFile',
-		'author' => 'index, show, new, create, edit, update, delete, updatePassword',
+		'author' => 'index, show, new, create, edit, update, delete, updatePassword, search',
 		'mediafile' => 'index, show, new, create, edit, update, delete',
 		'map' => 'index,search,suggest,loadPlaces,placeArticles,listPlaceOptions,listFloorOptions,listRoomArticles,showArticle',
 		'articleAdmin' => 'index,indexKnowledge,indexExhibition,indexLastModified,indexNotReviewed,delete,cleanupVersionsWizard,cleanUpVersions,setVoting',
