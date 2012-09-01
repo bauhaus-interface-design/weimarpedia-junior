@@ -3,22 +3,27 @@
 <f:section name="main">
 	<div id="main" role="main" class="grid">
 	<div class="row">
-	<h2>Anmelden</h2>
-
-	<div id="notifications">
-	<f:flashMessages />
-	</div>
-
-	<f:render partial="formErrors" />
-	
-	<p>Um bei Weimarpedia mitzumachen, musst du die <a href="http://weimarpedia.de/index.php?id=2">Teilnahmevoraussetzungen</a> erfüllen</p>
-	<f:form method="post" action="login" >
-		<label for="title">Login</label><br />
-		<f:form.textfield name="uname" value="{uname}"/><br />
-		<label for="title">Passwort</label><br />
-		<f:form.password name="uident" value="{uident}"/><br />
-		<f:form.submit class="wpj-button" value="Anmelden" />
-	</f:form>
+		<div id="login-form" class="slot-0-1-2-3">
+			<h2>Anmelden</h2>
+			<f:render partial="formErrors" />
+			<p>Um bei Weimarpedia mitzumachen, musst du die <a href="http://weimarpedia.de/index.php?id=2">Teilnahmevoraussetzungen</a> erfüllen</p>
+			<f:form method="post" action="login" >
+				<div id="notifications" class="permanent">
+				<f:flashMessages />
+				</div>
+				<p>
+				<label for="fld_login">Login</label><br />
+				<f:form.textfield name="uname" value="{uname}" id="fld_login" class="textfield"/><br />
+				</p>
+				<p>
+				<label for="fld_password">Passwort</label><br />
+				<f:form.password name="uident" value="{uident}" id="fld_password" class="textfield"/><br />
+				</p>
+				<p>
+				<f:form.submit class="wpj-button" value="Anmelden" />
+				</p>
+			</f:form>
+		</div>
 	</div>
 	</div>
 </f:section>

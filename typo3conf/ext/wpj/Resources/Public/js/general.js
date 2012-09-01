@@ -13,7 +13,7 @@ $(document).ready(function(){
 	Wpj.initMobileNav();
 
 	// notification box fade out
-	$('#notifications').delay(3000).fadeOut();
+	$('#notifications').not('.permanent').delay(3000).fadeOut();
 
 	// Germanizing the pagination / hide if only one page is available
 
