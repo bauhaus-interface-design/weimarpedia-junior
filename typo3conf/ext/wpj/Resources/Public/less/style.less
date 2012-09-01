@@ -691,10 +691,30 @@ aside .authorlist {
 
 ul.selection {
 	list-style: none; margin: 1em 0 0 0; padding: 0; border: 1px dotted @wpj_blue_light;
-	background: lighten(@wpj_blue_light, 20%);
-	height: 90px; overflow: auto;
+	height: 230px; overflow: auto;
+	margin-bottom: 1em;
 	li {
-		padding: .2em;
+		background: lighten(@wpj_blue_light, 20%);
+		border-bottom: 1px solid #ccc;
+		font-size: .82em;
+		margin: 0 0 1px 0;
+		a {
+			padding: .5em;
+			display: block;
+			text-decoration: none;
+			&:hover {
+				background: @wpj_blue_light;
+			}
+		}
+	}
+	li {
+		&.selected-item {
+			border: none;
+			a {
+				background: @wpj_blue_light;
+				color: @wpj_blue_dark;
+			}
+		}
 	}
 }
 
@@ -827,6 +847,7 @@ ul.tagit input[type="text"] {
 	padding: 0;
 	width: inherit;
     outline: none;
+		background: #f8f8f8;
 }
 
 @import "utils.less";
@@ -1040,7 +1061,9 @@ table {
   .box-shadow(@shadow);
 	min-width: 12em;
 	text-align: center;
-
+	&.danger {
+		color:#e3007a;
+	}
   &:hover {
     background-position: 0 -5px; 
     color: #333;
@@ -1093,6 +1116,9 @@ table {
 
 a.wpj-button {
 	text-decoration: none;
+	&.danger {
+		color: #e3007a;
+	}
 }
 
 //---------------------------------------------------------------- TWITTER BOOTSTRAP ELEMENTS -------------------------------

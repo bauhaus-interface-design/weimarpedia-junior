@@ -82,8 +82,8 @@
 						<p>
 							<a class="wpj-button" href="#" id="butBreak">Abbrechen</a>
 						</p>
-						<wpj:ifAdminLevel minLevel="10">						
-							<p><f:link.action class="wpj-button" action="delete" controller="articleAdmin" arguments="{article: article}" onclick="return confirm('Den Artikel wirklich loeschen?');">
+						<wpj:ifAdminLevel minLevel="10">
+							<p><f:link.action class="wpj-button danger" action="delete" controller="articleAdmin" arguments="{article: article}" onclick="return confirm('Den Artikel wirklich loeschen?');">
 								Artikel l&ouml;schen
 							</f:link.action></p>
 						</wpj:ifAdminLevel>
@@ -96,7 +96,7 @@
 							<p class="sub weighty">Der Artikel ist freigegeben und f&uuml;r alle sichtbar.</p>
 							<wpj:ifAdminLevel minLevel="10">
 								<p class="sub">Alle &Auml;nderungen verwerfen und die Freigabe des Artikels zur&uuml;ckziehen.</p>		
-								<p><f:link.action class="wpj-button" action="setReview" arguments="{reviewed:0,article: article}">Freigabe stoppen</f:link.action></p>	
+								<p><f:link.action class="wpj-button danger" action="setReview" arguments="{reviewed:0,article: article}">Freigabe stoppen</f:link.action></p>	
 							</wpj:ifAdminLevel>
 							</div>
 						</f:then>
@@ -113,7 +113,7 @@
 								<div class="mt">
 								<p class="sub weighty">Der Artikel ist <strong>nicht</strong> freigegeben.</p>
 								<p class="sub">Alle &Auml;nderungen verwerfen und den Artikel mit allen Medien freigeben</p>		
-								<p><f:link.action class="wpj-button" action="setReview" arguments="{reviewed:1,article: article}">Artikel freigeben</f:link.action></p>
+								<p><f:link.action class="wpj-button danger" action="setReview" arguments="{reviewed:1,article: article}">Artikel freigeben</f:link.action></p>
 								</div>
 							</wpj:ifAdminLevel>
 						</f:else>
