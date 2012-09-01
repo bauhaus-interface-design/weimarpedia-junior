@@ -65,17 +65,22 @@
 					
 					<div id="editOptions" style="display:none;">
 						
-						<p id="articletypeSelector">
+						<p class="weighty sub" id="articletypeSelector">
+							Der Artikel hat folgenden Typ:<br>
 							<f:form fieldNamePrefix="_type_" name="article" object="{article}" > 
 							<f:form.select id="articletype" property="articletype" options="{articletypes}" optionLabelField="name" optionValueField="uid"/>
 							</f:form>
 						</p>
 						
-						<p><a class="wpj-button" href="#" id="butSaveAndExit">Speichern und beenden</a></p>
 						<p>
-							<a class="wpj-button" href="#" id="butBreak">Abbrechen</a>
 							<a class="wpj-button" href="#" id="butSave">Zwischenspeichern</a>&nbsp;
 							<f:image src="typo3conf/ext/wpj/Resources/Public/img/spinner.gif" alt="warten..." class="spinner" id="saveAjaxSpinner" style="display:none;"/>
+						</p>
+						<p>
+							<a class="wpj-button" href="#" id="butSaveAndExit">Speichern und beenden</a>
+						</p>
+						<p>
+							<a class="wpj-button" href="#" id="butBreak">Abbrechen</a>
 						</p>
 						<wpj:ifAdminLevel minLevel="10">						
 							<p><f:link.action class="wpj-button" action="delete" controller="articleAdmin" arguments="{article: article}" onclick="return confirm('Den Artikel wirklich loeschen?');">
@@ -87,25 +92,29 @@
 					<f:if condition="{article.reviewed}>0">
 						
 						<f:then>
-							<p>Der Artikel ist freigegeben und f&uuml;r alle sichtbar.</p>
+							<div class="mt">
+							<p class="sub weighty">Der Artikel ist freigegeben und f&uuml;r alle sichtbar.</p>
 							<wpj:ifAdminLevel minLevel="10">
-								<p>Alle &Auml;nderungen verwerfen und die Freigabe des Artikels zur&uuml;ckziehen.</p>		
+								<p class="sub">Alle &Auml;nderungen verwerfen und die Freigabe des Artikels zur&uuml;ckziehen.</p>		
 								<p><f:link.action class="wpj-button" action="setReview" arguments="{reviewed:0,article: article}">Freigabe stoppen</f:link.action></p>	
 							</wpj:ifAdminLevel>
+							</div>
 						</f:then>
 						
 						<f:else>
-							<p>Der Artikel ist <strong>nicht</strong> freigegeben.</p>
-							
 							<wpj:ifAdminLevel minLevel="10">
-								<p>Bitte pr&uuml;fen Sie:</p>
-								<ul>
-									<li>Text auf inhaltliche Richtigkeit</li>
-									<li>alle Medien inkl. Nutzungsrechte </li>
-								</ul>
-
-								<p>Alle &Auml;nderungen verwerfen und den Artikel mit allen Medien freigeben</p>		
+								<div class="mt">
+									<p class="sub weighty">Bitte pr&uuml;fen Sie:</p>
+									<ul class="checklist">
+										<li>Text auf inhaltliche Richtigkeit</li>
+										<li>alle Medien inkl. Nutzungsrechte </li>
+									</ul>
+								</div>
+								<div class="mt">
+								<p class="sub weighty">Der Artikel ist <strong>nicht</strong> freigegeben.</p>
+								<p class="sub">Alle &Auml;nderungen verwerfen und den Artikel mit allen Medien freigeben</p>		
 								<p><f:link.action class="wpj-button" action="setReview" arguments="{reviewed:1,article: article}">Artikel freigeben</f:link.action></p>
+								</div>
 							</wpj:ifAdminLevel>
 						</f:else>
 						
@@ -127,22 +136,21 @@
 	    	</ul>
 			<ul id="tagField"></ul>
 			<p><a id="saveTags" class="wpj-button" href="#">Neue Schlagwörter zuweisen</a></p>
-				
-				
-			<h5>Orte:</h5>
+
+			<h5 class="mt">Orte:</h5>
 	    	<ul id="placeList" class="tags clearfix removable-items">
 	    		<f:image src="typo3conf/ext/wpj/Resources/Public/img/spinner.gif" alt="warten..." class="spinner"/>
 	    	</ul>
 	    	<ul id="placeTempList"></ul>
 			<p><a class="wpj-button" id="openPlaceWindow" href="<wpj:actionUrl action='placeSelectForm' arguments='{article:article}' pageType='10'/>">Ort auswählen</a></p>
-			
-			
-			<h5>Ortsreferenz:</h5>
+
+
+			<h5 class="mt">Ortsreferenz:</h5>
 			<ul id="refplaceList" class="tags clearfix removable-items">
 	    		<f:image src="typo3conf/ext/wpj/Resources/Public/img/spinner.gif" alt="warten..." class="spinner"/>
 	    	</ul>
 	    	<p><a class="wpj-button" id="openRefPlaceWindow" href="<wpj:actionUrl action='placeSelectForm' arguments='{article:article}' pageType='10'/>">Referenzort auswählen</a></p>
-			
+
 	</div>
 </wpj:ifAdminLevel>		
 	
@@ -163,7 +171,7 @@
 			<f:image src="typo3conf/ext/wpj/Resources/Public/img/spinner.gif" alt="warten..." class="spinner"/>
 		</div>
 
-		<p>Der Artikel wurde zuletzt am 
+		<p class="sub">Der Artikel wurde zuletzt am 
 		<f:format.date format="d.m.Y \u\m H:i">{article.updatedAt}</f:format.date>
 		 ge&auml;ndert und am 
 		 <f:format.date format="d.m.Y \u\m H:i">{article.createdAt}</f:format.date> erstellt.
