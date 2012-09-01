@@ -14,6 +14,7 @@ $(document).ready(function(){
 
 	// notification box fade out
 	$('#notifications').not('.permanent').delay(3000).fadeOut();
+	$('#notifications.permanent').delay(10000).fadeOut();
 
 	// Germanizing the pagination / hide if only one page is available
 
