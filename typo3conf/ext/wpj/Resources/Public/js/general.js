@@ -15,10 +15,14 @@ $(document).ready(function(){
 	// notification box fade out
 	$('#notifications').delay(3000).fadeOut();
 
-	// Germanizing the pagination
-	
-	$('.pagination .previous a').attr('title','zurück').text('«');
-	$('.pagination .next a').attr('title','weiter').text('»');
+	// Germanizing the pagination / hide if only one page is available
+
+	if($('.pagination li').length == 1) {
+		$('.pagination').hide();
+	} else {
+		$('.pagination .previous a').attr('title','zurück').text('«');
+		$('.pagination .next a').attr('title','weiter').text('»');
+	}
 	
 	// gallery related stuff
 
