@@ -317,17 +317,18 @@ h2 {
 
 .welcome {
 	h1 { margin: .7em 0 .2em 0; color: @wpj_brown; }
-	p { font-size: .78em; margin-top: .2em;}
+	p { font-size: .78em; margin-top: .2em; letter-spacing: 1px;}
 }
 
 .scope { background: @white; min-height: 13em; margin: 1.5em 0; .solid_line_top; .dashed_line_bottom; .box-shadow(0 0 20px #ccc) }
 .scope {
 	p {
 		word-wrap: break-word;
-		font-size: .78em;
+		font-size: .72em;
 		padding-left: .5em;
 		padding-right: .5em;
 		line-height: 140%;
+		letter-spacing: 1px;
 	}
 }
 .scope h2 { 
@@ -632,7 +633,7 @@ header.grid {
 	//padding-top: 20px;
 }
 
-.exhibition header {
+.exhibition .header-wrapper {
 	background: url(../img/transparent.png);	
 }
 
@@ -677,14 +678,7 @@ footer img {
 	}
 }
 
-.exhibition .pagination {
-	li a { 
-		color: darken(@wpj_blue, 50%);
-	}
-	li.current {
-		color: darken(@wpj_brown, 30%);
-	}
-}
+
 
 .pagination.top {
 	margin: 0;
@@ -693,7 +687,14 @@ footer img {
 
 .f3-widget-paginator { list-style: none; margin: 0; padding: 0; margin: 10px; text-align: center; }
 .f3-widget-paginator li { display: inline; margin: 0 .3em; }
-
+.exhibition .pagination {
+	li a { 
+		color: darken(@wpj_blue, 50%);
+	}
+	li.current {
+		color: darken(@wpj_brown, 30%);
+	}
+}
 // --------------- Notification --------------------------
 
 #notifications ul { .cleanList; margin: 1em 0;}
@@ -755,8 +756,18 @@ ul.tagit input[type="text"] {
 
 @import "utils.less";
 
+.touch .hide-for-mobile {
+	display: none;
+}
+
+@media only screen and (max-width: 480px) {
+	.hide-for-mobile {
+		display: none;
+	}
+}
+
 @media only screen and (max-width: 720px) {
-	
+
 	.grid.full {
 		padding: 0;
 	}
@@ -826,6 +837,13 @@ ul.tagit input[type="text"] {
 		background: #ededed;
 		.border-radius
 	}
+	
+	.exhibition {
+		#nav-wiki form {
+			border: 1px solid @wpj_blue_light;
+		}
+	}
+	
 	#nav-wiki form  {
 		label { width: 20%; } 
 		input { width: 25%; }
@@ -837,6 +855,10 @@ ul.tagit input[type="text"] {
 		img { width: 100%; height: auto; }
 	}
 
+	#medialist {
+		img.spinner { width: auto; height: auto; }
+	}
+
 	.article-teaser {
 		h3 { width: 180px;}
 		.authorlist {
@@ -844,6 +866,66 @@ ul.tagit input[type="text"] {
 		}
 	}
 
+	aside .authorlist {
+		font-size: .82em; 
+	}
+
+	// --------------- Pagination ----------------------------
+	
+	.pagination {
+		li { 
+			display: inline-block;
+			text-align: center;
+			margin-bottom: .5em;
+		}
+
+		li { 
+			background: #fff;
+			.border-radius;
+			border: 1px solid @wpj_blue;
+			padding: none;
+		}
+		li.current {
+			color: @wpj_brown;
+			padding: .4em .7em .2em .7em;
+		}
+		li a { 
+			display: block;
+			color: @wpj_blue;
+			text-decoration: none;
+			padding: .4em .7em .2em .7em;
+		}
+	}
+	.exhibition .pagination li a {
+		color: @wpj_blue;
+		padding: .4em .7em .2em .7em;
+	}
+
+/*
+	.pagination {
+		margin: 1em 0;
+		font-family: @fonts_serif;
+		li.current {
+			font-weight: bold;
+			color: @wpj_brown;
+		}
+	}
+
+
+
+	.pagination.top {
+		margin: 0;
+	}
+
+
+	.f3-widget-paginator { list-style: none; margin: 0; padding: 0; margin: 10px; text-align: center; }
+	.f3-widget-paginator li { display: inline; margin: 0 .3em; }
+	.exhibition .pagination {
+
+		li.current {
+			color: darken(@wpj_brown, 30%);
+		}
+*/
 }
 
 table { margin: 0 0 1.2em 0; width: 960px;}

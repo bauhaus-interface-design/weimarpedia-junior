@@ -39,7 +39,7 @@
 							<a class="wpj-button" id="addMediaLink" href="<wpj:actionUrl action='addMedia' arguments='{article:article}' pageType='0'/>">Medien verwalten</a>
 							</div>
 			    		</f:if>
-						<div id="medialist"><f:image src="typo3conf/ext/wpj/Resources/Public/img/spinner.gif" alt="warten..."/></div>
+						<div id="medialist"><f:image src="typo3conf/ext/wpj/Resources/Public/img/spinner.gif" alt="warten..." class="spinner"/></div>
 
 					</div>
 				</article>
@@ -48,7 +48,7 @@
 
 <!-- Article Meta -->
 <aside>
-	<div class="metabox">
+	<div class="metabox hide-for-mobile">
 		<h4>Bearbeitung</h4>
 		<wpj:isGuest>
 
@@ -74,7 +74,7 @@
 						<p>
 							<a class="wpj-button" href="#" id="butBreak">Abbrechen</a>
 							<a class="wpj-button" href="#" id="butSave">Zwischenspeichern</a>&nbsp;
-							<f:image src="typo3conf/ext/wpj/Resources/Public/img/spinner.gif" alt="warten..." id="saveAjaxSpinner" style="display:none;"/>
+							<f:image src="typo3conf/ext/wpj/Resources/Public/img/spinner.gif" alt="warten..." class="spinner" id="saveAjaxSpinner" style="display:none;"/>
 						</p>
 						<wpj:ifAdminLevel minLevel="10">						
 							<p><f:link.action class="wpj-button" action="delete" controller="articleAdmin" arguments="{article: article}" onclick="return confirm('Den Artikel wirklich loeschen?');">
@@ -122,7 +122,7 @@
 			
 			<h5>Schlagwörter:</h5>
 	    	<ul id="tagList" class="tags clearfix removable-items">
-	    		<f:image src="typo3conf/ext/wpj/Resources/Public/img/spinner.gif" alt="warten..."/>
+	    		<f:image src="typo3conf/ext/wpj/Resources/Public/img/spinner.gif" alt="warten..." class="spinner"/>
 	    	</ul>
 			<ul id="tagField"></ul>
 			<p><a id="saveTags" class="wpj-button" href="#">Neue Schlagwörter zuweisen</a></p>
@@ -130,7 +130,7 @@
 				
 			<h5>Orte:</h5>
 	    	<ul id="placeList" class="tags clearfix removable-items">
-	    		<f:image src="typo3conf/ext/wpj/Resources/Public/img/spinner.gif" alt="warten..."/>
+	    		<f:image src="typo3conf/ext/wpj/Resources/Public/img/spinner.gif" alt="warten..." class="spinner"/>
 	    	</ul>
 	    	<ul id="placeTempList"></ul>
 			<p><a class="wpj-button" id="openPlaceWindow" href="<wpj:actionUrl action='placeSelectForm' arguments='{article:article}' pageType='10'/>">Ort auswählen</a></p>
@@ -138,7 +138,7 @@
 			
 			<h5>Ortsreferenz:</h5>
 			<ul id="refplaceList" class="tags clearfix removable-items">
-	    		<f:image src="typo3conf/ext/wpj/Resources/Public/img/spinner.gif" alt="warten..."/>
+	    		<f:image src="typo3conf/ext/wpj/Resources/Public/img/spinner.gif" alt="warten..." class="spinner"/>
 	    	</ul>
 	    	<p><a class="wpj-button" id="openRefPlaceWindow" href="<wpj:actionUrl action='placeSelectForm' arguments='{article:article}' pageType='10'/>">Referenzort auswählen</a></p>
 			
@@ -154,12 +154,12 @@
 			</div>
 	</div>
 	
-<wpj:ifAdminLevel minLevel="20">				
+<wpj:ifAdminLevel minLevel="20">
 	<div class="metabox">
 		<h4>Versionen</h4>
 		<p><a id="loadVersionsBtn">Liste der Versionen laden</a></p>
 		<div id="versionslist" class="tags clearfix">
-			<f:image src="typo3conf/ext/wpj/Resources/Public/img/spinner.gif" alt="warten..."/>
+			<f:image src="typo3conf/ext/wpj/Resources/Public/img/spinner.gif" alt="warten..." class="spinner"/>
 		</div>
 
 		<p>Der Artikel wurde zuletzt am 

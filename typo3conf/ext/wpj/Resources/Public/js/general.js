@@ -17,8 +17,8 @@ $(document).ready(function(){
 
 	// Germanizing the pagination
 	
-	$('.pagination .previous a').text('zurück');
-	$('.pagination .next a').text('weiter');
+	$('.pagination .previous a').attr('title','zurück').text('«');
+	$('.pagination .next a').attr('title','weiter').text('»');
 	
 	// gallery related stuff
 
