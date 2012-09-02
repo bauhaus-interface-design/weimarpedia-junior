@@ -18,8 +18,7 @@
 			<f:form enctype="multipart/form-data" method="post" action="uploadMediafile" name="article" object="{article}">
 				<f:form.hidden name="article_id" value="{article.uid}" />
 				<f:form.upload property="mediafile" />
-				<f:form.submit value="hochladen" id="submitUpload"/> und 
-				<f:form.checkbox name="closeWindow" checked="true" value="true"/>Fenster schliessen
+				<f:form.submit value="hochladen" id="submitUpload"/> und Fenster schliessen <f:form.checkbox name="closeWindow" checked="true" value="true"/>
 			</f:form>
 			<div id="waitForUpload"> <f:image src="typo3conf/ext/wpj/Resources/Public/img/spinner.gif" alt="warten..."/> Bitte warten, die Datei wird auf den Server geladen. Das kann einige Minuten dauern...</div>
 			
@@ -42,13 +41,15 @@
 		
 		<div>
 			<h2>Zugewiesene Bilder</h2>
+			<div class="clearfix">
 			<f:for each="{article.medias}" as="media">
-				<div>
+				<div class="mediafile">
 					<f:image src="{media.previewUrl}" width="150cm" height="150" alt="preview"/>
 					<!--<p><f:format.html parseFuncTSPath="">{media.description}</f:format.html></p>-->
-					<p><f:link.action action="removeMedia" arguments="{media : media, article : article}">Datei entfernen</f:link.action></p>	
+					<p><f:link.action class="wpj-button" action="removeMedia" arguments="{media : media, article : article}">Datei entfernen</f:link.action></p>	
 				</div>
 			</f:for>
+			</div>
 		</div>
 	</div>
 
@@ -64,14 +65,16 @@
 				<f:widget.paginate objects="{mediafiles}" as="paginatedMediafiles"
 					 configuration="{itemsPerPage: 50, insertAbove: 0, insertBelow: 1}">
 					<f:for each="{paginatedMediafiles}" as="mediafile">
-						<div>
+						<div class="mediafile">
 							<f:image src="{mediafile.url}" width="150cm" height="150" alt="preview"/>
 							<!--<p>{mediafile.description}</p>-->
-							<p><f:link.action action="addMediafile" arguments="{mediafile : mediafile, article : article}">dem Artikel hinzuf&uuml;gen</f:link.action></p>
+							<p><f:link.action class="wpj-button" action="addMediafile" arguments="{mediafile : mediafile, article : article}">dem Artikel hinzuf&uuml;gen</f:link.action></p>
 						</div>
 					</f:for>
 			</div>
+			<div class="pagination">
 			</f:widget.paginate>
+			</div>
 		</div>
 	</div>
 </div>

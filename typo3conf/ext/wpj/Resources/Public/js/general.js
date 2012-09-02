@@ -49,7 +49,7 @@ $(document).ready(function(){
 		if(wikitools.length && theWindow.width() > 720) {
 			wikitools.removeClass('grid');
 			wikitools.addClass('fix');
-			$(wikitools).css({ right : ((theWindow.width()-$('.header-wrapper').width()) / 2 + 20) + 'px' });
+			$(wikitools).css({ right : ((theWindow.width()-$('.header-wrapper').width()) / 2 + 80) + 'px' });
 		} else {
 			wikitools.addClass('grid');
 			wikitools.removeClass('fix');
@@ -99,7 +99,7 @@ $(document).ready(function(){
 			if(theWindow.width() > 720) {
 				wikitools.removeClass('grid');
 				wikitools.addClass('fix');
-				$(wikitools).css({ right : ((theWindow.width()-$('.header-wrapper').width()) / 2 + 20) + 'px' });
+				$(wikitools).css({ right : ((theWindow.width()-$('.header-wrapper').width()) / 2 + 80) + 'px' });
 			} else {
 				wikitools.addClass('grid');
 				wikitools.removeClass('fix');
