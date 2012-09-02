@@ -132,24 +132,37 @@ hr { display: block; height: 1px; border: 0; border-top: 1px dashed @wpj_brown; 
 			display: block;
 			padding: .2em .5em;
 			background: url(../img/transparent.png);
+			margin: 0 1em .5em 0;
+			text-decoration: none;
 		}
 		li.current {
 			background: @wpj_brown;
 			a {
 				color: @white;
-				text-decoration: none;
 			}
 		}
 	}
 }
 
-.exhibition #nav-wiki-tools {
+.js .exhibition #nav-wiki-tools.fix {
 	position: fixed;
 	z-index: 1000;
 	right: 20px;
-	bottom: 50px;
+	top: 320px;
 	li {
 		float: none;
+		margin: 0 0 1.5em 0;
+		font-family: @fonts_serif;
+		padding: .7em 1em .5em 1em;
+		text-align: center;
+		.box-shadow(3px 3px 3px #666);
+		a {
+			text-decoration: none;
+			color: @wpj_blue_dark;
+		}
+	}
+	li.current {
+		a { color: #fff; }
 	}
 }
 
@@ -742,7 +755,7 @@ header.grid {
 	height: 97px;
 	position: absolute;
 	top: 70px;
-	right: 150px;
+	right: 100px;
 }
 
 #branding.rallye {

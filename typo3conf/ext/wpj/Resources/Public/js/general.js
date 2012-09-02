@@ -43,17 +43,26 @@ $(document).ready(function(){
 
 	if(exhibitionBG && $('#container.exhibition').length) {
 		
-		var wikitools = $('#nav-wiki-tools');
-		if(wikitools.length) {
-			wikitools.removeClass('grid');
-			$('#article-list').append(wikitools);
-		}
+		var theWindow	= $(window),
+		wikitools = $('#nav-wiki-tools');
 		
+		if(wikitools.length && theWindow.width() > 720) {
+			wikitools.removeClass('grid');
+			wikitools.addClass('fix');
+			$(wikitools).css({ right : ((theWindow.width()-$('.header-wrapper').width()) / 2 + 20) + 'px' });
+		} else {
+			wikitools.addClass('grid');
+			wikitools.removeClass('fix');
+		}
+
+		$('li', wikitools).each(function(i){
+			$(this).attr('id', 'ex-scope-' + (i + 1));
+		});
+
 		$('#container.exhibition').addClass('custom-bg');
 		$('#container.exhibition').after('<div id="bg"></div>'); 
 		
-		var theWindow	= $(window),
-		$bg				= $("#bg"),
+		var $bg				= $("#bg"),
 		aspectRatio		= $bg.width() / $bg.height();
 
 		var backgrounds = new Array(
@@ -87,6 +96,14 @@ $(document).ready(function(){
 
 		theWindow.resize(function() {
 			resizeBg();
+			if(theWindow.width() > 720) {
+				wikitools.removeClass('grid');
+				wikitools.addClass('fix');
+				$(wikitools).css({ right : ((theWindow.width()-$('.header-wrapper').width()) / 2 + 20) + 'px' });
+			} else {
+				wikitools.addClass('grid');
+				wikitools.removeClass('fix');
+			}
 		}).trigger("resize");
 	}
 
