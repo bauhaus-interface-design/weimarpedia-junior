@@ -114,6 +114,10 @@ hr { display: block; height: 1px; border: 0; border-top: 1px dashed @wpj_brown; 
 	}
 }
 
+#usr-bar {
+	display: none;
+}
+
 #nav-wiki-tools {
 	font-family: @fonts_serif;
 	margin: 1em auto 0 auto;
@@ -860,6 +864,12 @@ ul.tagit input[type="text"] {
 	.hide-for-mobile {
 		display: none;
 	}
+	#login-form {
+		p {
+			font-size: .82em;
+		}
+		padding: 1.5em .7em .7em .7em;
+	}
 }
 
 @media only screen and (max-width: 720px) {
@@ -885,12 +895,24 @@ ul.tagit input[type="text"] {
 		position: absolute;
 		top: 5px;
 		right: 20px;
+		z-index: 1000;
 	}
 
 	.start #branding {
 		display: block;
 	}
 
+	#usr-bar {
+		display: block;
+		background: #DCE2E5;
+		padding: .5em 2px;
+		margin-bottom: 1em;
+		border-bottom: 1px solid @grey;
+		font-size: .78em;
+		color: #666;
+		text-align: center;
+	}
+	
 	.welcome {
 		h1 { text-transform: uppercase; margin: 1em 0; color: @wpj_brown; font-size: 1.6em; line-height: 1; font-size: 1em;}
 	}

@@ -16,6 +16,20 @@ $(document).ready(function(){
 	$('#notifications').not('.permanent').delay(3000).fadeOut();
 	$('#notifications.permanent').delay(10000).fadeOut();
 
+	// setting focus to the login field
+	$('#fld_login').focus();
+
+	// highlight the main navigation when a single article is shown
+
+	if($('#article').length == 1 ) {
+		if($('#article').is('.knowledge')) {
+			$('#nav-wiki .item-knowledge').addClass('current');
+		}
+		if($('#article').is('.exhibition')) {
+			$('#nav-wiki .item-exhibition').addClass('current');
+		}
+	}
+
 	// Germanizing the pagination / hide if only one page is available
 
 	if($('.pagination li').length == 1) {
@@ -75,7 +89,6 @@ $(document).ready(function(){
 			resizeBg();
 		}).trigger("resize");
 	}
-
 
 });
 
@@ -171,14 +184,40 @@ Wpj.Search.submit = function(scope){
 }
 
 Wpj.initMobileNav = function() {
+
+	var logged_in = false;
+
+	if($('#accountLink').length == 1) {
+		logged_in = true;
+		$('html').addClass('logged-in');
+		$('body').prepend($('<div id="usr-bar"/>'));
+	}
+
 	var dropdown = $('<select />');
 	dropdown.attr('id', 'nav-mobile');
 	dropdown.append('<option value="./">Hauptnavigation</option>');
-	$('#nav-main li').each(function(i) {
+
+	// fetching guest links
+	$('#nav-main li:not("#login")').each(function(i) {
 		dropdown.append('<option value="' + $('a', this).attr('href') + '">' + $('a', this).text() + '</option>');
 	})
 	dropdown.bind('change', function(){
 		window.location.href=$('option:selected', this).attr('value');
+	})
+	
+	// fetching user related links
+	var contentUsrBar = '';
+	$('a', $('#userStatus')).each(function(i){
+		if(logged_in) {
+			if(i == 0) {
+				contentUsrBar = 'Du bist angemeldet als ' + $(this).text() + '. ';
+				$('#usr-bar').append(contentUsrBar);
+			} else {
+				$('#usr-bar').append($(this));
+			}
+		} else {
+			dropdown.append('<option value="' + $(this).attr('href') + '">' + $(this).text() + '</option>');
+		}
 	})
 	$('header h2').after(dropdown);
 }
