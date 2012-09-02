@@ -54,13 +54,22 @@
 	</div>
 
 	<div id="tabs-2">
-		
+		<a id="library-tab"></a>
 		<div id="notifications">
 			<f:flashMessages />
 		</div>
 		
 		<div>
 			<h2>Bilder oder Videos aus der Bibliothek</h2>
+			
+			<f:form method="post" controller="article" action="addMedia" arguments="{article: article}" name="search" section="tab-2">
+				<label for="mediafileSearchField" class="hideme">Suche</label> 
+				<f:form.textfield id="mediafileSearchField" property="search" value="{search.search}"/> 
+				<f:form.submit value="suchen" />
+			</f:form>
+			
+			<p> </p>
+			
 			<div class="clearfix">
 				<f:widget.paginate objects="{mediafiles}" as="paginatedMediafiles"
 					 configuration="{itemsPerPage: 50, insertAbove: 0, insertBelow: 1}">

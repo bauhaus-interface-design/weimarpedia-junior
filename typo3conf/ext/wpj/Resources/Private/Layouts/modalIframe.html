@@ -5,6 +5,14 @@
 	<script type="text/javascript">
 		$(document).ready(function(){
 			if ($('.tabs').length) $('.tabs').tabs();
+			
+			// jump to tab if hash is set (e.g. tab-2 for second tab)
+			if(document.location.hash!='') {
+			    //get the index from URL hash
+			    tabSelect = document.location.hash.split('-');
+			    $(".tabs").tabs('select', (tabSelect[1]-1));
+			}
+		
 		})
 	</script>
 </div>

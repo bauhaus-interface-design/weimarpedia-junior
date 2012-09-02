@@ -221,15 +221,18 @@ class Tx_Wpj_Controller_articleController extends Tx_Wpj_Controller_protectedCon
   	* add media
   	* 
   	* @param Tx_Wpj_Domain_Model_article $article The article to display
+    * @param object $search
   	* @dontvalidate $article
   	* @dontverifyrequesthash
   	*/
-	public function addMediaAction(Tx_Wpj_Domain_Model_article $article) {
+	public function addMediaAction(Tx_Wpj_Domain_Model_article $article, $search=null) {
 		if ($this->editingAllowed($article)){
 			$this->addEditingHeaders();
 			$this->view->assign('article', $article);
+            $this->view->assign('search', $search);
 			$mediafileRepository = t3lib_div::makeInstance('Tx_Wpj_Domain_Repository_mediafileRepository');
-			$this->view->assign('mediafiles', $mediafileRepository->findAll());
+			if ($search == null) $this->view->assign('mediafiles', $mediafileRepository->findAll());
+            else $this->view->assign('mediafiles', $mediafileRepository->search($search['search']));
 		
 		} else die("Sie haben keine ausreichenden Rechte.");
 	}

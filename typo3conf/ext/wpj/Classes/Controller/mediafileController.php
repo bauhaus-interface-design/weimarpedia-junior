@@ -31,7 +31,6 @@
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  */
 
-// TODO: As your extension matures, you should use Tx_Extbase_MVC_Controller_ActionController as base class, instead of the ScaffoldingController used below.
 class Tx_Wpj_Controller_mediafileController extends Tx_Wpj_Controller_protectedController {
 	
 	/**
@@ -117,8 +116,6 @@ class Tx_Wpj_Controller_mediafileController extends Tx_Wpj_Controller_protectedC
 		$this->flashMessageContainer->add('Your mediafile was removed.');
 		$this->redirect('index');
 	}
-	
-
 	
 }
 ?>

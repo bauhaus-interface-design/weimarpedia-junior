@@ -30,5 +30,23 @@
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  */
 class Tx_Wpj_Domain_Repository_mediafileRepository extends Tx_Extbase_Persistence_Repository {
+    /**
+     * 
+     *
+     * @param 
+     * @return array 
+     */
+    public function search($searchterm) {
+        $searchtermWrapped = '%'.$searchterm.'%';
+        $query = $this->createQuery();
+        $result = $query->matching(
+            $query->logicalOr(array(
+                $query->equals('uid',$searchterm),
+                $query->like('title',$searchtermWrapped),
+                $query->like('file',$searchtermWrapped)
+            ))
+        )->execute();
+        return $result;
+    }
 }
 ?>
