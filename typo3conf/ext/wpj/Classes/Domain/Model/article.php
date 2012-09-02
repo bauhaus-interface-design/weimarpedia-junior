@@ -392,6 +392,7 @@ class Tx_Wpj_Domain_Model_article extends Tx_Extbase_DomainObject_AbstractEntity
 	 */
 	public function getArticletypeCSSClass() {
 		$class = '';
+        if ($this->articletype == null) return $class;
 		if ($this->articletype->getUid() == 10) $class = 'exhibition';
 		else if ($this->articletype->getUid() < 10) $class = 'knowledge';
 		return $class;
@@ -543,10 +544,19 @@ class Tx_Wpj_Domain_Model_article extends Tx_Extbase_DomainObject_AbstractEntity
 	 * 
 	 * @return String
 	 */
-	public function getVersionDiff($article) {
-		return $this->htmlDiff($this->body, $article->body);
+	public function getVersionDiffTitle($article) {
+		return $this->htmlDiff($article->title, $this->title);
 	}
 	
+    /**
+     * 
+     * 
+     * @return String
+     */
+    public function getVersionDiffBody($article) {
+        return $this->htmlDiff($article->body,$this->body);
+    }
+    
 	public function getReviewedCSSClass(){
 		return ($this->reviewed) ? "" : "not-reviewed";
 	}

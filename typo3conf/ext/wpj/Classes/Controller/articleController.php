@@ -400,7 +400,8 @@ class Tx_Wpj_Controller_articleController extends Tx_Wpj_Controller_protectedCon
 		$this->view->assign('version_id', $version_id);
 		$this->view->assign('version', $version);
 		
-		$this->view->assign('difference', $article->getVersionDiff($version));
+		$this->view->assign('title_diff', $article->getVersionDiffTitle($version));
+        $this->view->assign('body_diff', $article->getVersionDiffBody($version));
 	}	
 	
 	/**

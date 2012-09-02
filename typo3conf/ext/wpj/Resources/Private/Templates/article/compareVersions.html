@@ -1,5 +1,40 @@
+{namespace wpj=Tx_Wpj_ViewHelpers}
+<f:layout name="default" />
 
-<h3>Vergleich zwischen Artikel und Version {version.versionLabel}</h3>
+<f:section name="main">
+	<div id="nav-wiki-tools">
+		<hr class="hideme" />
+	</div>
 
-<f:format.html parseFuncTSPath="">{difference}</f:format.html>
-		
+	<div class="grid">
+		<div id="notifications">
+			<f:flashMessages />
+		</div>
+	</div>
+	
+	<div id="main" role="main" class="grid">
+		<h2 class="hideme">Inhalt: Artikel</h2>
+		<div class="row">
+			<div class="slot-0-1-2-3-4-5">
+				
+				<h2>Vergleich zwischen dem aktuellen Artikel und seiner Version ›{version.versionLabel}‹</h2>
+				<article class="article {version.articletypeCssClass}">
+					<h3><f:format.html parseFuncTSPath="">{title_diff}</f:format.html></h3>
+					<div>
+						<f:format.html parseFuncTSPath="">{body_diff}</f:format.html>
+					</div>
+				</article>	
+				
+						
+				<h2>Version {version.versionLabel}</h2>
+				<article class="article {version.articletypeCssClass}" id="article">
+					<h3 id="article_title">{version.title}</h3>
+					<div id="article_body">
+						<f:format.html parseFuncTSPath="">{version.body}</f:format.html>
+					</div>
+				</article>	
+				
+			</div>
+		</div>			
+	</div>
+</f:section>
