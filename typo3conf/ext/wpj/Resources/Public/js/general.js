@@ -230,7 +230,7 @@ Wpj.initMobileNav = function() {
 				contentUsrBar = 'Du bist angemeldet als ' + $(this).text() + '. ';
 				$('#usr-bar').append(contentUsrBar);
 			} else {
-				$('#usr-bar').append($(this));
+				$('#usr-bar').append($(this).clone());
 			}
 		} else {
 			dropdown.append('<option value="' + $(this).attr('href') + '">' + $(this).text() + '</option>');
