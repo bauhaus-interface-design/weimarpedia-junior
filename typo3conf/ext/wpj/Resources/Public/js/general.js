@@ -248,6 +248,12 @@ var isiPhone = navigator.userAgent.match(/iPhone/i) != null;
 
 if(isiPad || isiPhone) {
 
+	window.addEventListener("load",function() {
+	  setTimeout(function(){
+	    window.scrollTo(0, 1);
+	  }, 0);
+	});
+
 	var iOSVersion5 = navigator.userAgent.match(/OS 5/i) != null;
 
 	if(!iOSVersion5) {
