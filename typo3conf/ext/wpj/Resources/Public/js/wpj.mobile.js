@@ -399,7 +399,7 @@ WPM.loadArticlesClickHandler = function(event){
 }
 
 
-WPM.buildList = function(ul, objects, labelAttr, clickHandler) {
+WPM.buildList = function(ul, objects, labelAttr, clickHandler, image) {
 	// clear list
 	$(ul+' li').remove();
 	// hide if empty
@@ -407,7 +407,11 @@ WPM.buildList = function(ul, objects, labelAttr, clickHandler) {
 		// fill list
 		for (i=0;i<objects.length;i++){
 			var object = objects[i];
-			var link = $('<a href="#"><span>' + object[labelAttr] + '</span></a>').appendTo(ul);
+			var imgHtml = '';
+			if (image){
+				imgHtml = '<img class="thumbnail" src="' + object[image] + '"/>';
+			}
+			var link = $('<a href="#"><span>' + object[labelAttr] + '</span>' + imgHtml + '</a>').appendTo(ul);
 			link.wrap('<li>');
 			link.bind('click', {uid: object.uid}, clickHandler);
 		}
@@ -855,7 +859,7 @@ WPM.HistoryAction.showPlace = function(options) {
 				$('.tabs #exhibitionArticles').bind('click', {uid:  parseInt(result.uid), type: 'exhibition'}, WPM.loadArticlesClickHandler);
 				
 				WPM.buildList('#overviewTab #floors-list ul', result.floors, 'name', WPM.floorListClickHandler);
-				WPM.buildList('#overviewTab #article-list ul', result.articles, 'title', WPM.articleListClickHandler);
+				WPM.buildList('#overviewTab #article-list ul', result.articles, 'title', WPM.articleListClickHandler, 'thumbnail');
 				WPM.View.show('place');
 
 			  WPM.setHash('showPlace', options);
@@ -882,7 +886,7 @@ WPM.HistoryAction.listArticles = function(options) {
 			success: function(result){
 				var type = options.type;
 				$('#' + type + 'Tab').addClass('active');
-				WPM.buildList('#' + type + 'Tab ul', result.articles, 'title', WPM.articleListClickHandler);
+				WPM.buildList('#' + type + 'Tab ul', result.articles, 'title', WPM.articleListClickHandler, 'thumbnail');
 				WPM.View.show('place');
 				WPM.setHash('listArticles', options);
 			}
@@ -928,7 +932,7 @@ WPM.HistoryAction.listArticles = function(options) {
 				if (result.articles.length > 1){
 					// show list if more than one article
 					$('#article-list-view .sectionhead h1').text(result.name);
-					WPM.buildList('#article-list-view #article-list-level4 ul', result.articles, 'title', WPM.articleListClickHandler);
+					WPM.buildList('#article-list-view #article-list-level4 ul', result.articles, 'title', WPM.articleListClickHandler, 'thumbnail');
 					WPM.View.show('article-list-view');
 					WPM.setHash('listArticles', options);
 					
@@ -960,7 +964,7 @@ WPM.HistoryAction.showArticle = function(options) {
 			}),
 			success: function(result){
 				
-				console.log(result.body);
+				//console.log(result.body);
 				
 				$('#article-view .inner h3').text( result.title );
 				$('#article-view .inner div.body').html( '<p>' + result.body + '</p>');
