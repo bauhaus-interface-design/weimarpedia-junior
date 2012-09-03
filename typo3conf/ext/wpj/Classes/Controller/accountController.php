@@ -26,7 +26,6 @@
 /**
  * Controller to manage current user profile
  * see session controller for login and logout actions
- * 
  *
  * @version $Id$
  * @copyright Copyright belongs to the respective authors
