@@ -221,6 +221,8 @@ ul.itemlist {
   z-index: 1;
   width: 100%;
   padding: 0;
+	background: #fff;
+	padding-bottom: 20%;
 }
 ul {
   list-style: none;
@@ -722,6 +724,11 @@ button.btn.small, input[type="submit"].btn.small {
 	ul.tabs {
 	  zoom: 1; }
 ul.tabs-content > li li { display:block; }
+
+@media only screen and (min-width: 480px) {
+	.ls-wrap { width: 480px; margin: 0 auto 20% auto; position: relative; height: 100%; background: #fff; }
+}
+
 /* Smartphones (portrait and landscape) ----------- */
 @media only screen
 and (min-device-width : 320px)
@@ -782,3 +789,4 @@ only screen and (-webkit-min-device-pixel-ratio : 1.5),
 only screen and (min-device-pixel-ratio : 1.5) {
 /* Styles */
 }
+
