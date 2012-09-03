@@ -5,3 +5,4 @@ uploads/wpj/mediafiles
 deprecation*.loguploads/wpj/mediafiles
 *.tmproj
 /uploads/wpj/applications
+typo3conf/ext/wpj/docs
