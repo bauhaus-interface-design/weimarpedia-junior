@@ -412,7 +412,7 @@ WPM.buildList = function(ul, objects, labelAttr, clickHandler, image) {
 				imgHtml = '<img class="thumbnail" src="' + object[image] + '"/>';
 			}
 			var link = $('<a href="#"><span>' + object[labelAttr] + '</span>' + imgHtml + '</a>').appendTo(ul);
-			link.wrap('<li>');
+			link.wrap('<li class="clearfix">');
 			link.bind('click', {uid: object.uid}, clickHandler);
 		}
 		$(ul).parent().show();
