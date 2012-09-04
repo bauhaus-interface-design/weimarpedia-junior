@@ -15,7 +15,7 @@ Tx_Extbase_Utility_Extension::configurePlugin(
 		'account' => 'index, edit, update, avatarForm, uploadAvatarRaw, uploadAvatarFile',
 		'author' => 'index, show, new, create, edit, update, delete, updatePassword, search',
 		'mediafile' => 'index, show, new, create, edit, update, delete',
-		'map' => 'index,search,suggest,loadPlaces,placeArticles,listPlaceOptions,listFloorOptions,listRoomArticles,showArticle',
+		'map' => 'index,search,suggest,loadPlaces,placeArticles,listPlaceOptions,listFloorOptions,listRoomArticles,showArticle,loadMedia',
 		'articleAdmin' => 'index,indexKnowledge,indexExhibition,indexLastModified,indexNotReviewed,delete,cleanupVersionsWizard,cleanUpVersions,setVoting',
 		'mapAdmin' => 'index,delete,loadChildren,loadBuildings,savePolygone',
 		'school' => 'index, show, new, create, edit, update, delete',

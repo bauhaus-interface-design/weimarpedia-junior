@@ -240,10 +240,17 @@ class Tx_Wpj_Controller_mapController extends Tx_Extbase_MVC_Controller_ActionCo
 		$medias = $article->getMedias();
 		foreach ($medias as $media){
 			//$url = $GLOBALS['TSFE']->cObj->IMG_RESOURCE	
+			
+			$imageProcessor = t3lib_div::makeInstance('Tx_Wpjr_Utility_ImageProcessing');
+            $file = t3lib_div::getFileAbsFileName($media->getPreviewUrl());
+            //$image = $imageProcessor->getResizedBase64( $file , 30, 30, 80);
+            
+			
 			$mediaArray[] = array(
 				'uid' => $media->getUid(),
 				'description' => $media->getDescription(),
 				'url' => $media->getPreviewUrl(),
+				'base64' => $file
 			);
 		}	
 			
@@ -257,7 +264,16 @@ class Tx_Wpj_Controller_mapController extends Tx_Extbase_MVC_Controller_ActionCo
 	}
 	
 	
-	
+	/**
+    * load media for article by ajax
+    *       
+    * @param Tx_Wpj_Domain_Model_article $article The article to display
+    * @return void
+    * @dontvalidate $article
+    */
+    public function loadMediaAction(Tx_Wpj_Domain_Model_article $article) {
+        $this->view->assign('article', $article);
+    }
 	
 	
 	

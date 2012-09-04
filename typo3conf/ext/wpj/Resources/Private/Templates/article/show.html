@@ -126,7 +126,7 @@
 		</wpj:isGuest>
 	</div>
 
-<wpj:ifAdminLevel minLevel="10">
+
 	<div class="metabox">
 		<h4>Einsortieren</h4> 
 			
@@ -134,25 +134,30 @@
 	    	<ul id="tagList" class="tags clearfix removable-items">
 	    		<f:image src="typo3conf/ext/wpj/Resources/Public/img/spinner.gif" alt="warten..." class="spinner"/>
 	    	</ul>
-			<ul id="tagField"></ul>
-			<p><a id="saveTags" class="wpj-button" href="#">Neue Schlagwörter zuweisen</a></p>
-
+			<wpj:ifAdminLevel minLevel="1">
+				<ul id="tagField"></ul>
+				<p><a id="saveTags" class="wpj-button" href="#">Neue Schlagwörter zuweisen</a></p>
+			</wpj:ifAdminLevel>	
+			
 			<h5 class="mt">Orte:</h5>
 	    	<ul id="placeList" class="tags clearfix removable-items">
 	    		<f:image src="typo3conf/ext/wpj/Resources/Public/img/spinner.gif" alt="warten..." class="spinner"/>
 	    	</ul>
 	    	<ul id="placeTempList"></ul>
-			<p><a class="wpj-button" id="openPlaceWindow" href="<wpj:actionUrl action='placeSelectForm' arguments='{article:article}' pageType='10'/>">Ort auswählen</a></p>
-
-
-			<h5 class="mt">Ortsreferenz:</h5>
-			<ul id="refplaceList" class="tags clearfix removable-items">
-	    		<f:image src="typo3conf/ext/wpj/Resources/Public/img/spinner.gif" alt="warten..." class="spinner"/>
-	    	</ul>
-	    	<p><a class="wpj-button" id="openRefPlaceWindow" href="<wpj:actionUrl action='placeSelectForm' arguments='{article:article}' pageType='10'/>">Referenzort auswählen</a></p>
-
+	    	
+			<wpj:ifAdminLevel minLevel="1">
+				<p><a class="wpj-button" id="openPlaceWindow" href="<wpj:actionUrl action='placeSelectForm' arguments='{article:article}' pageType='10'/>">Ort auswählen</a></p>
+			</wpj:ifAdminLevel>	
+			
+			<wpj:ifAdminLevel minLevel="10">
+				<h5 class="mt">Ortsreferenz:</h5>
+				<ul id="refplaceList" class="tags clearfix removable-items">
+		    		<f:image src="typo3conf/ext/wpj/Resources/Public/img/spinner.gif" alt="warten..." class="spinner"/>
+		    	</ul>
+		    	<p><a class="wpj-button" id="openRefPlaceWindow" href="<wpj:actionUrl action='placeSelectForm' arguments='{article:article}' pageType='10'/>">Ortsreferenz auswählen</a></p>
+			</wpj:ifAdminLevel>		
 	</div>
-</wpj:ifAdminLevel>		
+	
 	
 
 	

@@ -13,15 +13,19 @@
 		</f:if>	
 		<f:if condition="{media.mediafile.isVideo}">
 			<f:render partial="videoPlayer" arguments="{mediafile:media.mediafile, width:300, height:200}"/>
+			<br/>
+			<a href="{media.mediafile.url}" title="Video herunterladen" class="wpj-button">Video herunterladen</a>
+			
 		</f:if>	
 		<f:if condition="{media.mediafile.isAudio}">
 			<f:render partial="audioPlayer" arguments="{mediafile:media.mediafile, width:300}"/>
+			<a href="{media.mediafile.url}" title="Audio-Datei herunterladen" class="wpj-button">Audio-Datei herunterladen</a>
 		</f:if>
 		<f:if condition="{media.mediafile.isPdf}">
 			<br/>
-			<a href="{media.mediafile.url}" title="PDF herunterladen">
+			<a href="{media.mediafile.url}" title="PDF herunterladen" class="wpj-button">
 				<f:image src="{media.mediafile.url}" width="396cm" height="500" alt="PDF"/><br/>
-				[PDF-Datei herunterladen]
+				PDF-Datei herunterladen
 			</a>
 			<br/>
 		</f:if>	

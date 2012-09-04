@@ -1,0 +1,28 @@
+{namespace wpj=Tx_Wpj_ViewHelpers}
+
+<ul>
+<f:for each="{article.medias}" as="media">
+	<li>
+		<!-- media.uid {media.uid} / {media.mediafile.uid} / {media.mediafile.url}  -->
+		
+		<f:if condition="{media.mediafile.isImage}">
+			<f:image src="{media.mediafile.url}" width="420cm" height="500" alt="{media.description}"/>
+		</f:if>	
+		<f:if condition="{media.mediafile.isVideo}">
+			<a href="{media.mediafile.url}" title="Video herunterladen" class="wpj-button">Video anschauen</a>
+		</f:if>	
+		<f:if condition="{media.mediafile.isAudio}">
+			<a href="{media.mediafile.url}" title="Audio-Datei herunterladen" class="wpj-button">Tondokument anhören</a>
+		</f:if>
+		<f:if condition="{media.mediafile.isPdf}">
+			<br/>
+			<a href="{media.mediafile.url}" title="PDF herunterladen" class="wpj-button">
+				<f:image src="{media.mediafile.url}" width="420cm" height="500" alt="PDF"/><br/>
+				PDF-Datei öffnen
+			</a>
+			<br/>
+		</f:if>	
+		<f:format.html parseFuncTSPath="">{media.description}</f:format.html>
+	</li>
+</f:for>
+</ul>

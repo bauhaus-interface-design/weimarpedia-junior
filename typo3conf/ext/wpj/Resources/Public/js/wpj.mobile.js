@@ -493,7 +493,7 @@ WPM.updatePlaces = function(){
 	var lngCoef = Math.pow(10,lngDigits); // coefficient with the number of digits
 	var c = Math.floor( WPM.bounds.getSouthWest().lng() * lngCoef) / lngCoef;
 	var d = Math.ceil( WPM.bounds.getNorthEast().lng() * lngCoef) / lngCoef;
-	console.log( "# ",a, b, c, d);
+	//console.log( "# ",a, b, c, d);
 	
 	
 	// check if request cached
@@ -955,6 +955,7 @@ WPM.HistoryAction.listArticles = function(options) {
 
 WPM.HistoryAction.showArticle = function(options) {
 	if (typeof options.uid == 'number') {
+		// load texts
 		$.ajax({
 			url: loadArticleUrl,
 			type: 'POST',
@@ -968,11 +969,25 @@ WPM.HistoryAction.showArticle = function(options) {
 				
 				$('#article-view .inner h3').text( result.title );
 				$('#article-view .inner div.body').html( '<p>' + result.body + '</p>');
-				WPM.buildImageList('#article-view .inner ul', result.medias, 'description', 'url');
+				//WPM.buildImageList('#article-view .inner ul', result.medias, 'description', 'url');
 				WPM.View.show('article-view');
 				var scroll = new iScroll('article-scroll-wrapper');
 				WPM.setHash('showArticle', options);
 			}
 		});
+		
+		// load media
+		$.ajax({
+			url: loadArticleMediaUrl,
+			type: 'GET',
+			dataType: 'text',
+			data: ({
+				'tx_wpj_pi1[article]': options.uid
+			}),
+			success: function(result){
+				$('#articleMedia').html(result);
+			}
+		});
+
 	}
 }

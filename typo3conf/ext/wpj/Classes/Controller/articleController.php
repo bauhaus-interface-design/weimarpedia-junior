@@ -738,7 +738,7 @@ class Tx_Wpj_Controller_articleController extends Tx_Wpj_Controller_protectedCon
 
     private function setPageTitel($title){
         $GLOBALS['TSFE']->config['config']['noPageTitle'] = 2;
-        $GLOBALS['TSFE']->additionalHeaderData['titletag'] = "<title>$title - Weimarpedia Junior</title>";
+        $GLOBALS['TSFE']->additionalHeaderData['titletag'] = "<title>$title - Weimarpedia</title>";
     }
     
     
