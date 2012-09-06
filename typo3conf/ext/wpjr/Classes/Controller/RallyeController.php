@@ -125,7 +125,7 @@ class Tx_Wpjr_Controller_RallyeController extends Tx_Wpjr_Controller_protectedCo
 		}
 		$json = json_encode($source);
 		
-		//header('Content-Type: application/json');
+		header('Content-Type: application/json');
     	ob_clean();
     	//var_dump($debug);
     	echo $json;
@@ -334,14 +334,11 @@ class Tx_Wpjr_Controller_RallyeController extends Tx_Wpjr_Controller_protectedCo
 		);
 		
 		$json = json_encode($source);
-		//$json = json_encode($rallyePlacesArray);
 		
 		
     	ob_clean();
 		//header('Content-Type: application/json; charset=utf-8');
 		header("Content-Type: text/html; charset=utf-8");
-		
-		//echo $rallye->getName();
 		echo $json;
     	exit;	
 	}

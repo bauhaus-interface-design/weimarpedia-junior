@@ -43,6 +43,11 @@ class Tx_Wpj_Controller_mapController extends Tx_Extbase_MVC_Controller_ActionCo
 	 */
 	protected $placeRepository;
 	
+    /**
+     * @var Tx_Wpj_Utility_ThumbProcessing
+     */
+    protected $thumbProcessor;
+    
 	/**
 	 * Initializes the current action
 	 *
@@ -51,6 +56,7 @@ class Tx_Wpj_Controller_mapController extends Tx_Extbase_MVC_Controller_ActionCo
 	protected function initializeAction() {
 		$this->articleRepository = t3lib_div::makeInstance('Tx_Wpj_Domain_Repository_articleRepository');
 		$this->placeRepository = t3lib_div::makeInstance('Tx_Wpj_Domain_Repository_placeRepository');
+        $this->thumbProcessor = t3lib_div::makeInstance('Tx_Wpj_Utility_ThumbProcessing');
 	}
 	
 	/**
@@ -122,7 +128,7 @@ class Tx_Wpj_Controller_mapController extends Tx_Extbase_MVC_Controller_ActionCo
 			$articleArray[] = array(
 				'uid' => $article->getUid(),
 				'title' => $article->getTitle(),
-				'thumbnail' => $article->getThumbnailUrl()
+				'thumbnail' => $this->thumbProcessor->getThumb($article->getThumbnailUrl(), NULL, 40)
 			);
 		}
 		
@@ -158,7 +164,7 @@ class Tx_Wpj_Controller_mapController extends Tx_Extbase_MVC_Controller_ActionCo
 			$articleArray[] = array(
 				'uid' => $article->getUid(),
 				'title' => $article->getTitle(),
-				'thumbnail' => $article->getThumbnailUrl()
+				'thumbnail' => $this->thumbProcessor->getThumb($article->getThumbnailUrl(), NULL, 40)
 			);
 		}
 		
@@ -193,7 +199,8 @@ class Tx_Wpj_Controller_mapController extends Tx_Extbase_MVC_Controller_ActionCo
 		$response = array(
 			'uid' => $place->getUid(),
 			'name' => $place->getName(),
-			'image' => "http://".t3lib_div::getThisUrl().'uploads/wpj/floormaps/'.$place->getImage(), // floormap
+			'image' => $this->thumbProcessor->getThumb('uploads/wpj/floormaps/'.$place->getImage() , 880, NULL),
+			//'image' => "http://".t3lib_div::getThisUrl().'uploads/wpj/floormaps/'.$place->getImage(), // floormap
 			'rooms' => $roomArray,
 			'articles' => array()
 		);
@@ -215,7 +222,7 @@ class Tx_Wpj_Controller_mapController extends Tx_Extbase_MVC_Controller_ActionCo
 			$articleArray[] = array(
 				'uid' => $article->getUid(),
 				'title' => $article->getTitle(),
-				'thumbnail' => $article->getThumbnailUrl()
+				'thumbnail' => $this->thumbProcessor->getThumb($article->getThumbnailUrl(), NULL, 40)
 			);
 		}	
 			
@@ -236,28 +243,9 @@ class Tx_Wpj_Controller_mapController extends Tx_Extbase_MVC_Controller_ActionCo
   	*/
 	public function showArticleAction(Tx_Wpj_Domain_Model_article $article) {
 			
-		$mediaArray = array();
-		$medias = $article->getMedias();
-		foreach ($medias as $media){
-			//$url = $GLOBALS['TSFE']->cObj->IMG_RESOURCE	
-			
-			$imageProcessor = t3lib_div::makeInstance('Tx_Wpjr_Utility_ImageProcessing');
-            $file = t3lib_div::getFileAbsFileName($media->getPreviewUrl());
-            //$image = $imageProcessor->getResizedBase64( $file , 30, 30, 80);
-            
-			
-			$mediaArray[] = array(
-				'uid' => $media->getUid(),
-				'description' => $media->getDescription(),
-				'url' => $media->getPreviewUrl(),
-				'base64' => $file
-			);
-		}	
-			
 		$response = array(
 			'title' => $article->getTitle(),
-			'body' => $article->getBody(),
-			'medias' => $mediaArray
+			'body' => $article->getBody()
 		);
 		
 		return json_encode($response) ;
