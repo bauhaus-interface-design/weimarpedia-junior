@@ -755,8 +755,10 @@ WPM.getOptionsFromHash = function(fragment) {
 		WPM.setGuiHandler();
 
 		$('.btn.back').click(function(e) {
-			e.preventDefault();
-			history.back(-1);
+			if($(this).attr('href')=="#") {
+				e.preventDefault();
+				history.back(-1);
+			}
 		});
 
 		$('body').append('<div id="busy" style="display: none;"></div>');
