@@ -175,24 +175,30 @@ var lastIndicatorAppearance = 0;
 WPM.orientation = elem && elem.clientWidth / elem.clientHeight < 1.1 ? "portrait" : "landscape";
 
 WPM.setListeners = function() {
+	if (window.addEventListener){
 
-	window.addEventListener('orientationchange', function() {
-		WPM.orientation = ['portrait',,'landscape'][window.orientation & 2];
-    WPM.fixViews();
-	}, false);
-
-	window.addEventListener('resize', function() {
+		window.addEventListener('orientationchange', function() {
+			WPM.orientation = ['portrait',,'landscape'][window.orientation & 2];
 	    WPM.fixViews();
-	}, false);
+		}, false);
 
-	// When ready...
-	window.addEventListener("load",function() {
-	  // Set a timeout...
-	  setTimeout(function(){
-	    // Hide the address bar!
-	    window.scrollTo(0, 1);
-	  }, 0);
-	});
+		window.addEventListener('resize', function() {
+		    WPM.fixViews();
+		}, false);
+
+		// When ready...
+		window.addEventListener("load",function() {
+		  // Set a timeout...
+		  setTimeout(function(){
+		    // Hide the address bar!
+		    window.scrollTo(0, 1);
+		  }, 0);
+		});
+
+	} else if (window.attachEvent){
+
+		window.attachEvent('onresize', function() { WPM.fixViews(); });
+	}
 
 }
 
