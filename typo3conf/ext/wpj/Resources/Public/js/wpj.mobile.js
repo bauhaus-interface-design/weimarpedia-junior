@@ -628,7 +628,7 @@ WPM.initMap = function(selector, latLng, zoom) {
 		    style: google.maps.NavigationControlStyle.SMALL,
 		},
 		scaleControl: true, // small buttons without scale
-		disableDoubleClickZoom: true,
+		disableDoubleClickZoom: true
 	}
 	var mapStyle = [ 
 		{ featureType: "landscape", 
@@ -646,7 +646,7 @@ WPM.initMap = function(selector, latLng, zoom) {
 	var styledMapOptions = {
 		name: "Weimarpedia",
 		maxZoom: 60,
-		minZoom: 10,
+		minZoom: 10
 	};
 	
 	var myLatlng = new google.maps.LatLng(50.97755,11.32862);
@@ -755,8 +755,10 @@ WPM.getOptionsFromHash = function(fragment) {
 		WPM.setGuiHandler();
 
 		$('.btn.back').click(function(e) {
-			e.preventDefault();
-			history.back(-1);
+			if($(this).attr('href')=="#") {
+				e.preventDefault();
+				history.back(-1);
+			}
 		});
 
 		$('body').append('<div id="busy" style="display: none;"></div>');
