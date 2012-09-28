@@ -29,7 +29,6 @@ This Template is responsible for creating a table of domain objects.
 			<th>G&uuml;ltigkeit</th>
 			<th>zuletzt online</th>
 			
-			<th>Aktiv?</th>
 			<th> </th>
 			<th> </th>
 			<th> </th>
@@ -53,16 +52,6 @@ This Template is responsible for creating a table of domain objects.
 					</td>
 					<td><f:format.date format="d.m.Y \u\m H:i">{author.lastLogin}</f:format.date></td>
 					
-					<td>
-					<f:if condition="{author.disabled}">jetzt 
-						<f:then>
-							<f:link.action action="disable" arguments="{author : author}">aktivieren</f:link.action>
-						</f:then>	
-						<f:else>
-							<f:link.action action="disable" arguments="{author : author}">sperren</f:link.action>
-						</f:else>
-					</f:if>
-					</td>
 					<td><f:link.action class="wpj-button" action="edit" arguments="{author : author}">Bearbeiten</f:link.action></td>
 					<td><f:link.action class="wpj-button" action="updatePassword" arguments="{author : author}" onclick="return confirm('Wirklich ein neues Passwort erstellen und das alte verwerfen?');">Passwort&nbsp;neu&nbsp;generieren</f:link.action></td>
 					<td><f:link.action class="wpj-button" action="delete" arguments="{author : author}" onclick="return confirm('Wirklich entfernen?');">L&ouml;schen</f:link.action></td>

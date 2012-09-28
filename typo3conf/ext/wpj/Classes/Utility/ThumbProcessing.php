@@ -72,8 +72,11 @@ class Tx_Wpj_Utility_ThumbProcessing {
         $imageInfo = $this->contentObject->getImgResource($src, $setup);
         $GLOBALS['TSFE']->lastImageInfo = $imageInfo;
         if (!is_array($imageInfo)) {
-            exit('Could not get image resource for "' . htmlspecialchars($src) . '".');
+            //exit('Could not get image resource for "' . htmlspecialchars($src) . '".');
+            t3lib_div::sysLog('[tx_wpj]: ' . 'Could not get image resource for "' . htmlspecialchars($src) . '".','tx_wpj',5);
+ 
         }
+        
         $imageInfo[3] = t3lib_div::png_to_gif_by_imagemagick($imageInfo[3]);
         $GLOBALS['TSFE']->imagesOnPage[] = $imageInfo[3];
 

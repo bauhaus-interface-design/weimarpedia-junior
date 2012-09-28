@@ -351,7 +351,7 @@ WPM.View.show = function(scope) {
   			complete : function(){ $(this).removeClass('current'); }
   		});
 
-      WPM.DISABLE_HASH_LISTENER = 0;
+		WPM.DISABLE_HASH_LISTENER = 0;
 
   }
 }
@@ -484,7 +484,6 @@ WPM.loadPlaces = function(){
 
 
 WPM.updatePlaces = function(){
-	
 	WPM.bounds = WPM.map.getBounds();
 	
 	// standardize request
@@ -776,7 +775,7 @@ WPM.getOptionsFromHash = function(fragment) {
 		});
 
     $(window).hashchange( function() {
-
+    	
       if(WPM.DISABLE_HASH_LISTENER == 1) {
         WPM.DISABLE_HASH_LISTENER == 0;
       } else {
@@ -951,7 +950,7 @@ WPM.HistoryAction.listArticles = function(options) {
 					
 				}else {
 					// jump to article-view if only one article
-					WPM.HistoryAction.showArticle({uid: result.uid});
+					WPM.HistoryAction.showArticle({uid: result.articles[0].uid});
 				}
 				
 			}

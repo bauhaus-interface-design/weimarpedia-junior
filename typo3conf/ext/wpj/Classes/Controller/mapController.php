@@ -150,15 +150,21 @@ class Tx_Wpj_Controller_mapController extends Tx_Extbase_MVC_Controller_ActionCo
   	* @return void
   	*/
 	public function listPlaceOptionsAction(Tx_Wpj_Domain_Model_place $place) {
-		
-		$articles = $this->articleRepository->getArticlesOfPlaceUid($place->getUid());
-		if ($articles->count() < 4) { // expand short lists by more results
-			// load all articles
-			$uids = collectChildrenUidsFast($place);
-			$articles2 = $this->articleRepository->getArticlesOfPlaceUid($uids);
-			if ($articles->count() < 15) $articles = array_merge($articles->toArray(), $articles2->toArray());
-		}
-		
+		$articles = $this->articleRepository->getReferenceArticlesOfPlaceUid($place->getUid());
+        foreach ($articles as $article){break;} // extbase bug
+        
+        if ($articles->count() == 0) {
+    		// no reference article 	
+    		$articles = $this->articleRepository->getArticlesOfPlaceUid($place->getUid());
+    		if ($articles->count() < 4) { // expand short lists by more results
+    			// load articles for child places
+    			$uids = collectChildrenUidsFast($place);
+    			$articles2 = $this->articleRepository->getArticlesOfPlaceUid($uids);
+    			if ($articles2->count() < 15) $articles = array_merge($articles->toArray(), $articles2->toArray());
+    		}
+        }
+        
+        
 		$articleArray = array();
 		foreach ($articles as $article){
 			$articleArray[] = array(
@@ -172,8 +178,7 @@ class Tx_Wpj_Controller_mapController extends Tx_Extbase_MVC_Controller_ActionCo
 			'uid' => $place->getUid(),
 			'name' => $place->getName(),
 			'floors' => $this->placeRepository->getFloors($place),
-			'articles' => $articleArray,
-			//'test' => $children
+			'articles' => $articleArray
 		);
 		
 		return json_encode($response);
@@ -190,9 +195,14 @@ class Tx_Wpj_Controller_mapController extends Tx_Extbase_MVC_Controller_ActionCo
 		$roomArray = array();
 		$rooms = $this->placeRepository->findChildrenFast($place);
 		foreach ($rooms as $room){
+		    $articles = $room->getArticles();
+            $articleNum = (gettype($articles) == "array") ? count($articles) : 0;
+            $articlesHint = ($articleNum > 0) ? " (".$articleNum.")" : '';
+            
 			$roomArray[] = array(
 				'uid' => $room->getUid(),
-				'name' => $room->getName(),
+				'name' => $room->getName() . $articlesHint,
+				'num_articles' => $articleNum
 			);
 		}
 		
@@ -202,7 +212,7 @@ class Tx_Wpj_Controller_mapController extends Tx_Extbase_MVC_Controller_ActionCo
 			'image' => $this->thumbProcessor->getThumb('uploads/wpj/floormaps/'.$place->getImage() , 880, NULL),
 			//'image' => "http://".t3lib_div::getThisUrl().'uploads/wpj/floormaps/'.$place->getImage(), // floormap
 			'rooms' => $roomArray,
-			'articles' => array()
+			//'articles' => array()
 		);
 		
 		return json_encode($response);
@@ -219,10 +229,16 @@ class Tx_Wpj_Controller_mapController extends Tx_Extbase_MVC_Controller_ActionCo
 		$articles = $this->articleRepository->getArticlesOfPlaceUid($place->getUid());
 		$articleArray = array();
 		foreach ($articles as $article){
+		    try{
+		        $thumb = $this->thumbProcessor->getThumb($article->getThumbnailUrl(), NULL, 40);
+		    }catch(Exception $e){
+		        $thumb = "";
+		    }
+            
 			$articleArray[] = array(
 				'uid' => $article->getUid(),
 				'title' => $article->getTitle(),
-				'thumbnail' => $this->thumbProcessor->getThumb($article->getThumbnailUrl(), NULL, 40)
+				'thumbnail' => $thumb
 			);
 		}	
 			

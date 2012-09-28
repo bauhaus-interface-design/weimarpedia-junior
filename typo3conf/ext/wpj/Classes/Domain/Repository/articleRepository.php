@@ -345,6 +345,28 @@ class Tx_Wpj_Domain_Repository_articleRepository extends Tx_Extbase_Persistence_
 	
 	
 	
+    
+    
+    
+    
+    /**
+     * 
+     * @return array an array of Tx_Wpj_Domain_Model_article objects
+     */
+    public function getReferenceArticlesOfPlaceUid($placeUid, $type=NULL){
+        if ($type!=NULL){
+            $type_sql = ($type=="knowledge")? 'AND (a.articletype>0 AND a.articletype<10) ' : 'AND (a.articletype>9 AND a.articletype<20) ';
+        }   
+        $query = $this->createQuery();
+        return $query->statement('
+        SELECT DISTINCT a.*
+        FROM `tx_wpj_domain_model_place` p
+        INNER JOIN (`tx_wpj_domain_model_tag` t, `tx_wpj_article_tag_mm` mm, `tx_wpj_domain_model_article` a) ON 
+        (p.uid=t.place AND mm.uid_foreign = t.uid AND mm.uid_local = a.uid)
+        WHERE p.uid IN ('.$placeUid.') AND t.taxonomy=2 '.$type_sql.'
+        ')->execute();  
+        
+    }
 	
 	
 	/**
