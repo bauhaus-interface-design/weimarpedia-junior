@@ -71,23 +71,6 @@ class Tx_Wpj_Controller_mapController extends Tx_Extbase_MVC_Controller_ActionCo
   	*   	
   	* @return void
   	*/
-	public function searchAction() {
-		
-	}
-	
-	/**
-  	*   	
-  	* @return void
-  	*/
-	public function suggestAction() {
-		
-	}
-	
-	
-	/**
-  	*   	
-  	* @return void
-  	*/
 	public function loadPlacesAction() {
 		
 		$sLat = floatVal( $this->request->getArgument('sLat') );
@@ -115,6 +98,8 @@ class Tx_Wpj_Controller_mapController extends Tx_Extbase_MVC_Controller_ActionCo
 		//if (($articletype != 'knowledge') && ($articletype != 'exhibition')) {
 			//$articletype = 'knowledge';
 		//} 
+		$refarticles = $this->articleRepository->getReferenceArticlesOfPlaceUid($place->getUid());
+      
 		$articles = $this->articleRepository->getArticlesOfPlaceUid($place->getUid(), $articletype);
 		if ($articles->count() < 4) { // expand short lists by more results
 			// load all articles
@@ -123,20 +108,12 @@ class Tx_Wpj_Controller_mapController extends Tx_Extbase_MVC_Controller_ActionCo
 			if ($articles->count() < 15) $articles = array_merge($articles->toArray(), $articles2->toArray());
 		}
 		
-		$articleArray = array();
-		foreach ($articles as $article){
-			$articleArray[] = array(
-				'uid' => $article->getUid(),
-				'title' => $article->getTitle(),
-				'thumbnail' => $this->thumbProcessor->getThumb($article->getThumbnailUrl(), NULL, 40)
-			);
-		}
-		
 		$response = array(
 			'type' => $articletype,
 			'uid' => $place->getUid(),
 			'name' => $place->getName(),
-			'articles' => $articleArray,
+            'refarticles' => $this->article2json($refarticles),
+			'articles' => $this->article2json($articles),
 		);
 		
 		return json_encode($response);
@@ -150,35 +127,23 @@ class Tx_Wpj_Controller_mapController extends Tx_Extbase_MVC_Controller_ActionCo
   	* @return void
   	*/
 	public function listPlaceOptionsAction(Tx_Wpj_Domain_Model_place $place) {
-		$articles = $this->articleRepository->getReferenceArticlesOfPlaceUid($place->getUid());
-        foreach ($articles as $article){break;} // extbase bug
+		$refarticles = $this->articleRepository->getReferenceArticlesOfPlaceUid($place->getUid());
+        foreach ($refarticles as $a){}
         
-        if ($articles->count() == 0) {
-    		// no reference article 	
-    		$articles = $this->articleRepository->getArticlesOfPlaceUid($place->getUid());
-    		if ($articles->count() < 4) { // expand short lists by more results
-    			// load articles for child places
-    			$uids = collectChildrenUidsFast($place);
-    			$articles2 = $this->articleRepository->getArticlesOfPlaceUid($uids);
-    			if ($articles2->count() < 15) $articles = array_merge($articles->toArray(), $articles2->toArray());
-    		}
-        }
-        
-        
-		$articleArray = array();
-		foreach ($articles as $article){
-			$articleArray[] = array(
-				'uid' => $article->getUid(),
-				'title' => $article->getTitle(),
-				'thumbnail' => $this->thumbProcessor->getThumb($article->getThumbnailUrl(), NULL, 40)
-			);
+		$articles = $this->articleRepository->getArticlesOfPlaceUid($place->getUid());
+		if ($articles->count() < 4) { // expand short lists by more results
+			// load articles for child places
+			$uids = collectChildrenUidsFast($place);
+			$articles2 = $this->articleRepository->getArticlesOfPlaceUid($uids);
+			if ($articles2->count() < 15) $articles = array_merge($articles->toArray(), $articles2->toArray());
 		}
 		
 		$response = array(
 			'uid' => $place->getUid(),
 			'name' => $place->getName(),
 			'floors' => $this->placeRepository->getFloors($place),
-			'articles' => $articleArray
+            'refarticles' => $this->article2json($refarticles),
+            'articles' => $this->article2json($articles),
 		);
 		
 		return json_encode($response);
@@ -210,9 +175,7 @@ class Tx_Wpj_Controller_mapController extends Tx_Extbase_MVC_Controller_ActionCo
 			'uid' => $place->getUid(),
 			'name' => $place->getName(),
 			'image' => $this->thumbProcessor->getThumb('uploads/wpj/floormaps/'.$place->getImage() , 880, NULL),
-			//'image' => "http://".t3lib_div::getThisUrl().'uploads/wpj/floormaps/'.$place->getImage(), // floormap
 			'rooms' => $roomArray,
-			//'articles' => array()
 		);
 		
 		return json_encode($response);
@@ -226,26 +189,14 @@ class Tx_Wpj_Controller_mapController extends Tx_Extbase_MVC_Controller_ActionCo
   	* @return void
   	*/
 	public function listRoomArticlesAction(Tx_Wpj_Domain_Model_place $place) {
-		$articles = $this->articleRepository->getArticlesOfPlaceUid($place->getUid());
-		$articleArray = array();
-		foreach ($articles as $article){
-		    try{
-		        $thumb = $this->thumbProcessor->getThumb($article->getThumbnailUrl(), NULL, 40);
-		    }catch(Exception $e){
-		        $thumb = "";
-		    }
-            
-			$articleArray[] = array(
-				'uid' => $article->getUid(),
-				'title' => $article->getTitle(),
-				'thumbnail' => $thumb
-			);
-		}	
+		$refarticles = $this->articleRepository->getReferenceArticlesOfPlaceUid($place->getUid());
+        $articles = $this->articleRepository->getArticlesOfPlaceUid($place->getUid());
 			
 		$response = array(
 			'uid' => $place->getUid(),
 			'name' => $place->getName(),
-			'articles' => $articleArray
+            'refarticles' => $this->article2json($refarticles),
+            'articles' => $this->article2json($articles),
 		);
 		
 		return json_encode($response);
@@ -258,7 +209,6 @@ class Tx_Wpj_Controller_mapController extends Tx_Extbase_MVC_Controller_ActionCo
   	* @return void
   	*/
 	public function showArticleAction(Tx_Wpj_Domain_Model_article $article) {
-			
 		$response = array(
 			'title' => $article->getTitle(),
 			'body' => $article->getBody()
@@ -280,6 +230,18 @@ class Tx_Wpj_Controller_mapController extends Tx_Extbase_MVC_Controller_ActionCo
     }
 	
 	
-	
+	private function article2json($articles){
+	    $articleArray = array();
+        foreach ($articles as $article){
+            $thumb = $this->thumbProcessor->getThumb($article->getThumbnailUrl(), NULL, 40);
+            $articleArray[] = array(
+                'uid' => $article->getUid(),
+                'title' => $article->getTitle(),
+                'thumbnail' => $thumb,
+                'type' => $article->getArticletypeCSSClass(),
+            );
+        }
+        return $articleArray;
+	}
 }
 ?>

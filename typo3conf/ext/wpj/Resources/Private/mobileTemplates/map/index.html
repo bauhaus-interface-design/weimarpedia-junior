@@ -17,7 +17,6 @@
 			<div class="sectionhead">
 				<a href="http://www.weimarpedia.de" class="back btn btn-primary">Zurück</a>
 				<h1>Weimarpedia</h1>
-				<!-- <f:cObject typoscriptObjectPath="lib.mobileHomeLink" /> -->
 			</div>
 			<div id="map_canvas"></div>
 			<div id="showBuildings"><a href="#" id="showBuildingsBtn" class="btn btn-primary">Alle Orte</a></div>
@@ -28,45 +27,23 @@
 			<div class="sectionhead">
 					<a href="#" class="back btn btn-primary">Zurück</a>
 					<h1></h1>
-				<!-- <f:cObject typoscriptObjectPath="lib.mobileHomeLink" /> -->
 			</div>
 
 			<div class="inner">
 
 				<div class="ls-wrap">
-					<!-- Standard <ul> with class of "tabs" -->
-					<ul class="tabs">
-					  <!-- Give href an ID value of corresponding "tabs-content" <li>'s -->
-					  <li><a class="active" href="#overviewTab">Übersicht</a></li>
-					  <li><a id="knowledgeArticles" href="#knowledgeTab">Lexikon-Artikel</a></li>
-					  <li><a id="exhibitionArticles" href="#exhibitionTab">Galerie-Artikel</a></li>
-					</ul>
-
-					<!-- Standard <ul> with class of "tabs-content" -->
-					<ul class="tabs-content">
-					  	<li class="active" id="overviewTab">
-							<div id="floors-list">
-								<h2>Stockwerke</h2>
-								<ul class="itemlist"></ul>
-							</div>
-							<div id="article-list">
-								<h2>Artikel</h2>
-								<ul class="itemlist"></ul>
-							</div>
-						</li>
-					  	<li id="knowledgeTab">
-					  		<div>
-								<h2>Lexikon-Artikel</h2>
-								<ul class="itemlist"></ul>
-							</div>
-					  	</li>
-					  	<li id="exhibitionTab">
-					  		<div>
-								<h2>Galerie-Artikel</h2>
-								<ul class="itemlist"></ul>
-							</div>
-					  	</li>
-					</ul>
+					<div id="floors-list">
+						<h2>Stockwerke</h2>
+						<ul class="itemlist"></ul>
+					</div>
+					<div id="refarticle-list-level-2">
+						<h2>Referenz-Artikel</h2>
+						<ul class="refitemlist"></ul>
+					</div>
+					<div id="article-list-level-2">
+						<h2>Artikel</h2>
+						<ul class="itemlist"></ul>
+					</div>
 				</div>
 				
 
@@ -93,11 +70,6 @@
 						<h2>Räume</h2>
 						<ul class="itemlist"></ul>
 					</div>
-
-					<div id="article-list-level3">
-						<h2>Artikel</h2>
-						<ul class="itemlist"></ul>
-					</div>
 				</div>
 			</div>
 
@@ -115,6 +87,10 @@
 			<div class="inner">
 
 				<div id="scroll-wrapper">
+					<div id="refarticle-list-level-4">
+						<h2>Referenz-Artikel</h2>
+						<ul class="refitemlist"></ul>
+					</div>
 					<div id="article-list-level4">
 						<h2>Artikel</h2>
 						<ul class="itemlist"></ul>
@@ -129,7 +105,6 @@
 			<div class="sectionhead">
 				<a href="#" class="back btn btn-primary">Zurück</a>
 				<h1>Artikel</h1>
-				<!-- <f:cObject typoscriptObjectPath="lib.mobileHomeLink" /> -->
 			</div>
 			<div class="ls-wrap">
 			<div class="inner">

@@ -862,20 +862,25 @@ WPM.HistoryAction.showPlace = function(options) {
 			}),
 			success: function(result){
 				$('#place .sectionhead h1').text(result.name);
-				$('.tabs #knowledgeArticles').bind('click', {uid: parseInt(result.uid), type: 'knowledge'}, WPM.loadArticlesClickHandler);
-				$('.tabs #exhibitionArticles').bind('click', {uid:  parseInt(result.uid), type: 'exhibition'}, WPM.loadArticlesClickHandler);
 				
-				WPM.buildList('#overviewTab #floors-list ul', result.floors, 'name', WPM.floorListClickHandler);
-				WPM.buildList('#overviewTab #article-list ul', result.articles, 'title', WPM.articleListClickHandler, 'thumbnail');
+				WPM.buildList('#floors-list ul', result.floors, 'name', WPM.floorListClickHandler);
+				if (result.refarticles.length > 0){
+					WPM.buildList('#refarticle-list-level-2 ul', result.refarticles, 'title', WPM.articleListClickHandler, 'thumbnail');
+					$('#refarticle-list-level-2').show();
+				}else{
+					$('#refarticle-list-level-2').hide();
+				}
+				WPM.buildList('#article-list-level-2 ul', result.articles, 'title', WPM.articleListClickHandler, 'thumbnail');
+				
 				WPM.View.show('place');
 
-			  WPM.setHash('showPlace', options);
+			  	WPM.setHash('showPlace', options);
 				Skeleton.doFancyExpensiveTabThings();
 			}
 		});
 	}
 }
-
+/*
 // tabs exhibition and knowledge in view level-2 
 WPM.HistoryAction.listArticles = function(options) {
 	if (typeof options.uid == 'number') {
@@ -900,7 +905,7 @@ WPM.HistoryAction.listArticles = function(options) {
 		});
 	}
 }
-
+*/
 WPM.HistoryAction.showFloor = function(options) {
 
 	if (typeof options.uid == 'number') {
@@ -915,7 +920,6 @@ WPM.HistoryAction.showFloor = function(options) {
 				$('#floorplan .sectionhead h1').text(result.name);
 				$('#floorplan #floormap img').attr('src', result.image);
 				WPM.buildList('#floorplan #rooms-list ul', result.rooms, 'name', WPM.roomListClickHandler);
-				WPM.buildList('#floorplan #article-list ul', result.rooms, 'name', WPM.articleListClickHandler);
 				WPM.View.show('floorplan');
 				WPM.setHash('showFloor', options);
 			}
@@ -939,6 +943,12 @@ WPM.HistoryAction.listArticles = function(options) {
 				if (result.articles.length > 1){
 					// show list if more than one article
 					$('#article-list-view .sectionhead h1').text(result.name);
+					if (result.refarticles.length > 0){
+						WPM.buildList('#refarticle-list-level-4 ul', result.refarticles, 'title', WPM.articleListClickHandler, 'thumbnail');
+						$('#refarticle-list-level-4').show();
+					}else{
+						$('#refarticle-list-level-4').hide();
+					}
 					WPM.buildList('#article-list-view #article-list-level4 ul', result.articles, 'title', WPM.articleListClickHandler, 'thumbnail');
 					WPM.View.show('article-list-view');
 					WPM.setHash('listArticles', options);
