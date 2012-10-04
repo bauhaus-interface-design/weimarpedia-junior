@@ -1,8 +1,6 @@
 <?php
 /***************************************************************
 *  Copyright notice
-*
-*  (c)  TODO - INSERT COPYRIGHT
 *  All rights reserved
 *
 *  This script is part of the TYPO3 project. The TYPO3 project is
@@ -31,20 +29,33 @@
  */
 class Tx_Wpj_Domain_Repository_authorRepository extends Tx_Extbase_Domain_Repository_FrontendUserRepository {
 	
-	
-	
+	protected $findAuthorsOf = '
+            SELECT u.*
+            FROM `fe_users` u
+            INNER JOIN (`tx_wpj_domain_model_article` a, `tx_wpj_article_author_mm` mm) ON 
+            (mm.uid_foreign = u.uid AND mm.uid_local = a.uid)
+            WHERE ';
+    
+    /**
+     * Find all Authors
+     *
+     * @return Tx_Wpj_Domain_Model_author 
+     */
 	public function findAll() {
 		$query = $this->createQuery();
-		//$query->getQuerySettings()->setRespectEnableFields(FALSE);
 		$query->getQuerySettings()->setRespectStoragePage(FALSE);
-		$result = $query//->matching($query->equals('disable',0))
-			
+		$result = $query			
 			->setOrderings(array('tstamp' => Tx_Extbase_Persistence_QueryInterface::ORDER_DESCENDING))
 			->execute();
 		return $result;
 	}
 	
 	
+    /**
+     * Assign all unassigned users/authors to the usergroup 1
+     *
+     * @return Tx_Wpj_Domain_Model_author 
+     */
 	public function repairUsergroup(){
 		$persistenceManager = t3lib_div::makeInstance('Tx_Extbase_Persistence_Manager');
    		$persistenceManager->persistAll();
@@ -52,12 +63,14 @@ class Tx_Wpj_Domain_Repository_authorRepository extends Tx_Extbase_Domain_Reposi
 		$query = $this->createQuery();
 		$query->getQuerySettings()->setReturnRawQueryResult( TRUE );
 		$query->statement("UPDATE `fe_users` SET `usergroup`=1 WHERE `usergroup`='' OR `usergroup` IS NULL;")->execute();	
-		
 	}
 	
 	/**
-	 * @param Tx_Wpj_Domain_Model_school 
-	 */
+     * Find all authors from a specified school
+     *
+     * @param Tx_Wpj_Domain_Model_school $school
+     * @return Tx_Wpj_Domain_Model_author 
+     */
 	public function findBySchool($school) {
 		$query = $this->createQuery();
 		$result = $query->matching($query->equals('tx_wpj_school',$school))
@@ -67,10 +80,10 @@ class Tx_Wpj_Domain_Repository_authorRepository extends Tx_Extbase_Domain_Reposi
 	}
 	
 	/**
-	 * 
+	 * Search for an author in username, name and address
 	 *
-	 * @param 
-	 * @return array 
+	 * @param string $searchterm
+	 * @return array of Tx_Wpj_Domain_Model_author 
 	 */
 	public function search($searchterm) {
 		$searchterm = '%'.$searchterm.'%';
@@ -88,19 +101,13 @@ class Tx_Wpj_Domain_Repository_authorRepository extends Tx_Extbase_Domain_Reposi
 	
 	
 	
-	protected $findAuthorsOf = '
-			SELECT u.*
-			FROM `fe_users` u
-			INNER JOIN (`tx_wpj_domain_model_article` a, `tx_wpj_article_author_mm` mm) ON 
-			(mm.uid_foreign = u.uid AND mm.uid_local = a.uid)
-			WHERE ';
-	
 	
 	/**
 	 * Finds all authors including disabled or users with expired logins
 	 * ignore all admins
 	 *
-	 * @return array Autors
+     * @param Tx_Wpj_Domain_Model_article $article
+	 * @return array of Tx_Wpj_Domain_Model_author 
 	 */
 	public function findPublicAuthorsOf($article) {
 		$this->query = $this->createQuery();
@@ -113,7 +120,8 @@ class Tx_Wpj_Domain_Repository_authorRepository extends Tx_Extbase_Domain_Reposi
 	 * Finds all authors including disabled or users with expired logins
 	 * ignore all non-admins
 	 *
-	 * @return array Autors
+     * @param Tx_Wpj_Domain_Model_article $article
+	 * @return array of Tx_Wpj_Domain_Model_author 
 	 */
 	public function findHiddenAuthorsOf($article) {
 		$this->query = $this->createQuery();

@@ -1,8 +1,6 @@
 <?php
 /***************************************************************
 *  Copyright notice
-*
-*  (c)  TODO - INSERT COPYRIGHT
 *  All rights reserved
 *
 *  This script is part of the TYPO3 project. The TYPO3 project is
