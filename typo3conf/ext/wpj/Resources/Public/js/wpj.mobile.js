@@ -553,7 +553,7 @@ WPM.processPlacesRequest = function(result){
         for (i=0; i<WPM.places.length; i++) {
             var latlng = new google.maps.LatLng(places[i].lat, places[i].lng);
 
-			var image = new google.maps.MarkerImage('typo3conf/ext/wpj/Resources/Public/marker/' + places[i].icon,
+			var image = new google.maps.MarkerImage('uploads/wpj/placeIcons/' + places[i].icon,
 		      new google.maps.Size(80, 40),
 		      new google.maps.Point(0, 0),
 		      new google.maps.Point(40, 40),
