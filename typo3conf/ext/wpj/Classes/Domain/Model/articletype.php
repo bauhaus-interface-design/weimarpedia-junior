@@ -2,8 +2,6 @@
 
 /***************************************************************
 *  Copyright notice
-*
-*  (c) 2010 
 *  All rights reserved
 *
 *  This script is part of the TYPO3 project. The TYPO3 project is
@@ -41,12 +39,18 @@ class Tx_Wpj_Domain_Model_articletype extends Tx_Extbase_DomainObject_AbstractEn
 	
 	/**
 	 * public
+     * only public types can be manually assigned
+     * some types are for internal use only
+     * 
 	 * @var boolean
 	 */
 	protected $public;
 	
 	/**
 	 * taxonomies
+     * some taxonomies belongs to a specific articletype
+     * e.g. type: person -> taxonomy: born on 
+     * 
 	 * @var Tx_Extbase_Persistence_ObjectStorage<Tx_Wpj_Domain_Model_taxonomy>
 	 */
 	protected $taxonomies;

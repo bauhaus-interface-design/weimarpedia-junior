@@ -2,8 +2,6 @@
 
 /***************************************************************
 *  Copyright notice
-*
-*  (c) 2010 
 *  All rights reserved
 *
 *  This script is part of the TYPO3 project. The TYPO3 project is
@@ -53,6 +51,10 @@ class Tx_Wpj_Domain_Model_article extends Tx_Extbase_DomainObject_AbstractEntity
 		
 	/**
 	 * voting
+     * voting is queried for article charts
+     * 1 for charts over the last year
+     * 2 for alltime favorit articles
+     * 
 	 * @var integer
 	 */
 	protected $voting;
@@ -96,29 +98,31 @@ class Tx_Wpj_Domain_Model_article extends Tx_Extbase_DomainObject_AbstractEntity
 	 */
 	protected $authors;
 
-	
 	/**
 	 * t3ver_id
+     * for article versioning
 	 * @var integer
 	 */
 	protected $t3ver_id;
+    
 	/**
 	 * pid
+     * for article versioning
 	 * @var integer
 	 */
 	protected $pid;	
+    
 	/**
 	 * t3ver_label
+     * for article versioning
 	 * @var string
 	 */
 	protected $t3ver_label;	
 	
 	
 	
-	
-	
 	/**
-	 * Constructs this article
+	 * Constructs this article with presets
 	 */
 	public function __construct() {
 		$this->tags = new Tx_Extbase_Persistence_ObjectStorage();
@@ -216,7 +220,7 @@ class Tx_Wpj_Domain_Model_article extends Tx_Extbase_DomainObject_AbstractEntity
 	}
 
 	/**
-	 * Getter for tags
+	 * Getter for tags including tags / places / reference tags 
 	 *
 	 * @return Tx_Extbase_Persistence_ObjectStorage<Tx_Wpj_Domain_Model_tag> tags
 	 */
@@ -225,7 +229,7 @@ class Tx_Wpj_Domain_Model_article extends Tx_Extbase_DomainObject_AbstractEntity
 	}
 
 	/**
-	 * Getter for tags
+	 * Getter for tags of taxonomy reference
 	 *
 	 * @return Tx_Extbase_Persistence_ObjectStorage<Tx_Wpj_Domain_Model_tag> tags
 	 */
@@ -235,7 +239,7 @@ class Tx_Wpj_Domain_Model_article extends Tx_Extbase_DomainObject_AbstractEntity
 	}
 	
 	/**
-	 * Getter for tags
+	 * Getter for tags without places
 	 *
 	 * @return Tx_Extbase_Persistence_ObjectStorage<Tx_Wpj_Domain_Model_tag> tags
 	 */
@@ -245,7 +249,7 @@ class Tx_Wpj_Domain_Model_article extends Tx_Extbase_DomainObject_AbstractEntity
 	}
 
 	/**
-	 * Getter for tags
+	 * Getter for tags for places
 	 *
 	 * @return Tx_Extbase_Persistence_ObjectStorage<Tx_Wpj_Domain_Model_tag> tags
 	 */
@@ -285,9 +289,10 @@ class Tx_Wpj_Domain_Model_article extends Tx_Extbase_DomainObject_AbstractEntity
 		$this->medias = $medias;
 	}
 
-	
 	/**
-	 * 
+	 * Setter for medias 
+     * $mediaContent is a string {media_id}##{caption}\n created by js
+     * e.g.: 666##Bildunterschrift\n
 	 *
 	 * @param String $mediaContent
 	 * @return void
@@ -304,11 +309,8 @@ class Tx_Wpj_Domain_Model_article extends Tx_Extbase_DomainObject_AbstractEntity
 				$text = html_entity_decode($text);
 				$media->setDescription($text);
 			}
-			
 		}
 	}
-	
-	
 	
 	/**
 	 * Getter for medias
@@ -320,7 +322,8 @@ class Tx_Wpj_Domain_Model_article extends Tx_Extbase_DomainObject_AbstractEntity
 	}
 	
 	/**
-	 * Getter for medias
+	 * Getter for the article thumbnail
+     * finds the first image or returns a placeholder
 	 *
 	 * @return String
 	 */
@@ -386,9 +389,9 @@ class Tx_Wpj_Domain_Model_article extends Tx_Extbase_DomainObject_AbstractEntity
 	}
 	
 	/**
-	 * Getter for articletype
+	 * Getter for articletype as string
 	 *
-	 * @return Tx_Wpj_Domain_Model_articletype articletype
+	 * @return String articletype (only exhibition or knowledge)
 	 */
 	public function getArticletypeCSSClass() {
 		$class = '';
@@ -419,26 +422,20 @@ class Tx_Wpj_Domain_Model_article extends Tx_Extbase_DomainObject_AbstractEntity
 	
 	
 	/**
-	 * Getter for first authors
+	 * Getter for first author
 	 *
 	 * @return Tx_Wpj_Domain_Model_author author
 	 */
 	public function getAuthor() {
+        $authorRepository = t3lib_div::makeInstance('Tx_Wpj_Domain_Repository_authorRepository');
 		$this->authors->rewind();
 		$author = $this->authors->current();
-		if (!$author){
-			// author invalid or user with expired login?
-			$authorRepository = t3lib_div::makeInstance('Tx_Wpj_Domain_Repository_authorRepository');
-			$authors = $authorRepository->findPublicAuthorsOf($this);
-			
-			
-			
-		}
 		return $author;
 	}
 	
 	/**
-	 * 
+	 * checks if $author is an author of the article 
+     * 
 	 * @param Tx_Wpj_Domain_Model_author
 	 * @return boolean
 	 */
@@ -447,7 +444,8 @@ class Tx_Wpj_Domain_Model_article extends Tx_Extbase_DomainObject_AbstractEntity
 	}
 	
 	/**
-	 * 
+	 * checks if $userUid belongs to an author of the article
+     * 
 	 * @param integer $userUid
 	 * @return boolean
 	 */
@@ -506,7 +504,7 @@ class Tx_Wpj_Domain_Model_article extends Tx_Extbase_DomainObject_AbstractEntity
 	}
 	
 	/**
-	 * 
+	 * Returns an descriptive string for an article version
 	 * 
 	 * @return String
 	 */
@@ -522,7 +520,7 @@ class Tx_Wpj_Domain_Model_article extends Tx_Extbase_DomainObject_AbstractEntity
 
 
 	/**
-	 * 
+	 * Returns the number of chars as an indicator for a specific version
 	 * 
 	 * @return String
 	 */
@@ -540,7 +538,7 @@ class Tx_Wpj_Domain_Model_article extends Tx_Extbase_DomainObject_AbstractEntity
 	}
 	
 	/**
-	 * 
+	 * Returns a html string with removed and added parts of the title
 	 * 
 	 * @return String
 	 */
@@ -549,7 +547,7 @@ class Tx_Wpj_Domain_Model_article extends Tx_Extbase_DomainObject_AbstractEntity
 	}
 	
     /**
-     * 
+     * Returns a html string with removed and added parts of the body
      * 
      * @return String
      */
@@ -557,24 +555,24 @@ class Tx_Wpj_Domain_Model_article extends Tx_Extbase_DomainObject_AbstractEntity
         return $this->htmlDiff($article->body,$this->body);
     }
     
+    /**
+     * Returns a css class "not-reviewed" for classifying articles
+     * 
+     * @return String
+     */
 	public function getReviewedCSSClass(){
 		return ($this->reviewed) ? "" : "not-reviewed";
 	}
 	
-	
+    /**
+     * Returns a css class own articles
+     * 
+     * @return String
+     */
 	public function getOwnerCSSClass(){
 		$userUid = (int) $GLOBALS["TSFE"]->fe_user->user['uid'];
 		return ($this->hasAuthorByUserUid($userUid)) ? "my-article" : "";
 	}
-	
-	
-
-	
-	
-	
-	
-	
-	
 	
 	/**
 	 * 
