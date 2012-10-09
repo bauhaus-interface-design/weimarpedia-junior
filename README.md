@@ -26,3 +26,7 @@ https://github.com/bauhaus-interface-design/weimarpedia-rallye-app
 
 # Credits
 The project is sponsored by the Federal Ministry of Education and Culture and the Thuringian Ministry of Science, Education and Culture and is being accomplished in cooperation with the Bauhaus University.
+
+
+# Code documentation
+see http://www.weimarpedia.de/wpj-docs/
