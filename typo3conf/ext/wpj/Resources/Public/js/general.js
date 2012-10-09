@@ -1,5 +1,5 @@
 /** 
- * @author jens weber
+ * 
  */
 
 if(!window.Wpj){

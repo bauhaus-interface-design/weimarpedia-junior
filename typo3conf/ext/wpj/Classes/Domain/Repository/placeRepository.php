@@ -1,8 +1,6 @@
 <?php
 /***************************************************************
 *  Copyright notice
-*
-*  (c)  TODO - INSERT COPYRIGHT
 *  All rights reserved
 *
 *  This script is part of the TYPO3 project. The TYPO3 project is
@@ -30,8 +28,10 @@
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  */
 class Tx_Wpj_Domain_Repository_placeRepository extends Tx_Extbase_Persistence_Repository {
+    
 	/**
-	 * 
+	 * Returns the root place
+     * 
 	 * @return Tx_Wpj_Domain_Model_place objects
 	 */
 	public function findRoot() {
@@ -41,7 +41,8 @@ class Tx_Wpj_Domain_Repository_placeRepository extends Tx_Extbase_Persistence_Re
 	}
 	
 	/**
-	 * 
+	 * Returns the children of a place
+     * 
 	 * @return array an array of Tx_Wpj_Domain_Model_place objects
 	 */
 	public function findAllChildren(Tx_Wpj_Domain_Model_Place $place) {
@@ -51,12 +52,12 @@ class Tx_Wpj_Domain_Repository_placeRepository extends Tx_Extbase_Persistence_Re
 		return $query->execute();
 	}
 	
-	
 	/**
-	 * .
+	 * Returns search results for a searchterm
 	 *
 	 * @param string searchterm
-	 * @return array The tags
+     * @param integer accuracy
+	 * @return array an array of Tx_Wpj_Domain_Model_place objects
 	 */
 	public function search($term, $accuracy=NULL) {
 		$query = $this->createQuery();
@@ -68,9 +69,10 @@ class Tx_Wpj_Domain_Repository_placeRepository extends Tx_Extbase_Persistence_Re
 			->execute();
 	}
 	
-	
 	/**
-	 * 
+	 * Returns articles for a given place
+     * 
+     * @param Tx_Wpj_Domain_Model_Place $place
 	 * @return array an array of Tx_Wpj_Domain_Model_article objects
 	 */
 	public function getArticlesOfPlace(Tx_Wpj_Domain_Model_Place $place){
@@ -83,13 +85,16 @@ INNER JOIN (`tx_wpj_domain_model_tag` t, `tx_wpj_article_tag_mm` mm, `tx_wpj_dom
 (p.uid=t.place AND mm.uid_foreign = t.uid AND mm.uid_local = a.uid)
 WHERE p.uid='.$place->getUid().'
 ')->execute();	
-		
 	}
 	
-	
-
 	/**
-	 * 
+	 * Searchs for places in a map area
+     * 
+     * @param float $sLat
+     * @param float $wLng
+     * @param float $nLat
+     * @param float $eLng
+     * @param integer $accuracy
 	 * @return array an array of Tx_Wpj_Domain_Model_place objects
 	 */
 	public function findWithinBounds($sLat, $wLng, $nLat, $eLng, $accuracy=7) {
@@ -106,12 +111,15 @@ WHERE p.uid='.$place->getUid().'
 		return $query->execute();
 	}
 	
-	
-	
-
 	/**
-	 * 
-	 * @return array an array of Tx_Wpj_Domain_Model_place objects
+     * Searchs for places in a map area and converts results to array 
+     *
+	 * @param float $sLat
+     * @param float $wLng
+     * @param float $nLat
+     * @param float $eLng
+     * @param integer $accuracy
+	 * @return array 
 	 */
 	public function findWithinBoundsAsArray($sLat, $wLng, $nLat, $eLng, $accuracy=7) {
 		$result = $this->findWithinBounds($sLat, $wLng, $nLat, $eLng, $accuracy)->toArray();
@@ -126,13 +134,14 @@ WHERE p.uid='.$place->getUid().'
 				'icon' => $place->getIcon(),
 			);
 		}
-
 		return $array;
 	}
 	
-	
 	/**
-	 * 
+	 * Searchs a place by name
+     * 
+     * @param String $name
+     * @param integer $accuracy
 	 * @return array an array of Tx_Wpj_Domain_Model_place objects
 	 */
 	public function findByNameAndAccuracy($name, $accuracy) {
@@ -146,11 +155,12 @@ WHERE p.uid='.$place->getUid().'
 		return $result->getFirst();
 	}
 	
-	
-	
 	/**
-	 * suggest places by searchterm 
-	 * 
+	 * Suggest places by searchterm 
+     * 
+	 * @param String $term
+     * @param integer $accuracy
+     * @param integer $maxResults
 	 * @return array an unique array with keys "value", "type" and "label"
 	 */
 	public function suggestAsArray($term, $accuracy = NULL, $maxResults=20) {
@@ -201,11 +211,11 @@ WHERE p.uid='.$place->getUid().'
 		return $response;
 	}
 
-
-
 	/**
-	 * 
-	 * @return array an array of Tx_Wpj_Domain_Model_place objects
+	 * Returns the floors for a place
+     * 
+     * @param Tx_Wpj_Domain_Model_place $place
+	 * @return array 
 	 */
 	public function getFloors($place) {
 		$query = $this->createQuery();
@@ -225,38 +235,39 @@ WHERE p.uid='.$place->getUid().'
 				'image' => $place->getImage(),
 			);
 		}
-
 		return $array;
 	}
 	
-	
-	
 	/**
-	 * 
+	 * Recursive function to collect all children of a place
+     * 
 	 * @return array an array of Tx_Wpj_Domain_Model_place objects
 	 */
 	public function collectChildren($place) {
 		$place = (is_array($place))? $place : array($place);	
 		$children = $this->findAllChildren2($place)->toArray();
 		$children2 = array_merge( $children, $this->collectChildren($children)->toArray());
-		// 
-		
 		return $children2;
 	}
 	
 	/**
-	 * 
+	 * Returns children for a place 
+     * used in collectChildren
+     * 
 	 * @return array an array of Tx_Wpj_Domain_Model_place objects
 	 */
-	public function findAllChildren2($place) {
+	private function findAllChildren2($place) {
 		$query = $this->createQuery();
 		$query->matching($query->in('parent', $place));
 		return $query->execute();
 	}
 	
-	
-	
-	// plain sql version is faster:
+	/**
+     * collect ids for all children of a place
+     * plain sql version is faster: findChildrenFast()
+     * 
+     * @return String
+     */
 	public function collectChildrenUidsFast($place){
 		$children = array();
 		$childPlaces = $this->placeRepository->collectChildrenFast($place);
@@ -265,13 +276,23 @@ WHERE p.uid='.$place->getUid().'
 		}
 		return join(',', $children);
 	}
-
+    
+    /**
+     * Recursive function to collect children in 2 levels (floors & rooms) of a place
+     * 
+     * @return array an array of Tx_Wpj_Domain_Model_place objects
+     */
 	public function collectChildrenFast($place) {// building
 		$floors = $this->findChildrenFast($place); 
 		$rooms = $this->findChildrenFast($children); 
 		return array_merge( $floors, $rooms);
 	}
 	
+    /**
+     * Returns children of a place by a custom sql query
+     * 
+     * @return array an array of Tx_Wpj_Domain_Model_place objects
+     */
 	public function findChildrenFast($place) {
 		$uid = $this->collectUids($place);
 		if ($uid){
@@ -284,6 +305,11 @@ WHERE p.uid='.$place->getUid().'
 		} else return array();
 	}
 	
+    /**
+     * Returns comma separated uid of a place or an array of places
+     * 
+     * @return String
+     */
 	private function collectUids($a){
 		// single	
 		if (get_class($a) == 'Tx_Wpj_Domain_Model_place') return $a->getUid();	

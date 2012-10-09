@@ -8,7 +8,6 @@ if(!window.Wpj){
 }
 
 
-
 // first loading in show-mode
 $(document).ready(function(){
   // init boxes
@@ -18,11 +17,7 @@ $(document).ready(function(){
   Wpj.AuthorsBox.init();
 
   Wpj.VersionsBox.init();
-/*  //Wpj.MapBox.load();
   
-  
-  Wpj.ArticletypeBox.stopEditMode();
-*/  
   // editing buttons
   $("#startEditing").click(Wpj.startEditMode);
   $("#editOptions").hide(); // hide all editor buttons
@@ -35,6 +30,7 @@ $(document).ready(function(){
   Wpj.mode = "show"; // possible states are show & edit & save
 });
 
+
 Wpj.startEditMode = function(){
 	if (Wpj.mode == "show" && !Wpj.isMobileDevice) {
 		// boxes 
@@ -43,7 +39,6 @@ Wpj.startEditMode = function(){
 		Wpj.MediaBox.startEditMode();
 		Wpj.MapBox.startEditMode();
 		Wpj.AuthorsBox.startEditMode();
-		
 		
 		// start aloha
 		Wpj.Aloha.init();
@@ -67,6 +62,7 @@ Wpj.startEditMode = function(){
 	}
 	return false; 
 }
+
 
 Wpj.stopEditMode = function(){
 	if (Wpj.mode == "edit" || Wpj.mode == "save") {
@@ -102,6 +98,7 @@ Wpj.stopEditMode = function(){
 	return false; 
 }
 
+
 Wpj.save = function(event){
 	if ($('#articletype').val() == 1) {
 		alert("Bitte wähle den Artikeltyp aus dem Auswahlfeld.");
@@ -113,6 +110,8 @@ Wpj.save = function(event){
 	$('#article_form').submit();
 	return false; 
 }
+
+
 Wpj.prepareSaving = function(){
 	// copy article-textfields into hidden form
 	var title = $('#article_title').text()
@@ -134,6 +133,8 @@ Wpj.prepareSaving = function(){
 	
 	$('#mediaContent').val(mediaContent);
 }
+
+
 Wpj.saveAjax = function(event){
 	Wpj.prepareSaving();
 	var data = $("#article_form").serialize()+"&tx_wpj_pi1[ajax]=true";
@@ -294,9 +295,11 @@ Wpj.TagBox.addTag = function(){
 	});
 	return false; // prevent from sending form
 }
+
 Wpj.TagBox.startEditMode = function(){	
 	Wpj.TagBox.makeListitemsRemovable('');
 }
+
 Wpj.TagBox.makeListitemsRemovable = function(ul){	
 	$('ul'+ul+'.removable-items li').each(function(){
 		var id = $(this).attr('id');
@@ -331,10 +334,10 @@ Wpj.TagBox.deleteTag = function(event){
 	$li.hide('slow');
 	return false;
 }
+
 Wpj.TagBox.stopEditMode = function() {
 	Wpj.TagBox.load('');
 	$('ul.removable-items').removeClass('ul-edit');
-	
 }
 
 
@@ -409,9 +412,11 @@ Wpj.MapBox.load = function(){
 		}
 	});
 }
+
 Wpj.MapBox.startEditMode = function(){
 
 }
+
 Wpj.MapBox.stopEditMode = function(){
 
 }
@@ -452,6 +457,7 @@ Wpj.ArticletypeBox = {};
 Wpj.ArticletypeBox.startEditMode = function(){
 	if ($('#articletypeSelector').length > 0) $('#articletypeSelector').show();
 }
+
 Wpj.ArticletypeBox.stopEditMode = function(){
 	if ($('#articletypeSelector').length > 0) $('#articletypeSelector').hide();
 }
@@ -497,6 +503,7 @@ Wpj.Aloha.init = function() {
 		Aloha.jQuery('.alohaEditor').aloha();
 	}
 };
+
 Wpj.Aloha.stop = function() {
 	//$('.alohaEditor').removeAttr("contenteditable");
 	//$('.alohaEditor').removeClass("GENTICS_editable");
@@ -536,10 +543,6 @@ Wpj.Selector.mouseup = function(){
 		
 	}
 }
-
-
-
-
 
 
 /***************************

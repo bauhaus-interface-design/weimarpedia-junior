@@ -28,11 +28,12 @@
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  */
 class Tx_Wpj_Domain_Repository_mediafileRepository extends Tx_Extbase_Persistence_Repository {
+    
     /**
-     * 
+     * Search for a mediafiel by searchterm
      *
-     * @param 
-     * @return array 
+     * @param String $searchterm
+     * @return array of Tx_Wpj_Domain_Model_mediafile
      */
     public function search($searchterm) {
         $searchtermWrapped = '%'.$searchterm.'%';

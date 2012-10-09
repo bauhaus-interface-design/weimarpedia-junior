@@ -1,8 +1,6 @@
 <?php
 /***************************************************************
 *  Copyright notice
-*
-*  (c)  TODO - INSERT COPYRIGHT
 *  All rights reserved
 *
 *  This script is part of the TYPO3 project. The TYPO3 project is
@@ -32,10 +30,10 @@
 class Tx_Wpj_Domain_Repository_schoolRepository extends Tx_Extbase_Persistence_Repository {
 	
 	/**
-	 * 
+	 * Searchs for a school
 	 *
-	 * @param 
-	 * @return array 
+	 * @param String $searchterm
+	 * @return array an array of Tx_Wpj_Domain_Model_school objects
 	 */
 	public function search($searchterm) {
 		$searchterm = '%'.$searchterm.'%';

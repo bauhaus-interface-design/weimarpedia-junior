@@ -24,7 +24,7 @@
 ***************************************************************/
 
 /**
- * Controller 
+ * This controller provides basic functions for authentification
  *
  * @version $Id$
  * @copyright Copyright belongs to the respective authors
@@ -43,9 +43,10 @@ class Tx_Wpj_Controller_protectedController extends Tx_Extbase_MVC_Controller_Ac
 	
 	
 	/**
-	 * 
+	 * Redirects all users < $level to login page
 	 *
-	 * @return void
+	 * @param integer $level
+     * @return void
 	 */
 	protected function allowOnlyAuthorWithMinAdminLevel($level) {
 		$this->allowOnlyIfLoggedIn();
@@ -54,30 +55,35 @@ class Tx_Wpj_Controller_protectedController extends Tx_Extbase_MVC_Controller_Ac
 	}
 	
 	/**
-	 * 
+	 * Redirects anonym users to login page
 	 *
 	 * @return void
 	 */
 	protected function allowOnlyIfLoggedIn() {
 		if ( !$GLOBALS['TSFE']->loginUser ) $this->redirectToLogin();
 	}
-	
+    
+	/**
+     * Forwards to login page with extendable message
+     *
+     * @param string $msg
+     * @return void
+     */
 	protected function redirectToLogin($msg='') {
-		error_log('Tx_Wpj_Controller_protectedController::redirect');
 		$this->flashMessageContainer->add('Bitte melde dich an. '.$msg);
 		$this->forward('loginForm', 'session');
 		exit();
 	}
 	
 	/**
-	 * 
+	 * Checks admin level
 	 *
 	 * @return boolean
 	 */
 	protected function adminLevelMin($level) {
 		if (!$GLOBALS['TSFE']->loginUser) return false;
 		$this->user = $GLOBALS["TSFE"]->fe_user->user;
-		return ($this->user['tx_wpj_admin'] >= $level) ? true : false;
+		return ($this->user['tx_wpj_admin'] >= $level);
 		
 	}
 }

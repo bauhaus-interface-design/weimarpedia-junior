@@ -2,8 +2,6 @@
 
 /***************************************************************
 *  Copyright notice
-*
-*  (c) 2010 
 *  All rights reserved
 *
 *  This script is part of the TYPO3 project. The TYPO3 project is
@@ -50,16 +48,6 @@ class Tx_Wpj_Domain_Model_tag extends Tx_Extbase_DomainObject_AbstractEntity {
 	 * @var Tx_Wpj_Domain_Model_taxonomy
 	 */
 	protected $taxonomy;
-	
-	/*
-	 * Constructs this tag
-	 * @param string $name name
-	 * @param string $na2me na2me
-	 */
-	/*public function __construct($name, $bb) {
-		//$this->setName = $name;
-		//$this->taxonomy = $taxonomy;
-	}*/
 	
 	/**
 	 * Setter for name

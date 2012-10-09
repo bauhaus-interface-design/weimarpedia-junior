@@ -2,8 +2,6 @@
 
 /***************************************************************
 *  Copyright notice
-*
-*  (c) 2010 
 *  All rights reserved
 *
 *  This script is part of the TYPO3 project. The TYPO3 project is
@@ -24,7 +22,7 @@
 ***************************************************************/
 
 /**
- * Controller to login/logout
+ * Controller for login/logout
  *
  * @version $Id$
  * @copyright Copyright belongs to the respective authors
@@ -35,6 +33,8 @@ class Tx_Wpj_Controller_sessionController extends Tx_Wpj_Controller_protectedCon
 	
 	/**
   	* Shows the login form
+    * 
+    * @return void
   	*/
 	public function loginFormAction() {
 		if ($this->request->hasArgument('uname')){
@@ -46,9 +46,11 @@ class Tx_Wpj_Controller_sessionController extends Tx_Wpj_Controller_protectedCon
 	
 	
 	/**
-  	* Try to login the user by username and password
+  	* Try to login by username and password
+    * 
   	* @param String $uname username
   	* @param String $uident password
+    * @return void
   	*/
 	public function loginAction( $uname,  $uident) {
 		$loginData = array(
@@ -88,6 +90,8 @@ class Tx_Wpj_Controller_sessionController extends Tx_Wpj_Controller_protectedCon
 
 	/**
   	* logout the user
+    * 
+    * @return void
   	*/
 	public function logoutAction() {
 		$GLOBALS['TSFE']->fe_user->logoff();
@@ -96,8 +100,6 @@ class Tx_Wpj_Controller_sessionController extends Tx_Wpj_Controller_protectedCon
 	}
 	
 
-	
-	
 	/**
 	 * Loads data from session 
 	 * @return String
@@ -115,11 +117,20 @@ class Tx_Wpj_Controller_sessionController extends Tx_Wpj_Controller_protectedCon
 		$GLOBALS['TSFE']->fe_user->storeSessionData();
 	}
  
+    /**
+     * Deletes data from session.
+     * @return void
+     */
 	protected function clearSessionData() {
 		$GLOBALS['TSFE']->fe_user->setKey('ses', "tx_wpj_referer", array());
 		$GLOBALS['TSFE']->fe_user->storeSessionData();
 	}
 	
+    
+    /**
+     * Returns referer from session
+     * @return String
+     */
 	protected function hasReferer() {
 		return ($this->loadReferer());
 	}

@@ -2,8 +2,6 @@
 
 /***************************************************************
 *  Copyright notice
-*
-*  (c) 2010 
 *  All rights reserved
 *
 *  This script is part of the TYPO3 project. The TYPO3 project is
@@ -24,7 +22,8 @@
 ***************************************************************/
 
 /**
- * media
+ * media is a container to use mediafiles in different contexts
+ * separates caption from the file
  *
  * @version $Id$
  * @copyright Copyright belongs to the respective authors
@@ -55,14 +54,6 @@ class Tx_Wpj_Domain_Model_media extends Tx_Extbase_DomainObject_AbstractEntity {
 	 * @var Tx_Wpj_Domain_Model_mediafile
 	 */
 	protected $mediafile;
-	
-	/**
-	 * Constructs this media
-	 */
-//	public function __construct(Tx_Wpj_Domain_Model_mediafile $mediafile) {
-//		$this->setMediafile($mediafile);
-//	}	
-	
 	
 	/**
 	 * Setter for description
@@ -141,27 +132,69 @@ class Tx_Wpj_Domain_Model_media extends Tx_Extbase_DomainObject_AbstractEntity {
 		return $this->mediafile;
 	}
 	
+    /**
+     * Returns the url for the mediafile
+     *
+     * @return string
+     */
 	public function getUrl(){
 		if (!$this->mediafile) return false;
 		return $this->mediafile->getUrl();
 	}
+    
+    /**
+     * Returns the content-type of the mediafile
+     *
+     * @return string
+     */
 	public function getContentType(){
 		if (!$this->mediafile) return false;
 		return $this->mediafile->getContentType();
 	}
+    
+    /**
+     * Returns the preview-url for the mediafile
+     * images: url
+     * audio/video: icon
+     *
+     * @return string
+     */
 	public function getPreviewUrl(){
 		return $this->mediafile->getPreviewUrl();
 	}
 	
+    /**
+     * Returns true if media is video
+     *
+     * @return boolean
+     */
 	public function getIsVideo(){
 		return $this->mediafile->getIsVideo();
 	}
+    
+    /**
+     * Returns true if media is an image
+     *
+     * @return boolean 
+     */
 	public function getIsImage(){
 		return $this->mediafile->getIsImage();
 	}
+    
+    /**
+     * Returns true if media is an audiofile
+     *
+     * @return boolean
+     */
 	public function getIsAudio(){
 		return $this->mediafile->getIsAudio();
 	}
+    
+    /**
+     * Returns true if media is a pdf
+     *
+     * @return boolean
+     */
 	public function getIsPdf(){
 		return $this->mediafile->getIsPdf();
 	}

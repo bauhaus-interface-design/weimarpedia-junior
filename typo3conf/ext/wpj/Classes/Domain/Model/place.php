@@ -2,8 +2,6 @@
 
 /***************************************************************
 *  Copyright notice
-*
-*  (c) 2010 
 *  All rights reserved
 *
 *  This script is part of the TYPO3 project. The TYPO3 project is
@@ -95,7 +93,7 @@ class Tx_Wpj_Domain_Model_place extends Tx_Extbase_DomainObject_AbstractEntity {
 	protected $parent;
 	
 	/**
-	 * accuracyLabel
+	 * accuracyLabel translates numerical accuracy code into human readable string 
 	 * @var array
 	 */
 	private $accuracyLabels = array(
@@ -287,6 +285,7 @@ class Tx_Wpj_Domain_Model_place extends Tx_Extbase_DomainObject_AbstractEntity {
 	
 	/**
 	 * Getter for accuracyLabel
+     * translates numerical accuracy code into human readable string
 	 *
 	 * @return string accuracyLabel
 	 */
@@ -314,7 +313,7 @@ class Tx_Wpj_Domain_Model_place extends Tx_Extbase_DomainObject_AbstractEntity {
 	}
 	
 	/**
-	 * Setter for parent
+	 * Setter for parent place
 	 *
 	 * @param Tx_Wpj_Domain_Model_place $parent parent
 	 * @return void
@@ -325,7 +324,7 @@ class Tx_Wpj_Domain_Model_place extends Tx_Extbase_DomainObject_AbstractEntity {
 	}
 
 	/**
-	 * Getter for parent
+	 * Getter for parent place
 	 *
 	 * @return Tx_Wpj_Domain_Model_place parent
 	 */
@@ -335,6 +334,7 @@ class Tx_Wpj_Domain_Model_place extends Tx_Extbase_DomainObject_AbstractEntity {
 	
 	/**
 	 * Returns all childs of this
+     * 
 	 * @return array an array of Tx_Wpj_Domain_Model_place objects
 	 */
 	public function getChildren() {
@@ -343,11 +343,9 @@ class Tx_Wpj_Domain_Model_place extends Tx_Extbase_DomainObject_AbstractEntity {
 		return $children;
 	}
 	
-	
-	
-	
 	/**
 	 * Returns path to root level
+     * 
 	 * @return array an array of Tx_Wpj_Domain_Model_place objects
 	 */
 	public function pathToRoot(Tx_Wpj_Domain_Model_Place $place) {
@@ -363,16 +361,20 @@ class Tx_Wpj_Domain_Model_place extends Tx_Extbase_DomainObject_AbstractEntity {
 		return array_reverse($path);
 	}
 	
-		
 	/**
-	 * Returns 
-	 * @return 
+	 * Returns true if place has coordinates
+     * 
+	 * @return boolean
 	 */
 	public function getHasCoordinates(){
 		return ($this->coordinates != '') ? 1:0;
 	}
 	
-	
+    /**
+     * Returns articles for a place
+     * 
+     * @return array an array of Tx_Wpj_Domain_Model_article objects
+     */
 	public function getArticles(){
 		$placeRepository = t3lib_div::makeInstance('Tx_Wpj_Domain_Repository_PlaceRepository');
 		return $placeRepository->getArticlesOfPlace($this);

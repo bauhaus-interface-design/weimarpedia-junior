@@ -1,9 +1,6 @@
 <?php
 /***************************************************************
 *  Copyright notice
-*
-*            
-*           
 *  All rights reserved
 *
 *  This script is part of the TYPO3 project. The TYPO3 project is
@@ -25,16 +22,17 @@
 
 /**
  * Class implements some static methods 
- * 
- * @author 
- * @package 
+ *  
  */
 
 class Tx_Wpj_Utility_Array {
 	/**
-	 * Tx_Extbase_Persistence_ObjectStorage
-	 *
-	 * @return array
+     * filter an Tx_Extbase_Persistence_ObjectStorage by key/value
+     *
+	 * @param Tx_Extbase_Persistence_ObjectStorage $storage
+	 * @param String $key
+     * @param String $value
+	 * @return Tx_Extbase_Persistence_ObjectStorage selected items
 	 */
 	static public function collectIf($storage, $key, $value){
 		$newStorage = new Tx_Extbase_Persistence_ObjectStorage();
@@ -53,10 +51,13 @@ class Tx_Wpj_Utility_Array {
 		return $newStorage;
 	}
 	
-/**
-	 * Tx_Extbase_Persistence_ObjectStorage
-	 *
-	 * @return array
+    /**
+	 * filter an Tx_Extbase_Persistence_ObjectStorage by key/value
+     *
+     * @param Tx_Extbase_Persistence_ObjectStorage $storage
+     * @param String $key
+     * @param String $value
+     * @return Tx_Extbase_Persistence_ObjectStorage selected items
 	 */
 	static public function collectIfNot($storage, $key, $value){
 		$newStorage = new Tx_Extbase_Persistence_ObjectStorage();

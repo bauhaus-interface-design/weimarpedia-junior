@@ -2,8 +2,6 @@
 
 /***************************************************************
 *  Copyright notice
-*
-*  (c) 2010 
 *  All rights reserved
 *
 *  This script is part of the TYPO3 project. The TYPO3 project is
@@ -47,6 +45,7 @@ class Tx_Wpj_Controller_mediafileController extends Tx_Wpj_Controller_protectedC
 		$this->allowOnlyIfLoggedIn();
 		$this->mediafileRepository = t3lib_div::makeInstance('Tx_Wpj_Domain_Repository_mediafileRepository');
 	}
+    
 	/**
 	 * List action for this controller. Displays all mediafiles.
 	 */

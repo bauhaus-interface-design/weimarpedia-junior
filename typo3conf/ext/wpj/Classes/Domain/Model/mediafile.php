@@ -2,8 +2,6 @@
 
 /***************************************************************
 *  Copyright notice
-*
-*  (c) 2010 
 *  All rights reserved
 *
 *  This script is part of the TYPO3 project. The TYPO3 project is
@@ -24,7 +22,7 @@
 ***************************************************************/
 
 /**
- * mediafile
+ * mediafile 
  *
  * @version $Id$
  * @copyright Copyright belongs to the respective authors
@@ -33,7 +31,8 @@
 class Tx_Wpj_Domain_Model_mediafile extends Tx_Extbase_DomainObject_AbstractEntity {
 	
 	/**
-	 * title
+	 * title for interal use
+     * 
 	 * @var string
 	 * @validate NotEmpty
 	 */
@@ -67,7 +66,6 @@ class Tx_Wpj_Domain_Model_mediafile extends Tx_Extbase_DomainObject_AbstractEnti
 	
 	
 	protected $UPLOAD_DIR = 'uploads/wpj/mediafiles';
-	
 	
 	/**
 	 * Constructs this mediafile
@@ -172,33 +170,70 @@ class Tx_Wpj_Domain_Model_mediafile extends Tx_Extbase_DomainObject_AbstractEnti
 		return $this->description;
 	}
 	
+    /**
+     * Returns url uploads/...
+     *
+     * @return string 
+     */
 	public function getUrl() {
 		return $this->UPLOAD_DIR."/".basename( $this->file );
 	}
 	
+    /**
+     * Returns config string for video player 
+     *
+     * @return string 
+     */
 	public function getVideoFlashvars() {
-		$baseUri = "http://".t3lib_div::getThisUrl();//getIndpEnv('REQUEST_URL');
-		// TODO: find solution for excaping curly brackets in fluid
+		$baseUri = "http://".t3lib_div::getThisUrl();
+		// TODO: find solution for escaping curly brackets in fluid
 		return 'config={"playlist":["'.$baseUri.'typo3conf/ext/wpj/Resources/Public/img/weimarpedia_button.png", {"url": "'.$baseUri.$this->getUrl().'","autoPlay":false,"autoBuffering":true}]}';
 	}
 	
+    /**
+     * Returns true if media is a video
+     *
+     * @return string 
+     */
 	public function getIsVideo(){
 		return strpos($this->getContentType(), 'video') !== false;
 	}
 
+    /**
+     * Returns true if media is an image
+     *
+     * @return string 
+     */
 	public function getIsImage(){
 		return strpos($this->getContentType(), 'image') !== false;
 	}
 	
+    /**
+     * Returns true if media is an audiofile
+     *
+     * @return string 
+     */
 	public function getIsAudio(){
 		return strpos($this->getContentType(), 'audio') !== false;
 	}
 
+    /**
+     * Returns true if media is an pdf
+     *
+     * @return string 
+     */
 	public function getIsPdf(){
 		$ext = strtolower(array_pop(explode('.',$this->file)));
 		return ($ext == "pdf");
 	}
 	
+    /**
+     * Returns the preview-url for the mediafile
+     * images: url
+     * audio/video: icon
+     *
+     * @return string 
+     */
 	public function getPreviewUrl(){
 		if ($this->getIsVideo()) return "icon_video.png";
 		else if ($this->getIsAudio()) return "icon_audio.png";

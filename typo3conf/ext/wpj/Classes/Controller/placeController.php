@@ -2,8 +2,6 @@
 
 /***************************************************************
 *  Copyright notice
-*
-*  (c) 2010 
 *  All rights reserved
 *
 *  This script is part of the TYPO3 project. The TYPO3 project is
@@ -25,13 +23,13 @@
 
 /**
  * Controller for the place object
+ * provides admin views to manage places
  *
  * @version $Id$
  * @copyright Copyright belongs to the respective authors
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  */
 
-// TODO: As your extension matures, you should use Tx_Extbase_MVC_Controller_ActionController as base class, instead of the ScaffoldingController used below.
 class Tx_Wpj_Controller_placeController extends Tx_Wpj_Controller_protectedController {
 	
 	/**
@@ -51,6 +49,7 @@ class Tx_Wpj_Controller_placeController extends Tx_Wpj_Controller_protectedContr
 	
 	/**
 	 * List action for this controller. Displays all places.
+     * 
 	 * @param Tx_Wpj_Domain_Model_place $lastplace 
 	 * @dontvalidate $lastplace
 	 */
@@ -157,10 +156,8 @@ class Tx_Wpj_Controller_placeController extends Tx_Wpj_Controller_protectedContr
 		$this->redirect('index', NULL, NULL, array('lastPlace' => $place->getParent()));
 	}
 	
-
-	
 	/**
-	 * 
+	 * Returns childs of a place as html select options
 	 *
 	 * @param Tx_Wpj_Domain_Model_place $place The place 
 	 */
@@ -169,9 +166,8 @@ class Tx_Wpj_Controller_placeController extends Tx_Wpj_Controller_protectedContr
 	}
 	
 	/**
-	 * 
+	 * Returns childs of a place as json
 	 *
-	 * @param Tx_Wpj_Domain_Model_place $place The place 
 	 */
 	public function loadChildrenAction() {
 		$parentUid = (int) $_GET['root'];
@@ -183,7 +179,7 @@ class Tx_Wpj_Controller_placeController extends Tx_Wpj_Controller_protectedContr
 
 	
 	/**
-	 * 
+	 * Returns places back to root as html select options
 	 *
 	 * @param Tx_Wpj_Domain_Model_place $place The place 
 	 */
@@ -195,12 +191,10 @@ class Tx_Wpj_Controller_placeController extends Tx_Wpj_Controller_protectedContr
 	
 	
 	/**
-	 * Creates 
+	 * Creates a new place from data provided by a geolocalization service
 	 *
-	 * 
 	 */
 	public function createPlacesAction() {
-			
 		$placeData = $_POST['placeData'];
 		$createNow = ($_POST['createNow'] == "true")? true:false;	
 		// found existing place
@@ -234,7 +228,6 @@ class Tx_Wpj_Controller_placeController extends Tx_Wpj_Controller_protectedContr
 				} 
 			}
 				
-			//var_dump($place->getName());
 			echo nl2br($output);
 			if ($createNow) echo nl2br($log);
 		}else {

@@ -2,8 +2,6 @@
 
 /***************************************************************
 *  Copyright notice
-*
-*  (c) 2010 
 *  All rights reserved
 *
 *  This script is part of the TYPO3 project. The TYPO3 project is
@@ -130,6 +128,8 @@ class Tx_Wpj_Controller_articleController extends Tx_Wpj_Controller_protectedCon
 
 	/**
   	* suggests tags for $term as json
+    * 
+    * @return string json
   	*/
 	public function suggestTagAction() {
 		$term = $_GET['term']; // TODO: use quote-function provided by a future version of exbase
@@ -139,7 +139,9 @@ class Tx_Wpj_Controller_articleController extends Tx_Wpj_Controller_protectedCon
 	}
 
 	/**
-  	* term
+  	* suggests place tags for $term as json
+    * 
+    * @return string json
   	*/
 	public function suggestTagPlaceAction() {
 		$term = $_GET['term']; // TODO: use quote-function provided by a future version of exbase
@@ -150,9 +152,10 @@ class Tx_Wpj_Controller_articleController extends Tx_Wpj_Controller_protectedCon
 	}
 	
 	/**
-	 * 
+	 * suggests childs for a place as json
 	 *
 	 * @param Tx_Wpj_Domain_Model_place $place The place 
+     * @return string json
 	 */
 	public function loadPlaceChildrenAction() {
 		$parentUid = (int) $_GET['root'];
@@ -171,14 +174,16 @@ class Tx_Wpj_Controller_articleController extends Tx_Wpj_Controller_protectedCon
 	}
 	
 	/**
-  	* term
+  	* loads the form in iframe
+    * 
   	*/
 	public function placeSelectFormAction() {
 		
 	}
 	
 	/**
-  	* term
+  	* loads the form in iframe
+    * 
   	*/
 	public function refPlaceSelectFormAction() {
 		
@@ -317,7 +322,8 @@ class Tx_Wpj_Controller_articleController extends Tx_Wpj_Controller_protectedCon
 	
 	
 	/**
-  	* 
+  	* remove media from article
+    * 
   	* @param Tx_Wpj_Domain_Model_article $article The article to display
   	* @param Tx_Wpj_Domain_Model_media $media
   	* @dontvalidate $article
@@ -333,7 +339,8 @@ class Tx_Wpj_Controller_articleController extends Tx_Wpj_Controller_protectedCon
 	}
 	
 	/**
-  	*   	
+  	* show medias
+    *   	
   	* @param Tx_Wpj_Domain_Model_article $article The article to display
   	* @return void
   	* @dontvalidate $article
@@ -344,7 +351,8 @@ class Tx_Wpj_Controller_articleController extends Tx_Wpj_Controller_protectedCon
 	
 	
 	/**
-  	*   	
+  	* show map
+    *   	
   	* @param Tx_Wpj_Domain_Model_article $article The article to display
   	* @return void
   	* @dontvalidate $article
@@ -354,7 +362,8 @@ class Tx_Wpj_Controller_articleController extends Tx_Wpj_Controller_protectedCon
 	}	
 	
 	/**
-  	*   	
+  	* load map data  	
+    * 
   	* @param Tx_Wpj_Domain_Model_article $article The article to display
   	* @return void
   	* @dontvalidate $article
@@ -365,7 +374,8 @@ class Tx_Wpj_Controller_articleController extends Tx_Wpj_Controller_protectedCon
 
 	
 	/**
-  	*   	
+  	* load authors   
+    * 	
   	* @param Tx_Wpj_Domain_Model_article $article The article to display
   	* @return void
   	* @dontvalidate $article
@@ -378,7 +388,8 @@ class Tx_Wpj_Controller_articleController extends Tx_Wpj_Controller_protectedCon
 
 	
 	/**
-  	*   	
+  	* load versions
+    *   	
   	* @param Tx_Wpj_Domain_Model_article $article The article to display
   	* @return void
   	* @dontvalidate $article
@@ -391,7 +402,8 @@ class Tx_Wpj_Controller_articleController extends Tx_Wpj_Controller_protectedCon
 	
 	
 	/**
-  	*   	
+  	* compare versions  
+    * 	
   	* @param Tx_Wpj_Domain_Model_article $article The article to display
   	* @param string $version The article to display
   	* @return void
@@ -408,7 +420,8 @@ class Tx_Wpj_Controller_articleController extends Tx_Wpj_Controller_protectedCon
 	}	
 	
 	/**
-  	*   	
+  	* remove given author 
+    *  	
   	* @param Tx_Wpj_Domain_Model_article $article The article to display
 	* @param Tx_Wpj_Domain_Model_author $author
   	* @return void
@@ -429,6 +442,8 @@ class Tx_Wpj_Controller_articleController extends Tx_Wpj_Controller_protectedCon
 		
 	/**
   	* suggests tags for $term as json
+    * 
+    * @return string json
   	*/
 	public function suggestArticleAction() {
 		$term = $_GET['term']; // TODO: use quote-function provided by a future version of exbase
@@ -461,7 +476,9 @@ class Tx_Wpj_Controller_articleController extends Tx_Wpj_Controller_protectedCon
 	}
 		
 	/**
-	 * List action for this controller. Displays all articles.
+	 * Displays all articles with type knowledge
+     * for anonym users show only reviewed articles  
+     * 
 	 */
 	public function indexAction() {
 		if ( !$GLOBALS['TSFE']->loginUser ) {
@@ -478,7 +495,8 @@ class Tx_Wpj_Controller_articleController extends Tx_Wpj_Controller_protectedCon
 	}
 
 	/**
-	 * List action for this controller. Displays all articles.
+	 * Displays all articles with type exhibition
+     * for anonym users show only reviewed articles 
 	 * 
 	 */
 	public function exhibitionAction() {

@@ -26,15 +26,14 @@
 class Tx_Wpj_ViewHelpers_Form_UploadViewHelper extends Tx_Fluid_ViewHelpers_Form_UploadViewHelper {
 
 	/**
-	 * Renders 
+	 * Renders some tags to view, upload and delete an image
 	 *
 	 * @return string
 	 */
 	public function render() {
 		$name = $this->getName();
 		$this->registerFieldNameForFormTokenGeneration($name);
-		//$this->registerFieldNameForFormTokenGeneration($name."[file]");
-
+		
 		// hidden field for triggering set-method
 		$this->tag->addAttribute('type', 'hidden');
 		$this->tag->addAttribute('name', $name);

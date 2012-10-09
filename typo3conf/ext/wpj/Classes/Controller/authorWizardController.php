@@ -2,8 +2,6 @@
 
 /***************************************************************
 *  Copyright notice
-*
-*  (c) 2010 
 *  All rights reserved
 *
 *  This script is part of the TYPO3 project. The TYPO3 project is
@@ -24,14 +22,13 @@
 ***************************************************************/
 
 /**
- * Controller for the author object
+ * Controller to create multiple authors 
  *
  * @version $Id$
  * @copyright Copyright belongs to the respective authors
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  */
 
-// TODO: As your extension matures, you should use Tx_Extbase_MVC_Controller_ActionController as base class, instead of the ScaffoldingController used below.
 class Tx_Wpj_Controller_authorWizardController extends Tx_Wpj_Controller_protectedController {
 	
 	/**
@@ -50,7 +47,6 @@ class Tx_Wpj_Controller_authorWizardController extends Tx_Wpj_Controller_protect
 		$this->schoolRepository = t3lib_div::makeInstance('Tx_Wpj_Domain_Repository_schoolRepository');
 	}
 	
-	
 	/**
 	 * Displays a form for creating a new school
 	 *
@@ -58,14 +54,6 @@ class Tx_Wpj_Controller_authorWizardController extends Tx_Wpj_Controller_protect
 	 * @dontvalidate $newschool
 	 */
 	public function step1Action(Tx_Wpj_Domain_Model_school $newschool = NULL) {
-		
-//		$userRepository = t3lib_div::makeInstance('Tx_Extbase_Domain_Repository_FrontendUserRepository');
-//		$user = $userRepository->findByUid(6);
-//		//		$group = $userGroupRepository->findByUid(1);
-////		var_dump($userGroupRepository);
-////		var_dump($group);
-//		$this->view->assign('d1', $user->getUsergroup());
-		
 		$this->clearSessionData("authors");
 		$this->clearSessionData("school");
 		$this->view->assign('newschool', $newschool);
@@ -88,7 +76,7 @@ class Tx_Wpj_Controller_authorWizardController extends Tx_Wpj_Controller_protect
 	}
 	
 	/**
-	 * 
+	 * Saves school choosed by the select field and redirects to step 2
 	 */
 	public function step1SelectAction() {
 		$schoolUid = $this->request->getArgument('selectedSchool');
@@ -162,6 +150,10 @@ class Tx_Wpj_Controller_authorWizardController extends Tx_Wpj_Controller_protect
 		else $this->redirect('step2');
 	}
 	
+    /**
+     * Shows the created logins
+     *
+     */
 	public function step3Action() {
 		$authorSessionStorage = $this->loadSessionData("authors");
 		$this->view->assign('authors', $authorSessionStorage);
@@ -194,6 +186,10 @@ class Tx_Wpj_Controller_authorWizardController extends Tx_Wpj_Controller_protect
 		$GLOBALS['TSFE']->fe_user->storeSessionData();
 	}
  
+    /**
+     * Deletes session data.
+     * @return void
+     */
 	protected function clearSessionData($key) {
 		$GLOBALS['TSFE']->fe_user->setKey('ses', "tx_wpj_".$key, array());
 		$GLOBALS['TSFE']->fe_user->storeSessionData();

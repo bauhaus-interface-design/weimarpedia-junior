@@ -2,8 +2,6 @@
 
 /***************************************************************
 *  Copyright notice
-*
-*  (c) 2010 
 *  All rights reserved
 *
 *  This script is part of the TYPO3 project. The TYPO3 project is
@@ -97,7 +95,9 @@ class Tx_Wpj_Controller_accountController extends Tx_Wpj_Controller_protectedCon
 	
 	/**
 	 * receives an jpg-stream from flash and saves as image
-	 *
+	 * via $GLOBALS["HTTP_RAW_POST_DATA"]
+     * 
+     * @return string success | failed
 	 */
 	public function uploadAvatarRawAction() {
 		if ( isset ( $GLOBALS["HTTP_RAW_POST_DATA"] )) {
@@ -114,6 +114,7 @@ class Tx_Wpj_Controller_accountController extends Tx_Wpj_Controller_protectedCon
 	
 	/**
 	 * uploads the avatar image file
+     * redirects to index
 	 *
 	 */
 	public function uploadAvatarFileAction() {

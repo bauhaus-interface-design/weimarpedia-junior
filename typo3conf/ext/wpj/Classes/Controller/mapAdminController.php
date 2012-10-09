@@ -2,8 +2,6 @@
 
 /***************************************************************
 *  Copyright notice
-*
-*  (c) 2010 
 *  All rights reserved
 *
 *  This script is part of the TYPO3 project. The TYPO3 project is
@@ -25,6 +23,8 @@
 
 /**
  * Controller manage map-views
+ * This is an unfinished experimental feature to draw outlines for buildings and room 
+ * All functionality is only for testing purposes
  *
  * @version $Id$
  * @copyright Copyright belongs to the respective authors
@@ -45,14 +45,12 @@ class Tx_Wpj_Controller_mapAdminController extends Tx_Wpj_Controller_protectedCo
 	 */
 	protected function initializeAction() {
 		$this->allowOnlyAuthorWithMinAdminLevel(10);
-		//$this->articleRepository = t3lib_div::makeInstance('Tx_Wpj_Domain_Repository_articleRepository');
 		$this->placeRepository = t3lib_div::makeInstance('Tx_Wpj_Domain_Repository_placeRepository');
-		//$authorRepository = t3lib_div::makeInstance('Tx_Wpj_Domain_Repository_authorRepository');
-		//$this->author = $authorRepository->findByUid( (int)$GLOBALS["TSFE"]->fe_user->user['uid'] );
 	}
 	
 	/**
 	 * List action for this controller. Displays a map
+     * 
 	 */
 	public function indexAction() {
 		$places = $this->placeRepository->findAll();
@@ -71,13 +69,11 @@ class Tx_Wpj_Controller_mapAdminController extends Tx_Wpj_Controller_protectedCo
         	// -->
         	</script>';
         $this->response->addAdditionalHeaderData($additionalHeaderData); 
-        
 	}
 	
-	
-	
 	/**
-	 * 
+	 * loads the buildings
+     * 
   	 * @dontverifyrequesthash
 	 */
 	public function loadBuildingsAction() {
@@ -86,7 +82,8 @@ class Tx_Wpj_Controller_mapAdminController extends Tx_Wpj_Controller_protectedCo
 	}
 	
 	/**
-	 * 
+	 * loads the childs of the buildings
+     * 
   	 * @dontverifyrequesthash
 	 */
 	public function loadChildrenAction() {
@@ -106,7 +103,6 @@ class Tx_Wpj_Controller_mapAdminController extends Tx_Wpj_Controller_protectedCo
 		$this->placeRepository->update($place);
 		return "success";
 	}
-	
 	
 	/**
   	*   	

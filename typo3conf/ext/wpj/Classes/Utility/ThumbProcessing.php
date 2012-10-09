@@ -43,7 +43,7 @@ class Tx_Wpj_Utility_ThumbProcessing {
     
     
      /**
-     * Render the img tag.
+     * Render the img source for a thumbnail
      * @see http://typo3.org/documentation/document-library/references/doc_core_tsref/4.2.0/view/1/5/#id4164427
      *
      * @param string $src
@@ -55,8 +55,6 @@ class Tx_Wpj_Utility_ThumbProcessing {
      * @param integer $maxHeight maximum height of the image
      *
      * @return string rendered tag.
-     * @author Sebastian Böttger <sboettger@cross-content.com>
-     * @author Bastian Waidelich <bastian@typo3.org>
      */
     public function getThumb($src, $width = 100, $height = 100, $minWidth = NULL, $minHeight = NULL, $maxWidth = NULL, $maxHeight = NULL) {
         $this->contentObject = new tslib_cObj();

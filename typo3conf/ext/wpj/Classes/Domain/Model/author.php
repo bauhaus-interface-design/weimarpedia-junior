@@ -65,13 +65,17 @@ class Tx_Wpj_Domain_Model_author extends Tx_Extbase_Domain_Model_FrontendUser {
     
     /**
 	 * path to avatar directory
+     * 
 	 * @var string
 	 */
 	protected $AVATAR_DIR = 'uploads/wpj/avatars';
 
 	
 	/**
-     * Sets 
+     * Sets the admin level
+     * 0..9 students
+     * 10..49 teacher
+     * 50.. admins
      *
      * @param integer $adminlevel
      * @return void
@@ -81,7 +85,7 @@ class Tx_Wpj_Domain_Model_author extends Tx_Extbase_Domain_Model_FrontendUser {
     }
 
     /**
-     * Returns 
+     * Returns the admin level
      *
      * @return integer
      */
@@ -90,7 +94,7 @@ class Tx_Wpj_Domain_Model_author extends Tx_Extbase_Domain_Model_FrontendUser {
     }
 	
     /**
-     * Returns 
+     * Returns the short name
      *
      * @return String
      */
@@ -103,6 +107,7 @@ class Tx_Wpj_Domain_Model_author extends Tx_Extbase_Domain_Model_FrontendUser {
     /**
      * Returns path to avatar image for e.g. image helper
      * e.g.: uploads/wpj/avatars/6.jpg
+     * 
      * @return String
      */
     public function getAvatarImage() {
@@ -114,6 +119,7 @@ class Tx_Wpj_Domain_Model_author extends Tx_Extbase_Domain_Model_FrontendUser {
     /**
      * Returns absolute system path to avatar directory
      * e.g.: /opt/local/apache/htdocs/.../wpj_typo3/uploads/wpj/avatars/6.jpg
+     * 
      * @return String
      */
     public function getAvatarAbsPath() {
@@ -124,7 +130,7 @@ class Tx_Wpj_Domain_Model_author extends Tx_Extbase_Domain_Model_FrontendUser {
     
     
     /**
-     * Returns 
+     * Returns disable
      *
      * @return boolean
      */
@@ -133,7 +139,7 @@ class Tx_Wpj_Domain_Model_author extends Tx_Extbase_Domain_Model_FrontendUser {
     }  
     
     /**
-     * Returns 
+     * Returns starttime
      *
      * @return DateTime
      */
@@ -142,7 +148,9 @@ class Tx_Wpj_Domain_Model_author extends Tx_Extbase_Domain_Model_FrontendUser {
     } 
     
     /**
-     * Returns 
+     * Returns endtime
+     * endtime is not used, because author objects become invalid after endtime
+     * use wpj_endtime instead to check a valid login
      *
      * @return DateTime
      */
@@ -151,7 +159,7 @@ class Tx_Wpj_Domain_Model_author extends Tx_Extbase_Domain_Model_FrontendUser {
     }
 	
 	/**
-     * Returns 
+     * Returns wpj_endtime as end of a valid login
      *
      * @return DateTime
      */
@@ -160,7 +168,7 @@ class Tx_Wpj_Domain_Model_author extends Tx_Extbase_Domain_Model_FrontendUser {
 	}
 	
      /**
-     * Returns 
+     * Returns true if a login is valid now
      *
      * @return Boolean
      */       
@@ -170,7 +178,7 @@ class Tx_Wpj_Domain_Model_author extends Tx_Extbase_Domain_Model_FrontendUser {
     } 
      
      /**
-     * Returns 
+     * Returns true if a login is not valid now
      *
      * @return Boolean
      */       
@@ -179,7 +187,7 @@ class Tx_Wpj_Domain_Model_author extends Tx_Extbase_Domain_Model_FrontendUser {
     } 
     
     /**
-     * Sets 
+     * Sets school
      *
      * @param Tx_Wpj_Domain_Model_school $school
      * @return void
@@ -189,7 +197,7 @@ class Tx_Wpj_Domain_Model_author extends Tx_Extbase_Domain_Model_FrontendUser {
     }
 
     /**
-     * Returns 
+     * Returns school
      *
      * @return Tx_Wpj_Domain_Model_school
      */
@@ -197,6 +205,11 @@ class Tx_Wpj_Domain_Model_author extends Tx_Extbase_Domain_Model_FrontendUser {
         return $this->school;
     }
     
+    /**
+     * Returns a random password
+     *
+     * @return string
+     */
     public function generatePassword($length = 8) {
 	    $password = "";
 		$possible = "2346789bcdfghjkmnpqrtvwxyzCDFGHJKLMNPQRTVWXYZ%?#";
@@ -212,6 +225,12 @@ class Tx_Wpj_Domain_Model_author extends Tx_Extbase_Domain_Model_FrontendUser {
 		return $password;
 	}
     
+    /**
+     * Returns random username 
+     * format: 888-888
+     *
+     * @return string
+     */
  	public function generateUsername($prefix='') {
  		$username = $prefix;
 		$possible = "123467890";
@@ -226,21 +245,20 @@ class Tx_Wpj_Domain_Model_author extends Tx_Extbase_Domain_Model_FrontendUser {
 			$i++;
 	    }
 	    
-	    // TODO: unique?
+	    // TODO: check if unique
 	    
 		return $username;
 	}
 	
+    /**
+     * Sets starttime and duration for login
+     *
+     * @return void
+     */
 	public function setStarttimeAndDuration($starttime, $duration) {
 		$this->starttime = $starttime;
 		$this->wpj_endtime = $starttime + $duration;
 	}
 	
-	public function addStandardGroup(){
-		//$authorRepository = t3lib_div::makeInstance('Tx_Wpj_Domain_Repository_authorRepository');
-		//$authorRepository->repairUsergroup();
-	}
-	
-    
 }
 ?>

@@ -13,11 +13,6 @@
  * Public License for more details.                                       *
  *                                                                        */
 
-/**
- *
- * @todo documentation
- *
- */
 
 /**
  *

@@ -3,7 +3,7 @@
 class Tx_Wpj_ViewHelpers_ArticleMediaIconsViewHelper extends Tx_Fluid_Core_ViewHelper_AbstractViewHelper {
 	
 	/**
-	 * renders 
+	 * Renders a 4-icon-box for the available media in an article
 	 *
 	 * @param string $article 
 	 * @return string the rendered string

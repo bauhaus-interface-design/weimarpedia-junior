@@ -2,8 +2,6 @@
 
 /***************************************************************
 *  Copyright notice
-*
-*  (c) 2010 
 *  All rights reserved
 *
 *  This script is part of the TYPO3 project. The TYPO3 project is
@@ -31,7 +29,6 @@
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  */
 
-// TODO: As your extension matures, you should use Tx_Extbase_MVC_Controller_ActionController as base class, instead of the ScaffoldingController used below.
 class Tx_Wpj_Controller_schoolController extends Tx_Wpj_Controller_protectedController {
 	
 	/**
@@ -118,8 +115,6 @@ class Tx_Wpj_Controller_schoolController extends Tx_Wpj_Controller_protectedCont
 		$this->flashMessageContainer->add('Your school was removed.');
 		$this->redirect('index');
 	}
-	
-
 	
 }
 ?>

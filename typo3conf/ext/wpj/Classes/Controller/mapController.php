@@ -2,8 +2,6 @@
 
 /***************************************************************
 *  Copyright notice
-*
-*  (c) 2010 
 *  All rights reserved
 *
 *  This script is part of the TYPO3 project. The TYPO3 project is
@@ -24,7 +22,7 @@
 ***************************************************************/
 
 /**
- * Controller manage map-views
+ * Controller to manage the map section with map, lists and article views
  *
  * @version $Id$
  * @copyright Copyright belongs to the respective authors
@@ -64,15 +62,14 @@ class Tx_Wpj_Controller_mapController extends Tx_Extbase_MVC_Controller_ActionCo
 	 */
 	public function indexAction() {
 		
-		
 	}
 	
 	/**
-  	*   	
-  	* @return void
+  	* Returns all places for a given map area as json 
+    *  	
+  	* @return string json
   	*/
 	public function loadPlacesAction() {
-		
 		$sLat = floatVal( $this->request->getArgument('sLat') );
 		$wLng = floatVal( $this->request->getArgument('wLng') );
 		$nLat = floatVal( $this->request->getArgument('nLat') );
@@ -83,21 +80,18 @@ class Tx_Wpj_Controller_mapController extends Tx_Extbase_MVC_Controller_ActionCo
 			'persons' => array(),
 			'objects' => array()
 		);
-		
 		return json_encode($response); // don't mask slashes in closing htmltags
 	}
 	
 	
 	/**
-  	* TODO: allow knowledge / exhibition as type  
+  	* Returns all articles and ref-articles for a given place as json 
+    * 
   	* @param Tx_Wpj_Domain_Model_place $place 	
   	* @param String $articletype 
-  	* @return void
+  	* @return string json
   	*/
 	public function placeArticlesAction(Tx_Wpj_Domain_Model_place $place, $articletype) {
-		//if (($articletype != 'knowledge') && ($articletype != 'exhibition')) {
-			//$articletype = 'knowledge';
-		//} 
 		$refarticles = $this->articleRepository->getReferenceArticlesOfPlaceUid($place->getUid());
       
 		$articles = $this->articleRepository->getArticlesOfPlaceUid($place->getUid(), $articletype);
@@ -121,10 +115,10 @@ class Tx_Wpj_Controller_mapController extends Tx_Extbase_MVC_Controller_ActionCo
 	
 	
 	/**
-  	* 
+  	* Returns floors for a place as json
   	*   	
   	* @param Tx_Wpj_Domain_Model_place $place 
-  	* @return void
+  	* @return string json
   	*/
 	public function listPlaceOptionsAction(Tx_Wpj_Domain_Model_place $place) {
 		$refarticles = $this->articleRepository->getReferenceArticlesOfPlaceUid($place->getUid());
@@ -151,10 +145,10 @@ class Tx_Wpj_Controller_mapController extends Tx_Extbase_MVC_Controller_ActionCo
 	
 	
 	/**
-  	* 
+  	* Returns rooms for a place as json
   	*   	
   	* @param Tx_Wpj_Domain_Model_place $place 
-  	* @return void
+  	* @return string json
   	*/
 	public function listFloorOptionsAction(Tx_Wpj_Domain_Model_place $place) {
 		$roomArray = array();
@@ -183,10 +177,10 @@ class Tx_Wpj_Controller_mapController extends Tx_Extbase_MVC_Controller_ActionCo
 	
 	
 	/**
-  	* 
+  	* Returns articles for a place as json
   	*   	
   	* @param Tx_Wpj_Domain_Model_place $place 
-  	* @return void
+  	* @return string json
   	*/
 	public function listRoomArticlesAction(Tx_Wpj_Domain_Model_place $place) {
 		$refarticles = $this->articleRepository->getReferenceArticlesOfPlaceUid($place->getUid());
@@ -198,22 +192,20 @@ class Tx_Wpj_Controller_mapController extends Tx_Extbase_MVC_Controller_ActionCo
             'refarticles' => $this->article2json($refarticles),
             'articles' => $this->article2json($articles),
 		);
-		
 		return json_encode($response);
 	}
 	
 	/**
-  	* 
+  	* Returns article data as json
   	*   	
   	* @param Tx_Wpj_Domain_Model_place $place 
-  	* @return void
+  	* @return string json
   	*/
 	public function showArticleAction(Tx_Wpj_Domain_Model_article $article) {
 		$response = array(
 			'title' => $article->getTitle(),
 			'body' => $article->getBody()
 		);
-		
 		return json_encode($response) ;
 	}
 	
@@ -222,14 +214,16 @@ class Tx_Wpj_Controller_mapController extends Tx_Extbase_MVC_Controller_ActionCo
     * load media for article by ajax
     *       
     * @param Tx_Wpj_Domain_Model_article $article The article to display
-    * @return void
     * @dontvalidate $article
     */
     public function loadMediaAction(Tx_Wpj_Domain_Model_article $article) {
         $this->view->assign('article', $article);
     }
 	
-	
+	/**
+    * converts article objects to array
+    * 
+    */
 	private function article2json($articles){
 	    $articleArray = array();
         foreach ($articles as $article){

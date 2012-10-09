@@ -39,7 +39,7 @@ class Tx_Wpj_Domain_Repository_authorRepository extends Tx_Extbase_Domain_Reposi
     /**
      * Find all Authors
      *
-     * @return Tx_Wpj_Domain_Model_author 
+     * @return array of Tx_Wpj_Domain_Model_author 
      */
 	public function findAll() {
 		$query = $this->createQuery();
@@ -54,12 +54,11 @@ class Tx_Wpj_Domain_Repository_authorRepository extends Tx_Extbase_Domain_Reposi
     /**
      * Assign all unassigned users/authors to the usergroup 1
      *
-     * @return Tx_Wpj_Domain_Model_author 
+     * @return void
      */
 	public function repairUsergroup(){
 		$persistenceManager = t3lib_div::makeInstance('Tx_Extbase_Persistence_Manager');
    		$persistenceManager->persistAll();
-   		
 		$query = $this->createQuery();
 		$query->getQuerySettings()->setReturnRawQueryResult( TRUE );
 		$query->statement("UPDATE `fe_users` SET `usergroup`=1 WHERE `usergroup`='' OR `usergroup` IS NULL;")->execute();	
@@ -97,10 +96,6 @@ class Tx_Wpj_Domain_Repository_authorRepository extends Tx_Extbase_Domain_Reposi
 		)->execute();
 		return $result;
 	}
-	
-	
-	
-	
 	
 	/**
 	 * Finds all authors including disabled or users with expired logins

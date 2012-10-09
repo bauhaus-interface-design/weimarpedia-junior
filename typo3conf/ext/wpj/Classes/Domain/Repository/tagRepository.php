@@ -1,8 +1,6 @@
 <?php
 /***************************************************************
 *  Copyright notice
-*
-*  (c)  TODO - INSERT COPYRIGHT
 *  All rights reserved
 *
 *  This script is part of the TYPO3 project. The TYPO3 project is
@@ -32,10 +30,10 @@
 class Tx_Wpj_Domain_Repository_tagRepository extends Tx_Extbase_Persistence_Repository {
 	
 	/**
-	 * .
+	 * Searchs for a school
 	 *
 	 * @param string searchterm
-	 * @return array The tags
+	 * @return array an array of Tx_Wpj_Domain_Model_tag objects
 	 */
 	public function search($term) {
 		$this->query = $this->createQuery();
@@ -44,10 +42,11 @@ class Tx_Wpj_Domain_Repository_tagRepository extends Tx_Extbase_Persistence_Repo
 	}
 	
 	/**
-	 * .
+	 * Returns tags for an article and a given taxonomy
 	 *
-	 * @param string searchterm
-	 * @return array The tags
+	 * @param Tx_Wpj_Domain_Model_article $article
+     * @param Tx_Wpj_Domain_Model_taxonomy $taxonomy
+	 * @return array an array of Tx_Wpj_Domain_Model_tag objects
 	 */
 	public function findByArticleAndTaxonomy($article, $taxonomy) {
 		$this->query = $this->createQuery();
@@ -62,6 +61,8 @@ class Tx_Wpj_Domain_Repository_tagRepository extends Tx_Extbase_Persistence_Repo
 	/**
 	 * suggest tags by searchterm 
 	 * 
+     * @param string searchterm
+     * @param integer $maxResults
 	 * @return array an unique array with keys "value", "type" and "label"
 	 */
 	public function suggestAsArray($term, $maxResults=20) {
@@ -87,15 +88,15 @@ class Tx_Wpj_Domain_Repository_tagRepository extends Tx_Extbase_Persistence_Repo
 		    if (count($response) > $maxResults) break;
 		}
 		return $response;
-		
 	}
 	
 	
 	/**
-	 * .
+	 * Find or creates a tag for a place
 	 *
-	 * @param string searchterm
-	 * @return array The tags
+	 * @param integer $placeId
+     * @param integer $taxonomyId
+	 * @return array an array of Tx_Wpj_Domain_Model_tag objects
 	 */
 	public function findOrCreateByPlaceAndTaxonomy($placeId, $taxonomyId) {
 		$tag = $this->findOneByPlaceAndTaxonomy($placeId, $taxonomyId);
@@ -116,16 +117,15 @@ class Tx_Wpj_Domain_Repository_tagRepository extends Tx_Extbase_Persistence_Repo
 			$this->add($tag);
 		}
 		return $tag;
-
-				
 	}
 	
 	
 	/**
-	 * .
+	 * Finds a tag for a place
 	 *
-	 * @param string searchterm
-	 * @return array The tags
+	 * @param Tx_Wpj_Domain_Model_place $place
+     * @param Tx_Wpj_Domain_Model_taxonomy $taxonomy
+	 * @return Tx_Wpj_Domain_Model_tag tag
 	 */
 	public function findOneByPlaceAndTaxonomy($place, $taxonomy) {
 		$this->query = $this->createQuery();
@@ -139,10 +139,11 @@ class Tx_Wpj_Domain_Repository_tagRepository extends Tx_Extbase_Persistence_Repo
 				
 	
 	/**
-	 * .
-	 *
-	 * @param string searchterm
-	 * @return array The tags
+	 * Finds a tag by name
+     *
+     * @param String $name
+     * @param Tx_Wpj_Domain_Model_taxonomy $taxonomy
+     * @return Tx_Wpj_Domain_Model_tag tag
 	 */
 	public function findOneByLabelAndTaxonomy($name, $taxonomy) {
 		$this->query = $this->createQuery();

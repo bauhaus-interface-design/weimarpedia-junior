@@ -2,8 +2,6 @@
 
 /***************************************************************
 *  Copyright notice
-*
-*  (c) 2010 
 *  All rights reserved
 *
 *  This script is part of the TYPO3 project. The TYPO3 project is
@@ -31,7 +29,6 @@
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  */
 
-// TODO: As your extension matures, you should use Tx_Extbase_MVC_Controller_ActionController as base class, instead of the ScaffoldingController used below.
 class Tx_Wpj_Controller_authorController extends Tx_Wpj_Controller_protectedController {
 	
 	/**
@@ -49,6 +46,7 @@ class Tx_Wpj_Controller_authorController extends Tx_Wpj_Controller_protectedCont
 		$this->authorRepository = t3lib_div::makeInstance('Tx_Wpj_Domain_Repository_authorRepository');
 		$this->author = $this->authorRepository->findByUid( (int)$GLOBALS["TSFE"]->fe_user->user['uid'] );
 	}
+    
 	/**
 	 * List action for this controller. Displays all authors.
 	 */
@@ -112,7 +110,6 @@ class Tx_Wpj_Controller_authorController extends Tx_Wpj_Controller_protectedCont
 		$this->redirect('index');
 	}
 
-
 	/**
 	 * Updates an existing author and forwards to the index action afterwards.
 	 *
@@ -138,9 +135,8 @@ class Tx_Wpj_Controller_authorController extends Tx_Wpj_Controller_protectedCont
 		$this->redirect('index');
 	}
 	
-    
     /**
-     * 
+     * Searchs for an author
      *
      * @param object $search
      * @dontverifyrequesthash

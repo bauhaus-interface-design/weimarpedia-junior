@@ -2,8 +2,6 @@
 
 /***************************************************************
 *  Copyright notice
-*
-*  (c) 2010 
 *  All rights reserved
 *
 *  This script is part of the TYPO3 project. The TYPO3 project is
@@ -24,7 +22,9 @@
 ***************************************************************/
 
 /**
- * Controller 
+ * Controller for the dashboard
+ * this page is shown by requesting weimarpedia.de
+ * if the user is logged in, show only own articles
  *
  * @version $Id$
  * @copyright Copyright belongs to the respective authors
@@ -53,6 +53,7 @@ class Tx_Wpj_Controller_dashboardController extends Tx_Wpj_Controller_protectedC
 	
 	/**
 	 * Initializes the current action
+     * Find author if logged in 
 	 *
 	 * @return void
 	 */
@@ -63,7 +64,9 @@ class Tx_Wpj_Controller_dashboardController extends Tx_Wpj_Controller_protectedC
 	}
 	
 	/**
-  	* 
+  	* Index action
+    * if user is logged in redirect to index_loggedIn
+    * 
   	*/
 	public function indexAction() {
 		if ( $GLOBALS['TSFE']->loginUser ) $this->forward('index_loggedIn'); 
@@ -76,7 +79,8 @@ class Tx_Wpj_Controller_dashboardController extends Tx_Wpj_Controller_protectedC
 	}
 	
 	/**
-  	* 
+  	* Index for logged in users  
+    * list includes not reviewed articles 
   	*/
 	public function index_loggedInAction() {
 		if ( !$GLOBALS['TSFE']->loginUser ) $this->forward('index'); 

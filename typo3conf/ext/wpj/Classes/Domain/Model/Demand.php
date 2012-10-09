@@ -1,8 +1,6 @@
 <?php
 /***************************************************************
  *  Copyright notice
- *
- *  (c) 2009 Jochen Rau <jochen.rau@typoplanet.de>
  *  All rights reserved
  *
  *  This script is part of the TYPO3 project. The TYPO3 project is
@@ -23,7 +21,7 @@
  ***************************************************************/
 
 /**
- * 
+ *  Demand contains all settings for a search query
  */
 class Tx_Wpj_Domain_Model_Demand extends Tx_Extbase_DomainObject_AbstractEntity {
 	
@@ -48,7 +46,9 @@ class Tx_Wpj_Domain_Model_Demand extends Tx_Extbase_DomainObject_AbstractEntity 
 	
 	
 	/**
-	 * @param string $scope
+	 * Sets the scope
+     * 
+     * @param string $scope
 	 * @return void
 	 */
 	public function setScope($scope = NULL) {
@@ -56,57 +56,64 @@ class Tx_Wpj_Domain_Model_Demand extends Tx_Extbase_DomainObject_AbstractEntity 
 	}
 	
 	/**
-	 * @param 
-	 * @return void
+	 * Returns the scope
+     * 
+	 * @return string
 	 */
 	public function getScope() {
 		return $this->scope;
 	}
 
 	/**
+     * Sets the searchterm
+     * 
 	 * @param string $searchterm
-	 * @return void
 	 */
 	public function setSearchterm($searchterm) {
 		$this->searchterm = trim($searchterm);
 	}
 
 	/**
-	 * @param 
-	 * @return void
+	 * Returns the searchterm
+     * 
+	 * @return string searchterm
 	 */
 	public function getSearchterm() {
 		return trim($this->searchterm);
 	}
 		
 	/**
-	 * @param 
+     * Returns the length of the searchterm
+	 *  
 	 * @return integer
 	 */
 	public function getSearchtermLength() {
 		return strlen($this->getSearchterm());
 	}
+    
+    /**
+     * Sets the results limit 
+     * 
+     * @param integer $limit
+     */
+    public function setLimit($limit) {
+        $this->limit = $limit;
+    }
 	
 	/**
-	 * @param 
-	 * @return void
+	 * Returns the results limit 
+     * 
+	 * @return integer $limit
 	 */
 	public function getLimit() {
 		return $this->limit;
 	}
 	
-	/**
-	 * @param 
-	 * @return void
-	 */
-	public function setLimit($limit) {
-		$this->limit = $limit;
-	}
-	
 	
 	/**
-	 * @param 
-	 * @return string
+     * Returns the scope humand readable
+     *
+	 * @param string
 	 */
 	public function getScopeOutput() {
 		switch ($this->scope){
@@ -122,8 +129,8 @@ class Tx_Wpj_Domain_Model_Demand extends Tx_Extbase_DomainObject_AbstractEntity 
 	
 	
 	/**
-	 * @param 
-	 * @return void
+	 * Returns true if searching in scope "authors"
+	 * @return boolean
 	 */
 	public function getIsAuthorScope() {
 		return ($this->scope == 'authors');

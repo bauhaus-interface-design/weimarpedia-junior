@@ -2,8 +2,6 @@
 
 /***************************************************************
 *  Copyright notice
-*
-*  (c) 2010 
 *  All rights reserved
 *
 *  This script is part of the TYPO3 project. The TYPO3 project is
@@ -181,6 +179,13 @@ class Tx_Wpj_Domain_Model_school extends Tx_Extbase_DomainObject_AbstractEntity 
 	public function setSchooltype(Tx_Wpj_Domain_Model_schooltype $schooltype) {
 		$this->schooltype = $schooltype;
 	}
+    
+    /**
+     * Shortcut to create and set a new Tx_Wpj_Domain_Model_schooltype
+     *
+     * @param Tx_Wpj_Domain_Model_schooltype $schooltype
+     * @return void
+     */
 	public function createSchooltype($name) {
 		$this->schooltype = new Tx_Wpj_Domain_Model_schooltype($name);
 	}

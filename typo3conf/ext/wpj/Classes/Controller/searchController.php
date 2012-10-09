@@ -2,8 +2,6 @@
 
 /***************************************************************
 *  Copyright notice
-*
-*  (c) 2010 
 *  All rights reserved
 *
 *  This script is part of the TYPO3 project. The TYPO3 project is
@@ -24,7 +22,8 @@
 ***************************************************************/
 
 /**
- * Controller for the article object
+ * Controller to manage search requests
+ * see the Tx_Wpj_Domain_Model_Demand object for the structure of the request
  *
  * @version $Id$
  * @copyright Copyright belongs to the respective authors
@@ -53,7 +52,6 @@ class Tx_Wpj_Controller_searchController extends Tx_Wpj_Controller_protectedCont
 	 */
 	protected $tagRepository;	
 	
-	
 	/**
 	 * @var Tx_Wpj_Domain_Model_author
 	 */
@@ -73,7 +71,6 @@ class Tx_Wpj_Controller_searchController extends Tx_Wpj_Controller_protectedCont
 		$this->author = $this->authorRepository->findByUid( (int)$GLOBALS["TSFE"]->fe_user->user['uid'] );
 	}
 	
-	
 	/**
 	 * List action for this controller
 	 * 
@@ -91,7 +88,6 @@ class Tx_Wpj_Controller_searchController extends Tx_Wpj_Controller_protectedCont
 				$this->redirect('index', 'article');
 			} 
 			$this->view->assign('demand', $demand);
-			
 			
 			switch ($demand->getScope()) {
 				case 'knowledge':
@@ -120,11 +116,6 @@ class Tx_Wpj_Controller_searchController extends Tx_Wpj_Controller_protectedCont
 			$this->view->assign('authorArticles', $authorArticles);
 			$this->view->assign('schoolArticles', $schoolArticles);
 			
-			// TODO: do the following as an ajax-request
-			//$suggestions = $this->getSuggestions( $demand->getSearchterm() );
-			//$this->view->assign('suggestions', $suggestions);
-	
-			
 			// further links
 			if ($demand->getScope() != 'authors'){
 				// tags
@@ -145,10 +136,13 @@ class Tx_Wpj_Controller_searchController extends Tx_Wpj_Controller_protectedCont
 		} else $this->redirect('index', 'article');
 	}
 
-	
+    /**
+     * Returns suggestions from google for $query
+     * 
+     * @param string $query
+     */
 	protected function getSuggestions($query){
 		$lang = 'de';
-		
 		$url = 'http://suggestqueries.google.com/complete/search?output=firefox&client=firefox&hl=' . $lang . '&q=' . urlencode($query);
 		
 		$ch = curl_init($url);
@@ -159,7 +153,6 @@ class Tx_Wpj_Controller_searchController extends Tx_Wpj_Controller_protectedCont
 		curl_setopt($ch, CURLOPT_USERAGENT, "Mozilla/5.0 (Windows NT 6.0; rv:2.0.1) Gecko/20100101 Firefox/4.0.1");
 		$data = curl_exec($ch);
 		curl_close($ch);
-		
 		$suggestions = json_decode($data, true);
 		
 		if ($suggestions) {
@@ -171,6 +164,11 @@ class Tx_Wpj_Controller_searchController extends Tx_Wpj_Controller_protectedCont
 		
 	}
 	
+    /**
+     * Searchs for articles, authors and schools for a given demand
+     * 
+     * @param Tx_Wpj_Domain_Model_Demand $demand
+     */
 	private function searchArticles($demand){
 		$term = $demand->getSearchterm();
 		
@@ -182,7 +180,6 @@ class Tx_Wpj_Controller_searchController extends Tx_Wpj_Controller_protectedCont
 				$this->redirect('show', 'article', NULL, array(article => $article->getUid()));
 			}
 		}
-		
 		
 		// 2. no results: fuzzy search
 		$articles = $this->articleRepository->search($demand);

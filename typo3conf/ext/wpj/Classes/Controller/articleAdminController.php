@@ -2,8 +2,6 @@
 
 /***************************************************************
 *  Copyright notice
-*
-*  (c) 2010 
 *  All rights reserved
 *
 *  This script is part of the TYPO3 project. The TYPO3 project is
@@ -67,7 +65,8 @@ class Tx_Wpj_Controller_articleAdminController extends Tx_Wpj_Controller_protect
 	
 
 	/**
-	 * List all articles
+	 * Lists all articles
+     * 
 	 */
 	public function indexAction() {
 		$articles = $this->articleRepository->findAll('', ''); // ($reviewed=1, $type="knowledge", $order="tstamp", $orderSequence="DESC", $limit=NULL)
@@ -77,7 +76,7 @@ class Tx_Wpj_Controller_articleAdminController extends Tx_Wpj_Controller_protect
 	
 	
 	/**
-	 * List all articles with type knowledge 
+	 * Lists all articles with type knowledge 
 	 */
 	public function indexKnowledgeAction() {
 		$articles = $this->articleRepository->findAll('', 'knowledge'); // ($reviewed=1, $type="knowledge", $order="tstamp", $orderSequence="DESC", $limit=NULL)
@@ -88,7 +87,7 @@ class Tx_Wpj_Controller_articleAdminController extends Tx_Wpj_Controller_protect
 	}
 
 	/**
-	 * List all articles with type exhibition 
+	 * Lists all articles with type exhibition 
 	 */
 	public function indexExhibitionAction() {
 		$articles = $this->articleRepository->findAll('', 'exhibition'); // ($reviewed=1, $type="knowledge", $order="tstamp", $orderSequence="DESC", $limit=NULL)
@@ -99,7 +98,7 @@ class Tx_Wpj_Controller_articleAdminController extends Tx_Wpj_Controller_protect
 	}	
 
 	/**
-	 * List last modified 30 articles
+	 * Lists last modified 30 articles
 	 */
 	public function indexLastModifiedAction() {
 		$articles = $this->articleRepository->findAll('', '', "tstamp", "DESC", 30); // ($reviewed=1, $type="knowledge", $order="tstamp", $orderSequence="DESC", $limit=NULL)
@@ -110,7 +109,7 @@ class Tx_Wpj_Controller_articleAdminController extends Tx_Wpj_Controller_protect
 	}
 
 	/**
-	 * List all unreviewed articles
+	 * Lists all unreviewed articles
 	 */
 	public function indexNotReviewedAction() {
 		$articles = $this->articleRepository->findAll(0, ''); // ($reviewed=1, $type="knowledge", $order="tstamp", $orderSequence="DESC", $limit=NULL)
@@ -135,7 +134,7 @@ class Tx_Wpj_Controller_articleAdminController extends Tx_Wpj_Controller_protect
 
 	/**
 	 * Manage obsolete versions of articles
-     * this function is currently unfinished
+     * 
 	 */
 	public function cleanupVersionsWizardAction() {
 		$versions = $this->articleRepository->findAllObsoleteVersions();
@@ -145,7 +144,7 @@ class Tx_Wpj_Controller_articleAdminController extends Tx_Wpj_Controller_protect
     
     /**
      * Manage obsolete versions of articles
-     * this function is currently unfinished
+     * 
      */
     public function cleanUpVersionsAction() {
         $this->articleRepository->cleanUpObsoleteVersions();

@@ -1,5 +1,5 @@
 /*
- *	functions for admin interface
+ *	functions for the admin interface
  */
 
 if(!window.Wpj){
