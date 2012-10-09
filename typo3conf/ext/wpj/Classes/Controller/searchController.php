@@ -25,6 +25,7 @@
  * Controller to manage search requests
  * see the Tx_Wpj_Domain_Model_Demand object for the structure of the request
  *
+ * @package WPJ
  * @version $Id$
  * @copyright Copyright belongs to the respective authors
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later

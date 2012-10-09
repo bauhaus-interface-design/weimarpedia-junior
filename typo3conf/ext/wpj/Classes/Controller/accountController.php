@@ -25,11 +25,11 @@
  * Controller to manage current user profile
  * see session controller for login and logout actions
  *
+ * @package WPJ
  * @version $Id$
  * @copyright Copyright belongs to the respective authors
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  */
-
 class Tx_Wpj_Controller_accountController extends Tx_Wpj_Controller_protectedController {
 	
 	/**

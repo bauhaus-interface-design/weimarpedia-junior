@@ -23,6 +23,7 @@
 /**
  * Class implements some static methods 
  *  
+ * @package WPJ
  */
 
 class Tx_Wpj_Utility_Array {

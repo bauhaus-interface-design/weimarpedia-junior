@@ -22,6 +22,7 @@
 
 /**
  * 
+ * @package WPJ
  */
 class Tx_Wpj_ViewHelpers_Form_UploadViewHelper extends Tx_Fluid_ViewHelpers_Form_UploadViewHelper {
 

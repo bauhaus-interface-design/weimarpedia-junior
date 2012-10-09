@@ -26,6 +26,7 @@
  * this page is shown by requesting weimarpedia.de
  * if the user is logged in, show only own articles
  *
+ * @package WPJ
  * @version $Id$
  * @copyright Copyright belongs to the respective authors
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later

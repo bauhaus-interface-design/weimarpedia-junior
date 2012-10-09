@@ -26,6 +26,7 @@
  * This is an unfinished experimental feature to draw outlines for buildings and room 
  * All functionality is only for testing purposes
  *
+ * @package WPJ
  * @version $Id$
  * @copyright Copyright belongs to the respective authors
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later

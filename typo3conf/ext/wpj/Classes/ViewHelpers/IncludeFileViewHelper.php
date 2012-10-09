@@ -26,8 +26,7 @@
  * ViewHelper to include a css or js file
  * 
  *
- * @package TYPO3
- * @subpackage 
+ * @package WPJ
  * @version $Id$
  */
 class Tx_Wpj_ViewHelpers_IncludeFileViewHelper extends Tx_Fluid_Core_ViewHelper_AbstractViewHelper {

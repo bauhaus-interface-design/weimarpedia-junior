@@ -27,7 +27,7 @@
 /**
  * Class implements some static methods for image processing
  * 
- * 
+ * @package WPJ
  */
 class Tx_Wpj_Utility_ThumbProcessing {
 	/**

@@ -1,4 +1,4 @@
-<?php 
+v<?php 
 /***************************************************************
 *  Copyright notice
 *
@@ -28,8 +28,7 @@
  * @version $Id$
  * @copyright Copyright belongs to the respective authors
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
- * @package Wpj
- * @subpackage ViewHelpers\Debug
+ * @package WPJ
  *
  */
 class Tx_Wpj_ViewHelpers_Debug_VariablesViewHelper extends Tx_Fluid_ViewHelpers_Link_ActionViewHelper {

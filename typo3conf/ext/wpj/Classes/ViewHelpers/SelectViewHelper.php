@@ -1,5 +1,13 @@
 <?php
 
+/**
+ * @version $Id$
+ * @copyright Copyright belongs to the respective authors
+ * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
+ * @package WPJ
+ *
+ */
+
 class Tx_Wpj_ViewHelpers_SelectViewHelper extends Tx_Fluid_ViewHelpers_Form_SelectViewHelper {
 	/**
 	 * Überschreibt die Methode aus dem Fluid-ViewHelper. Es wird geprüft, ob es in dem Option-Objekt eine Methode getChildren() gibt.

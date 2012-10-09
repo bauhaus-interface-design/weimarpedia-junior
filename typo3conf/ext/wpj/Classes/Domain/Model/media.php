@@ -25,6 +25,7 @@
  * media is a container to use mediafiles in different contexts
  * separates caption from the file
  *
+ * @package WPJ
  * @version $Id$
  * @copyright Copyright belongs to the respective authors
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later

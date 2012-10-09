@@ -24,7 +24,14 @@
 *  This copyright notice MUST APPEAR in all copies of the script!
 ***************************************************************/
 
-
+/**
+ * @version $Id$
+ * @copyright Copyright belongs to the respective authors
+ * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
+ * @package WPJ
+ *
+ */
+ 
 class Tx_Wpj_ViewHelpers_SqlViewHelper extends Tx_Fluid_Core_ViewHelper_AbstractViewHelper {
 	/**
 	 *
