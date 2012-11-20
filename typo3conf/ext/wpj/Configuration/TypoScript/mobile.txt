@@ -28,7 +28,7 @@
 	page.includeCSS.file40 = 
 	page.includeCSS.file60 = 
 	
-	page.includeJS.file20 = 
+	page.includeJS.file20 = typo3conf/ext/wpj/Resources/Public/js/modernizr-2.0.6.min.js
 	page.includeJS.file30 = 
 	
 	page.headerData.20 = TEXT

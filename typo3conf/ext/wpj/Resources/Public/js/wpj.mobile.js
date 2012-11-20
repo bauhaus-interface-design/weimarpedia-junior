@@ -240,7 +240,10 @@ WPM.Popup.setContent = function(scope,html) {
 	// in #scroll-content müsste jetzt die entsprechende Liste via Ajax geladen werden.
 	$('#popup-scroll-wrapper .scroll-content').html(html);
 
-	var scroll = new iScroll('popup-scroll-wrapper');
+	if($('html').is('.touch')) {
+		var scroll = new iScroll('popup-scroll-wrapper');
+	}
+
 	
 	$('#popup-' + scope + ' .close').click(function(){
 		$('.modal-backdrop, #popup-' + scope).fadeOut(400);
@@ -988,7 +991,11 @@ WPM.HistoryAction.showArticle = function(options) {
 				$('#article-view .inner div.body').html( '<p>' + result.body + '</p>');
 				//WPM.buildImageList('#article-view .inner ul', result.medias, 'description', 'url');
 				WPM.View.show('article-view');
-				var scroll = new iScroll('article-scroll-wrapper');
+				
+				if($('html').is('.touch')) {
+					var scroll = new iScroll('article-scroll-wrapper');
+				}
+
 				WPM.setHash('showArticle', options);
 			}
 		});
