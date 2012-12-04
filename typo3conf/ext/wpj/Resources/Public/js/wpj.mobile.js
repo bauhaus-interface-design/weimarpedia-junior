@@ -638,11 +638,12 @@ WPM.initMap = function(selector, latLng, zoom) {
 		{ featureType: "transit", 
 			elementType: "all", stylers: [ { hue: "#ffbb00" }, { lightness: 0 }, { saturation: -84 } ] },
 		{ featureType: "road", 
-			elementType: "all", stylers: [ { hue: "#ffc300" }, { saturation: -81 }, { lightness: 11 }, { gamma: 2.51 } ] },
+			elementType: "all", stylers: [ { hue: "#ffc300" }, { saturation: -81 }, { lightness: 11 }, { gamma: 2.51 } ] }
+		//	,
 		//{ featureType: "poi.government", 
 		//	elementType: "all", stylers: [ { saturation: 100 }, { hue: "#ff00f6" }, { lightness: 0 }, { gamma: 1.03 } ] }, 
-		{ featureType: "poi", 
-			elementType: "labels", stylers: [ { visibility: "off" } ] }
+		//{ featureType: "poi", 
+		//	elementType: "labels", stylers: [ { visibility: "off" } ] }
 
 	] 
 	var styledMapOptions = {
