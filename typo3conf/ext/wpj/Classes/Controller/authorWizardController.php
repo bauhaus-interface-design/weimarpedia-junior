@@ -122,7 +122,7 @@ class Tx_Wpj_Controller_authorWizardController extends Tx_Wpj_Controller_protect
 		$newauthor->setUsername($username);
 		$newauthor->setStarttimeAndDuration( time() , 60*60*24*365); // valid 1 year from now 
 		// add group
-		$newauthor->addStandardGroup();
+		//$newauthor->addStandardGroup();
 		// add adminlevel
 		$newauthor->setAdmin(1);
 		// add new author to repository
